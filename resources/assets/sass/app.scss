@@ -7,3 +7,13 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+.sociality {
+  a {
+    img{
+      width: 200px;
+      padding:20px;
+    }
+  }
+}
