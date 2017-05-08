@@ -17,6 +17,8 @@
 
         <!-- Styles -->
         <link href="dist/css/app.css" rel="stylesheet">
+        <link href="dist/css/ionicons.min.css" rel="stylesheet">
+        <link href="dist/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
         <!-- Ionicons -->
         <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
