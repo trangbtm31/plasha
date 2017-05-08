@@ -13,8 +13,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
+        <title>{{ config('app.name', 'Pla Sha') }}</title>
         <!-- Styles -->
         <link href="dist/css/app.css" rel="stylesheet">
         <link href="dist/css/ionicons.min.css" rel="stylesheet">
@@ -32,7 +31,11 @@
 
     </head>
     <body>
-        {{--@include("layouts.header");--}}
+        @include("layouts.app");
         @yield('content')
     </body>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+
 </html>
