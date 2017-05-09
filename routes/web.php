@@ -33,9 +33,9 @@ Route::group(['middleware' => ['web']], function() {
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index' ]);
 
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');
 }]);
-Route::post('/post-plan', ['as' => 'postPlan', 'uses' => 'Plan\PlanController@create']);
+Route::post('/create-plan', ['as' => 'plan.create', 'uses' => 'Plan\PlanController@create']);
