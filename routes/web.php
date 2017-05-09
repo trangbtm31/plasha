@@ -33,11 +33,7 @@ Route::group(['middleware' => ['web']], function() {
     Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
 
-<<<<<<< HEAD
 Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index' ]);
-=======
-Route::get('/home',['as' => 'home', 'uses' => 'HomeController@index' ] );
->>>>>>> 765ce574eb9e3607078179809aac0af7d3ebdff4
 
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');

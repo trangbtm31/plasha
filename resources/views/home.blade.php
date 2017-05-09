@@ -46,18 +46,17 @@
             <!-- Post Create Box
             ================================================= -->
                   {!! Form::open(array('route'=>'plan.create', 'method' => 'post', 'files'=>true)) !!}
-                  <form role="form"  method="POST" action="{{ route('postPlan') }}">
+                  <form role="form"  method="POST" action="">
                     {{ csrf_field() }}
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="create-post">
                       {!! Form::text('plan_name','',array('class' => 'form-control', 'placeholder' => 'Enter name of plan')) !!}
-                        <input name="plan_name" type="text" cols="30" rows="1" class="form-control" placeholder="Enter name of plan">
                         <div class="row">
                           <div class="col-md-9 col-sm-9">
                             <div class="form-group">
                               <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                              <textarea name="description" id="exampleTextarea" cols="50" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                              {!! Form::textarea('description','',array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) !!}
                             </div>
                           </div>
                           <div class="col-md-3 col-sm-3">
