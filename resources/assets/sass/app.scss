@@ -187,7 +187,9 @@ textarea{
   width: 100%;
 }
 
-
+#app {
+  min-height: 50px;
+}
 
 /*==================================================
  Login Page
@@ -236,21 +238,6 @@ textarea{
       top: 20px;
       border-radius: 17px;
     }
-    .btn-secondary {
-      background: linear-gradient(to bottom, rgba(109,110,113,1), rgba(0,0,0,1));
-      padding: 0 40px;
-      border: none;
-      min-height: 36px;
-      font-size: 18px;
-      border-radius: 6px;
-      color: #fff;
-      position: relative;
-      outline: none;
-    }
-    .btn-secondary:hover{
-      background: #000;
-      transition: all 1s;
-    }
   }
 
   /*
@@ -284,6 +271,8 @@ textarea{
   width: 0;
 }
 
+/*======= Register Page ======*/
+
 #lp-register{
   background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(../../images/bg-3.jpg) fixed no-repeat;
   background-size: cover;
@@ -291,6 +280,9 @@ textarea{
   position: absolute;
   top: 0;
   width: 100%;
+  p {
+    margin-top: 10px;
+  }
 }
 
 #lp-register .wrapper{
@@ -324,13 +316,14 @@ textarea{
 /*Registration Form Container*/
 
 .reg-form-container{
-  background: #fff;
+  background: linear-gradient(to bottom, rgba(43,57,144, 0.5), rgba(39,170,225,1) 65%);
   box-shadow: 0 0 35px rgba(0,0,0, .4);
   padding: 40px 40px 40px 60px;
   border-radius: 6px;
   position: relative;
-  min-height: 560px;
+  min-height: 500px;
   z-index: 10;
+  color: #fff;
 }
 
 /*Registration Login/Register Tabs*/
@@ -403,7 +396,7 @@ textarea{
 }
 
 #registration_form select.form-control{
-  background: rgba(0, 0, 0, 0) url("../../images/down-arrow.png") no-repeat scroll calc(100% - 10px) center / 8px auto;
+  background: #fff url("../../images/down-arrow.png") no-repeat scroll calc(100% - 10px) center / 8px auto;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

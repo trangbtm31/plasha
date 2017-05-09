@@ -18,7 +18,7 @@
                   <div class="tab-content">
                     <div class="tab-pane active" id="register">
                       <h3>Register Now !!!</h3>
-                      <p class="text-muted">Be cool and join today. Meet millions</p>
+                      <p>Be cool and join today. Meet millions</p>
 
                       <!--Register Form-->
                       <form name="registration_form" id='registration_form' class="form-inline" role="form" method="POST" action="{{ route('register') }}">
@@ -130,8 +130,8 @@
                           </label>
                         </div>
                       </form><!--Register Now Form Ends-->
-                      <p><a href="{{ route('login') }}">Already have an account?</a></p>
-                      <button class="btn btn-primary" type="submit">Register Now</button>
+                      <button class="btn-secondary col-md-offset-3" type="submit">Register Now</button>
+                      <p align="center"><a href="{{ route('login') }}" class="text-white">Already have an account?</a></p>
                     </div><!--Registration Form Contents Ends-->
                   </div>
                 </div>

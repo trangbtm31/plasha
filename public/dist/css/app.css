@@ -5976,6 +5976,9 @@ textarea {
   box-sizing: border-box;
   width: 100%; }
 
+#app {
+  min-height: 50px; }
+
 /*==================================================
  Login Page
   ==================================================*/
@@ -6027,19 +6030,6 @@ textarea {
       position: relative;
       top: 20px;
       border-radius: 17px; }
-    #banner .form-wrapper .btn-secondary {
-      background: linear-gradient(to bottom, #6d6e71, black);
-      padding: 0 40px;
-      border: none;
-      min-height: 36px;
-      font-size: 18px;
-      border-radius: 6px;
-      color: #fff;
-      position: relative;
-      outline: none; }
-    #banner .form-wrapper .btn-secondary:hover {
-      background: #000;
-      transition: all 1s; }
   #banner .form-shadow {
     position: absolute;
     left: 0;
@@ -6058,6 +6048,7 @@ textarea {
   position: absolute;
   width: 0; }
 
+/*======= Register Page ======*/
 #lp-register {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../images/bg-3.jpg) fixed no-repeat;
   background-size: cover;
@@ -6065,6 +6056,8 @@ textarea {
   position: absolute;
   top: 0;
   width: 100%; }
+  #lp-register p {
+    margin-top: 10px; }
 
 #lp-register .wrapper {
   padding-top: 140px;
@@ -6090,13 +6083,14 @@ textarea {
 
 /*Registration Form Container*/
 .reg-form-container {
-  background: #fff;
+  background: linear-gradient(to bottom, rgba(43, 57, 144, 0.8), #27aae1 65%);
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
   padding: 40px 40px 40px 60px;
   border-radius: 6px;
   position: relative;
-  min-height: 560px;
-  z-index: 10; }
+  min-height: 500px;
+  z-index: 10;
+  color: #fff; }
 
 /*Registration Login/Register Tabs*/
 .reg-form-container .reg-options .nav-tabs {
@@ -6158,7 +6152,7 @@ textarea {
   padding-left: 15px; }
 
 #registration_form select.form-control {
-  background: transparent url("../../images/down-arrow.png") no-repeat scroll calc(100% - 10px) center/8px auto;
+  background: #fff url("../../images/down-arrow.png") no-repeat scroll calc(100% - 10px) center/8px auto;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

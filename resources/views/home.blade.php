@@ -1,15 +1,18 @@
 @extends('layouts.master')
 
+@section('title')
+    Plasa news feed !!
+@endsection
+
 @section('content')
-
-
+    @include("layouts.app")
     <div id="page-contents">
     	<div class="container">
     		<div class="row">
 
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
-    			<div class="col-md-3 static">
+            <div class="col-md-3 static">
             <div class="profile-card">
             	<img src="images/users/user-1.jpg" alt="user" class="profile-photo" />
             	<h5><a href="timeline.html" class="text-white">Sarah Cruiz</a></h5>
@@ -392,11 +395,7 @@
     <!-- Scripts
     ================================================= -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
-
-
-
-
-
+    <script src="js/sticky-kit.min.js"></script>
 
 {{--<div class="container">
     <div class="row">
