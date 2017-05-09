@@ -6,6 +6,7 @@
 
 @section('content')
 
+@if(!Auth::check())
 <section id="banner">
     <div class="container">
         <!-- Log in Form
@@ -57,8 +58,9 @@
         </svg>--}}
     </div>
 </section>
-
-
+@else
+<?php redirect()->route('home'); ?>
+@endif
 {{--<div class="container" >
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
