@@ -6050,7 +6050,7 @@ textarea {
 
 /*======= Register Page ======*/
 #lp-register {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../images/bg-3.jpg) fixed no-repeat;
+  background: url(../../images/bg-3.jpg) fixed no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -6060,13 +6060,14 @@ textarea {
     margin-top: 10px; }
 
 #lp-register .wrapper {
-  padding-top: 140px;
-  padding-bottom: 140px; }
+  padding-top: 40px;
+  padding-bottom: 97px; }
 
 .intro-texts {
   color: #fff;
   font-size: 14px;
-  transform: translateY(100px); }
+  transform: translateY(100px);
+  text-shadow: 0.5 0.5 1 1; }
 
 .intro-texts h1 {
   margin-bottom: 30px;
@@ -6161,10 +6162,15 @@ textarea {
 #registration_form p.birth {
   margin-left: 10px; }
 
+.help-block li {
+  list-style-type: none; }
+  .help-block li strong {
+    color: #d90416; }
+
 /*Social Links Bottom*/
 #lp-register ul.social-icons {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
   z-index: 11; }
 
 #lp-register ul.social-icons li {
