@@ -15,7 +15,7 @@ class PlanController extends Controller
     public function create(Request $request)
     {
         try {
-            //$plan = new Plan($request);
+            $plan = new Plan($request);
             return redirect()->route('home');
         } catch (Exception $e){
             print_r('Error: ' . $e);

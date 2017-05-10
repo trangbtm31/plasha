@@ -45,26 +45,26 @@
 
             <!-- Post Create Box
             ================================================= -->
-                  {!! Form::open(array('route'=>'plan.create', 'method' => 'post', 'files'=>true)) !!}
+                  {!! Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) !!}
                   <form role="form"  method="POST" action="">
                     {{ csrf_field() }}
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="create-post">
-                      {!! Form::text('plan_name','',array('class' => 'form-control', 'placeholder' => 'Enter name of plan')) !!}
+                      {!! Form::text('plan_name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan')) !!}
                         <div class="row">
-                          <div class="col-md-9 col-sm-9">
+                          <div class="col-md-10 col-sm-10">
                             <div class="form-group">
                               <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
-                              {!! Form::textarea('description','',array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) !!}
+                              <div>
+                                {!! Form::textarea('description', '', array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) !!}
+                                {!! Form::file('thumbnail',array('class' => 'ion-images')) !!}
+                              </div>
                             </div>
                           </div>
-                          <div class="col-md-3 col-sm-3">
+                          <div class="col-md-2 col-sm-2">
                             <div class="tools">
-                              <ul class="publishing-tools list-inline">
-                                <li><a href="#"><i class="ion-images"></i></a></li>
-                              </ul>
-                              <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                              {!! Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) !!}
                             </div>
                           </div>
                         </div>
