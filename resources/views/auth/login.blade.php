@@ -6,7 +6,6 @@
 
 @section('content')
 
-@if(!Auth::check())
 <section id="banner">
     <div class="container">
         <!-- Log in Form
@@ -24,11 +23,11 @@
                     </fieldset>
                     <fieldset class="form-group {{ $errors->has('password') ? ' has-error' : '' }}" >
                         <input type="password" class="form-control" id="example-password" placeholder="Enter a password" name="password" required >
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                     </fieldset>
                     <fieldset class="form-group">
                             <div class="checkbox">
@@ -58,9 +57,6 @@
         </svg>--}}
     </div>
 </section>
-@else
-<?php redirect()->route('home'); ?>
-@endif
 {{--<div class="container" >
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
