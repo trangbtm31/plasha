@@ -15,6 +15,6 @@ class UserInfo extends Model
     }
     static function getUserByID($id)
     {
-        return \DB::table('user_info')->join('users','user_info.user_id','=','users.id')->select('users.id','name','avatar')->where('id',$id)->get('');
+        return \DB::table('user_info')->join('users','user_info.user_id','=','users.id')->select('users.id','first_name','last_name','avatar')->where('id',$id)->get('');
     }
 }

@@ -37,7 +37,7 @@ class HomeController extends Controller
             {
                 if ($user['id'] == $plan['user_id'])
                 {
-                    $plan['user_name'] = $user['name'];
+                    $plan['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
                     $plan['user_avatar'] = $user['avatar'];
                 }
             }
