@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Plan;
+use App\UserInfo;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $plan = new Plan();
         $data = Plan::getAllPlan();
+        $users_arr = $user_info = array();
+        foreach ($data as $plan)
+        {
+            if (!in_array($plan['user_id'], $users_arr))
+            {
+                $user_info = UserInfo::getUserByID($plan['user_id']);
+                array_push($users_arr, json_decode(json_encode($user_info),true)[0]);
+            }
+            foreach ($users_arr as $user)
+            {
+                if ($user['id'] == $plan['user_id'])
+                {
+                    $plan['user_name'] = $user['name'];
+                    $plan['user_avatar'] = $user['avatar'];
+                }
+            }
+        };
+
         return view('home', compact('data'));
     }
 }

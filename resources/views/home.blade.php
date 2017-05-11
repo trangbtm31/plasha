@@ -89,10 +89,10 @@
             <div class="post-content">
               <img src="images/plan-thumbnail/{{ $item["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
               <div class="post-container">
-                <img src="images/users/user-5.jpg" alt="user" class="profile-photo-md pull-left" />
+                <img src="images/users/{{ $item["user_avatar"] }}" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+                    <h5><a href="timeline.html" class="profile-link">{!! $item["user_name"] !!}</a> <span class="following">following</span></h5>
                     <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($item["created_at"]))->diffForHumans()?></p>
                   </div>
                   <div class="reaction">
