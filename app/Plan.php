@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 class plan extends Model
 {
     protected $table = 'plan';
+    protected $id = '';
+
+//    public function __construct($id)
+//    {
+//        parent::__construct();
+//        $this->id = $id;
+//    }
 
     public function Create(PlanRequest $request)
     {

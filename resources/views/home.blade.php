@@ -50,7 +50,6 @@
                   @endif
 
                   {!! Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) !!}
-                  <form role="form"  method="POST" action="">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="create-post">
@@ -81,7 +80,6 @@
                           </div>
                         </div>
                     </div><!-- Post Create Box End-->
-                  </form>
                   {!! Form::close() !!}
             <!-- Post Content
             ================================================= -->
@@ -118,7 +116,10 @@
                   </div>
                   <div class="post-comment">
                     <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
+                    {!! Form::open(array('route'=>['post-comment', $item->id], 'method' => 'post')) !!}
+                      {!! Form::textarea('comment', '', array('class' => 'form-control', 'placeholder' => 'Write a comment...')) !!}
+                      {!! Form::submit('Comment', array('class' => 'btn btn-primary pull-right')) !!}
+                    {!! Form::close() !!}
                   </div>
                 </div>
               </div>
