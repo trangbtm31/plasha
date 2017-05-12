@@ -25,8 +25,8 @@ class PlanController extends Controller
     public function postComment($plan_id, PlanCommentRequest $request)
     {
         try {
-            $comment = new Comment($plan_id);
-            $comment->create($request);
+            $comment = new Comment();
+            $comment->create($plan_id, $request);
             return redirect()->route('home')->with(['message' => 'Your comment has been posted successfully!']);
         } catch (Exception $e){
             print_r('Error: ' . $e);

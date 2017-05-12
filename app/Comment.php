@@ -9,22 +9,18 @@ use Illuminate\Support\Facades\Auth;
 class Comment extends Model
 {
     protected $table = 'plan_comment';
-    protected $id = '';
 
-    function __construct($id)
+    public function create($plan_id, PlanCommentRequest $request)
     {
-        parent::__construct();
-        $this->id = $id;
-    }
-
-    public function create(PlanCommentRequest $request)
-    {
-
         //Insert database
         $this->user_id = Auth::id();
-        $this->plan_id = '27';
         $this->comment = $request->comment;
-
+        $this->plan_id = $plan_id;
         $this->save();
+    }
+
+    public function getCommentByPlanID($planID)
+    {
+        return self::select('*')->where(['plan_id' => $planID])->get();
     }
 }
