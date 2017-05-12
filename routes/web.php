@@ -35,4 +35,4 @@ Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index' ]);
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');
 }]);
-Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create']);
+Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create' ]);
