@@ -33,29 +33,13 @@ class plan extends Model
 
     public function getAllPlan()
     {
-        $data = self::select('*')->orderBy('created_at','desc')->get('');
-        $users_arr = $user_info = array();
-        foreach ($data as $plan)
-        {
-            if (!in_array($plan['user_id'], $users_arr))
-            {
-                $user_info = UserInfo::getUserByID($plan['user_id']);
-                array_push($users_arr, json_decode(json_encode($user_info),true)[0]);
-            }
-            foreach ($users_arr as $user)
-            {
-                if ($user['id'] == $plan['user_id'])
-                {
-                    $plan['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-                    $plan['user_avatar'] = $user['avatar'];
-                }
-            }
-            $comment = new Comment();
-            $comment_list = $comment->getCommentByPlanID($plan['user_id']);
-//            echo '<pre>';
-//            print_r($comment_list);
-//            echo '<pre>';
+        $data = self::join('users',"$this->table.user_id",'=','users.id')->join('user_info', "$this->table.user_id", '=', 'user_info.user_id')->select("$this->table.id", "$this->table.user_id", 'name', 'description', 'category', "$this->table.created_at", "$this->table.updated_at", 'thumbnail', 'first_name', 'last_name', 'avatar')->orderBy('created_at', 'desc')->get();
+        foreach ($data as $plan) {
+            //Get all comment of plan
+            $comment = new Comment($plan['id']);
+            $plan['list_comment'] = $comment->getComment();
         };
+
         return $data;
     }
 }

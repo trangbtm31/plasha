@@ -46,14 +46,14 @@
             <!-- Post Create Box
             ================================================= -->
                   @if(Session::has('message'))
-                    <div class="message">{!! Session::get('message') !!}</div>
+                    <div class="message">{{ Session::get('message') }}</div>
                   @endif
 
-                  {!! Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) !!}
+                  {{ Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) }}
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="create-post">
-                      {!! Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) !!}
+                      {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
                       @foreach($errors->get('name') as $error)
                         <div class="error">{{ $error }}</div>
                       @endforeach
@@ -62,11 +62,11 @@
                             <div class="form-group">
                               <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
                               <div>
-                                {!! Form::textarea('description', '', array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) !!}
+                                {{ Form::textarea('description', '', array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
                                 @foreach($errors->get('description') as $error)
                                   <div class="error">{{ $error }}</div>
                                 @endforeach
-                                {!! Form::file('thumbnail',array('class' => 'ion-images', 'accept' => 'image/*')) !!}
+                                {{ Form::file('thumbnail',array('class' => 'ion-images', 'accept' => 'image/*')) }}
                                 @foreach($errors->get('thumbnail') as $error)
                                   <div class="error">{{ $error }}</div>
                                 @endforeach
@@ -75,23 +75,23 @@
                           </div>
                           <div class="col-md-2 col-sm-2">
                             <div class="tools">
-                              {!! Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) !!}
+                              {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}
                             </div>
                           </div>
                         </div>
                     </div><!-- Post Create Box End-->
-                  {!! Form::close() !!}
+                  {{ Form::close() }}
             <!-- Post Content
             ================================================= -->
-            @foreach($data as $item)
+            @foreach($data as $plan)
             <div class="post-content">
-              <img src="images/plan-thumbnail/{{ $item["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
+              <img src="images/plan-thumbnail/{{ $plan["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
               <div class="post-container">
-                <img src="images/users/{{ $item["user_avatar"] }}" alt="user" class="profile-photo-md pull-left" />
+                <img src="images/users/{{ $plan["avatar"] }}" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">{!! $item["user_name"] !!}</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($item["created_at"]))->diffForHumans()?></p>
+                    <h5><a href="timeline.html" class="profile-link">{{ $plan["first_name"] }} {{ $plan["last_name"] }}</a> <span class="following">following</span></h5>
+                    <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
                   </div>
                   <div class="reaction">
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
@@ -99,27 +99,27 @@
                   </div>
                   <div class="line-divider"></div>
                   <div class="post-title">
-                    <p>{!! $item["name"] !!}</p>
+                    <p>{{ $plan["name"] }}</p>
                   </div>
                   <div class="line-divider"></div>
                   <div class="post-text">
-                    <p>{!! $item["description"] !!}</p>
+                    <p>{{ $plan["description"] }}</p>
                   </div>
                   <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>
+                  @foreach($plan['list_comment'] as $comment)
+                    <div class="post-comment">
+                      <img src="images/users/{{ $comment['avatar'] }}" alt="" class="profile-photo-sm" />
+                      <p><a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}</p>
+                      <div class="text-muted" style="display: inline-block"><?php echo \Carbon\Carbon::createFromTimestamp(strtotime($comment["created_at"]))->diffForHumans()?></div>
+                    </div>
+
+                  @endforeach
                   <div class="post-comment">
                     <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                    {!! Form::open(array('route'=>['post-comment', $item->id], 'method' => 'post')) !!}
-                      {!! Form::textarea('comment', '', array('class' => 'form-control', 'placeholder' => 'Write a comment...')) !!}
-                      {!! Form::submit('Comment', array('class' => 'btn btn-primary pull-right')) !!}
-                    {!! Form::close() !!}
+                    {{ Form::open(array('route'=>['post-comment', $plan->id], 'method' => 'post')) }}
+                      {{ Form::textarea('comment', '', array('class' => 'form-control', 'placeholder' => 'Write a comment...')) }}
+                      {{ Form::submit('Comment', array('class' => 'btn btn-primary pull-right')) }}
+                    {{ Form::close() }}
                   </div>
                 </div>
               </div>

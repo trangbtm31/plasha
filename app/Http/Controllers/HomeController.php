@@ -28,7 +28,7 @@ class HomeController extends Controller
         $data = $plan->getAllPlan();
 //        echo '<pre>';
 //        print_r($data);
-//        echo '<pre>';
+//        echo '</pre>';
         return view('home', compact('data'));
     }
 }
