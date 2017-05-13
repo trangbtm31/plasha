@@ -14,8 +14,8 @@
           ================================================= -->
             <div class="col-md-3 static">
             <div class="profile-card">
-            	<img src="images/users/user-1.jpg" alt="user" class="profile-photo" />
-            	<h5><a href="timeline.html" class="text-white">Sarah Cruiz</a></h5>
+            	<img src="images/users/{{ $current_user[0]->avatar }}" alt="user" class="profile-photo" />
+            	<h5><a href="timeline.html" class="text-white">{{ $current_user[0]->first_name }} {{ $current_user[0]->last_name }}</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
@@ -51,7 +51,6 @@
 
                   {{ Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) }}
                     {{ csrf_field() }}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="create-post">
                       {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
                       @foreach($errors->get('name') as $error)
@@ -60,13 +59,13 @@
                         <div class="row">
                           <div class="col-md-10 col-sm-10">
                             <div class="form-group">
-                              <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
+                              <img src="images/users/{{ $current_user[0]->avatar }}" alt="" class="profile-photo-md" />
                               <div>
-                                {{ Form::textarea('description', '', array('class' => 'form-control', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
+                                {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
                                 @foreach($errors->get('description') as $error)
                                   <div class="error">{{ $error }}</div>
                                 @endforeach
-                                {{ Form::file('thumbnail',array('class' => 'ion-images', 'accept' => 'image/*')) }}
+                                {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
                                 @foreach($errors->get('thumbnail') as $error)
                                   <div class="error">{{ $error }}</div>
                                 @endforeach
@@ -85,7 +84,9 @@
             ================================================= -->
             @foreach($data as $plan)
             <div class="post-content">
-              <img src="images/plan-thumbnail/{{ $plan["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
+              @foreach($plan["list_thumbnail"] as $thumbnail)
+              <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
+              @endforeach
               <div class="post-container">
                 <img src="images/users/{{ $plan["avatar"] }}" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
@@ -96,6 +97,7 @@
                   <div class="reaction">
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                    <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
                   </div>
                   <div class="line-divider"></div>
                   <div class="post-title">
@@ -109,13 +111,16 @@
                   @foreach($plan['list_comment'] as $comment)
                     <div class="post-comment">
                       <img src="images/users/{{ $comment['avatar'] }}" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}</p>
-                      <div class="text-muted" style="display: inline-block"><?php echo \Carbon\Carbon::createFromTimestamp(strtotime($comment["created_at"]))->diffForHumans()?></div>
+                      <p>
+                        <a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}
+                        <br/>
+                        <span class="text-muted" style="display: inline-block"><?php echo \Carbon\Carbon::createFromTimestamp(strtotime($comment["created_at"]))->diffForHumans()?></span>
+                      </p>
                     </div>
 
                   @endforeach
                   <div class="post-comment">
-                    <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
+                    <img src="images/users/{{ $current_user[0]->avatar }}" alt="" class="profile-photo-sm" />
                     {{ Form::open(array('route'=>['post-comment', $plan->id], 'method' => 'post')) }}
                       {{ Form::textarea('comment', '', array('class' => 'form-control', 'placeholder' => 'Write a comment...')) }}
                       {{ Form::submit('Comment', array('class' => 'btn btn-primary pull-right')) }}
