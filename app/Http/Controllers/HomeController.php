@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Plan;
-use App\UserInfo;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -26,9 +26,8 @@ class HomeController extends Controller
     {
         $plan = new Plan();
         $data = $plan->getAllPlan();
-//        echo '<pre>';
-//        print_r($data);
-//        echo '</pre>';
-        return view('home', compact('data'));
+        $current_user = User::getCurrentUserInfo();
+
+        return view('home', compact('data', 'current_user'));
     }
 }

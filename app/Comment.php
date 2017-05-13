@@ -30,4 +30,8 @@ class Comment extends Model
     {
         return self::join('users',"$this->table.user_id",'=','users.id')->join('user_info',"$this->table.user_id",'=','user_info.user_id')->select("$this->table.id","$this->table.user_id",'plan_id','comment',"$this->table.created_at","$this->table.updated_at",'first_name','last_name','avatar')->where('plan_id', $this->planID)->orderBy('created_at','asc')->get()->toArray();
     }
+    public function count()
+    {
+        return self::join('users',"$this->table.user_id",'=','users.id')->join('user_info',"$this->table.user_id",'=','user_info.user_id')->where('plan_id', $this->planID)->count();
+    }
 }
