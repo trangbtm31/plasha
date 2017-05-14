@@ -4,6 +4,11 @@
     Plasa news feed !!
 @endsection
 
+@section('head')
+  <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+  <script language="javascript" src="js/ajax/ajax.js" ></script>
+@endsection
+
 @section('content')
     @include("layouts.app")
     <div id="page-contents">
@@ -82,54 +87,12 @@
                   {{ Form::close() }}
             <!-- Post Content
             ================================================= -->
-            @foreach($data as $plan)
-            <div class="post-content">
-              @foreach($plan["list_thumbnail"] as $thumbnail)
-              <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
-              @endforeach
-              <div class="post-container">
-                <img src="images/users/{{ $plan["avatar"] }}" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">{{ $plan["first_name"] }} {{ $plan["last_name"] }}</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
+                  <div id="content">
+                      @include('plan.plan-ajax')
                   </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
+                  <div id="loadding" class="hidden" style="color:#337ab7; font-size: 20px; font-weight: bold; text-align: center">
+                    LOADDING ...
                   </div>
-                  <div class="line-divider"></div>
-                  <div class="post-title">
-                    <p>{{ $plan["name"] }}</p>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p>{{ $plan["description"] }}</p>
-                  </div>
-                  <div class="line-divider"></div>
-                  @foreach($plan['list_comment'] as $comment)
-                    <div class="post-comment">
-                      <img src="images/users/{{ $comment['avatar'] }}" alt="" class="profile-photo-sm" />
-                      <p>
-                        <a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}
-                        <br/>
-                        <span class="text-muted" style="display: inline-block"><?php echo \Carbon\Carbon::createFromTimestamp(strtotime($comment["created_at"]))->diffForHumans()?></span>
-                      </p>
-                    </div>
-
-                  @endforeach
-                  <div class="post-comment">
-                    <img src="images/users/{{ $current_user[0]->avatar }}" alt="" class="profile-photo-sm" />
-                    {{ Form::open(array('route'=>['post-comment', $plan->id], 'method' => 'post')) }}
-                      {{ Form::textarea('comment', '', array('class' => 'form-control', 'placeholder' => 'Write a comment...')) }}
-                      {{ Form::submit('Comment', array('class' => 'btn btn-primary pull-right')) }}
-                    {{ Form::close() }}
-                  </div>
-                </div>
-              </div>
-            </div>
-            @endforeach
 
           <!-- Newsfeed Common Side Bar Right
           ================================================= -->

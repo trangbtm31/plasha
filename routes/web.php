@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function() {
 });
 
 Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index' ]);
+Route::get('/plan-ajax', ['as' => 'plan-ajax', 'uses' => 'HomeController@PlanAjax' ]);
 
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');

@@ -24,10 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $plan = new Plan();
-        $data = $plan->getAllPlan();
         $current_user = User::getCurrentUserInfo();
+        return view('home', compact('current_user'));
+    }
 
-        return view('home', compact('data', 'current_user'));
+    public function PlanAjax()
+    {
+        $current_user = User::getCurrentUserInfo();
+        return view('plan/plan-ajax',compact('current_user'));
     }
 }
