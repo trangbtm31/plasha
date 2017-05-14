@@ -33,4 +33,9 @@ class HomeController extends Controller
         $current_user = User::getCurrentUserInfo();
         return view('plan/plan-ajax',compact('current_user'));
     }
+    public function CommentAjax()
+    {
+        $current_user = User::getCurrentUserInfo();
+        return view('plan/comment-ajax',compact('current_user'));
+    }
 }

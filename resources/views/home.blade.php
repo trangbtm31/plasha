@@ -7,6 +7,7 @@
 @section('head')
   <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
   <script language="javascript" src="js/ajax/ajax.js" ></script>
+  <link href="css/home.css" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')

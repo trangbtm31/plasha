@@ -37,10 +37,9 @@ class plan extends Model
             $plan['total_thumbnail']= $thumbnail->count();
             $plan['list_thumbnail'] = $thumbnail->getThumbnail();
 
-            //Get all comment of plan
+            //Count total comment of plan
             $comment = new Comment($plan['id']);
             $plan['total_comment']= $comment->count();
-            $plan['list_comment'] = $comment->getComment();
         };
 
         return $data;

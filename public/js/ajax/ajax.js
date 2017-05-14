@@ -1,46 +1,24 @@
-// Biến dùng kiểm tra nếu đang gửi ajax thì ko thực hiện gửi thêm
 var is_busy = false;
-
-// Biến lưu trữ trang hiện tại
 var page = 1;
-
-// Biến lưu trữ rạng thái phân trang
 var stopped = false;
 
 $(document).ready(function()
 {
-    // Khi kéo scroll thì xử lý
     $(window).scroll(function()
     {
-        // Element append nội dung
         $element = $('#content');
-
-        // ELement hiển thị chữ loadding
         $loadding = $('#loadding');
-
-        // Nếu màn hình đang ở dưới cuối thẻ thì thực hiện ajax
         if($(window).scrollTop() + $(window).height() >= $element.height())
         {
-            // Nếu đang gửi ajax thì ngưng
             if (is_busy == true){
                 return false;
             }
-
-            // Nếu hết dữ liệu thì ngưng
             if (stopped == true){
                 return false;
             }
-
-            // Thiết lập đang gửi ajax
             is_busy = true;
-
-            // Tăng số trang lên 1
             page++;
-
-            // Hiển thị loadding
             $loadding.removeClass('hidden');
-
-            // Gửi Ajax
             $.ajax(
                 {
                     type        : 'get',
@@ -54,7 +32,6 @@ $(document).ready(function()
                 })
                 .always(function()
                 {
-                    // Sau khi thực hiện xong ajax thì ẩn hidden và cho trạng thái gửi ajax = false
                     $loadding.addClass('hidden');
                     is_busy = false;
                 });
@@ -62,3 +39,38 @@ $(document).ready(function()
         }
     });
 });
+function LoadMoreComment(data) {
+    var plan_id = $(data).attr('plan_id');
+    var is_busy = $(data).attr('is_busy');
+    var comment_page = $(data).attr('page');
+
+    $element = $('#comment-plan-'+plan_id+' .comment-content');
+
+    $button = $(data);
+
+    if (is_busy == true) {
+        return false;
+    }
+    comment_page++;
+
+    $button.html('LOADDING ...');
+    $.ajax(
+        {
+            type: 'get',
+            dataType: 'text',
+            url: 'comment-ajax',
+            data: {"comment_page": comment_page, "plan_id": plan_id},
+            success: function(result)
+            {
+                var x = document.getElementById("comment-plan-" + plan_id);
+                var y = x.getElementsByTagName("button")[0];
+                y.setAttribute("page", comment_page);
+                $element.append(result);
+            }
+        })
+        .always(function()
+        {
+            $button.html('LOAD MORE');
+            is_busy = false;
+        });
+}

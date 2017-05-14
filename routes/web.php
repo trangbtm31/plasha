@@ -32,6 +32,8 @@ Route::group(['middleware' => ['web']], function() {
 
 Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index' ]);
 Route::get('/plan-ajax', ['as' => 'plan-ajax', 'uses' => 'HomeController@PlanAjax' ]);
+Route::get('/comment-ajax/{plan_id}', ['as' => 'comment-ajax', 'uses' => 'HomeController@CommentAjax' ]);
+Route::get('/comment-ajax', ['as' => 'comment-ajax', 'uses' => 'HomeController@CommentAjax' ]);
 
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');
