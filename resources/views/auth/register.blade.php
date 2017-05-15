@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('title')
+Register
+@endsection
 @section('content')
 
  <div id="lp-register">
