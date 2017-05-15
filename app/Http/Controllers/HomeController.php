@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Plan;
+use App\PlanLike;
 use App\User;
 
 class HomeController extends Controller
@@ -37,5 +37,17 @@ class HomeController extends Controller
     {
         $current_user = User::getCurrentUserInfo();
         return view('plan/comment-ajax',compact('current_user'));
+    }
+    public function LikeAjax()
+    {
+        if(isset($_GET['plan_id'])){
+            $plan_id = (int)$_GET['plan_id'];
+        }
+        else {
+            return false;
+        }
+
+        $planLike = new PlanLike($plan_id);
+        $planLike->like();
     }
 }

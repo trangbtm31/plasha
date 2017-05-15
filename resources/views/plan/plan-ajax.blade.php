@@ -46,7 +46,7 @@ if ($total > $limit){
 foreach($data as $plan)
 {
     ?>
-    <div class="post-content">
+    <div id="plan-{{ $plan['id'] }}" class="post-content">
         @foreach($plan["list_thumbnail"] as $thumbnail)
             <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
         @endforeach
@@ -58,7 +58,7 @@ foreach($data as $plan)
                     <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
                 </div>
                 <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                    <a class="button-like like" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i> 13</a>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                     <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
                 </div>
@@ -78,7 +78,7 @@ foreach($data as $plan)
                     </div>
                 </div>
                 <div class="post-comment">
-                    <img src="images/users/{{ $current_user[0]->avatar }}" alt="" class="profile-photo-sm" />
+                    <img src="images/users/{{ isset($current_user[0]->avatar)? $current_user[0]->avatar : 'users_default.png' }}" alt="" class="profile-photo-sm" />
                     <form method="POST" action="{{ route('post-comment', ['plan_id' => $plan['id']]) }}">
                         {{ csrf_field() }}
                         <textarea name="comment" class="form-control" placeholder="Write a comment..." rows="4" cols="50"></textarea>
