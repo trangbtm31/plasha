@@ -36,6 +36,7 @@ class PlanLike extends Model
                 ['user_id', '=', Auth::User()->id]
             ])->update(['status' => 'like']);
         }
+        return $this->countLike();
     }
     public function dislike()
     {
@@ -57,6 +58,17 @@ class PlanLike extends Model
                 ['user_id', '=', Auth::User()->id]
             ])->update(['status' => 'dislike']);
         }
+        return $this->countLike();
+    }
+
+    public function countLike()
+    {
+        $data = self::where([
+                ['plan_id', '=', $this->planID],
+                ['status', '=', 'like']
+            ])
+            ->count();
+        return $data;
     }
 
     public function getStatus()

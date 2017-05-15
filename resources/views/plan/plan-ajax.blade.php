@@ -18,6 +18,7 @@ $start = ($limit * $page) - $limit;
 // Câu truy vấn
 $plan = new Plan();
 $data = $plan->getPlanLimit($start, $limit + 1);
+
 $data = json_decode($data, true);
 
 $total = count($data);
@@ -37,15 +38,15 @@ foreach($data as $plan)
             <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
         @endforeach
         <div class="post-container">
-            <img src="images/users/{{ $plan["avatar"] }}" alt="user" class="profile-photo-md pull-left" />
+            <img src="images/users/{{ !empty($plan["avatar"]) ? $plan["avatar"] : 'users_default.png' }}" alt="user" class="profile-photo-md pull-left" />
             <div class="post-detail">
                 <div class="user-info">
                     <h5><a href="timeline.html" class="profile-link">{{ $plan["first_name"] }} {{ $plan["last_name"] }}</a> <span class="following">following</span></h5>
                     <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
                 </div>
                 <div class="reaction">
-                    <a class="button-like {{ $plan['like_status'] }}" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
+                    <a class="button-like {{ $plan['like_status'] }}" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i><span class="total-like">{{ $plan['total_like'] }}</span></a>
+                    <a class="btn text-blue"><i class="icon ion-chatbox-working"></i>{{ $plan['total_comment'] }}</a>
                 </div>
                 <div class="line-divider"></div>
                 <div class="post-title">

@@ -31,7 +31,7 @@ if ($total > $limit){
 ?>
 @foreach($data as $comment)
     <div class="post-comment">
-        <img src="images/users/{{ $comment['avatar'] }}" alt="" class="profile-photo-sm" />
+        <img src="images/users/{{ !empty($comment['avatar']) ? $comment['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm" />
         <p>
             <a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}
             <br/>

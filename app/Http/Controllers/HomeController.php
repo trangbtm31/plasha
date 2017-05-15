@@ -52,9 +52,8 @@ class HomeController extends Controller
         else {
             return false;
         }
-
         $planLike = new PlanLike($plan_id);
-        $planLike->like();
+        return $planLike->like();
     }
 
     //Update database when dislike
@@ -66,8 +65,7 @@ class HomeController extends Controller
         else {
             return false;
         }
-
         $planLike = new PlanLike($plan_id);
-        $planLike->dislike();
+        return $planLike->dislike();
     }
 }
