@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Plan;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlanRequest extends FormRequest
+class PlanThumbnailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PlanRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,15 +24,7 @@ class PlanRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|max:50',
-            'description' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            //
+            'thumbnail' => 'max:2048'
         ];
     }
 }
