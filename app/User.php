@@ -28,6 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    static function createUserInfo() {
+        $query = \DB::table('user_info')->select('user_id')->where('user_id','=',Auth::id())->count();
+        return $query != 0 ? '' : \DB::table('user_info')->insert(
+            ['user_id' => Auth::id()]
+        );
+    }
+
     static function getCurrentUserInfo()
     {
         $current_user_id = Auth::id();

@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        User::createUserInfo();
         $current_user = User::getCurrentUserInfo();
         return view('home', compact('current_user'));
     }
