@@ -22,20 +22,6 @@ $data = json_decode($data, true);
 
 $total = count($data);
 
-for ($i = 0; $i < $total - 1; $i++)
-{
-    //Get all thumbnail of plan
-    $thumbnail = new PlanThumbnail($plan['id']);
-    $plan['total_thumbnail']= $thumbnail->count();
-    $plan['list_thumbnail'] = $thumbnail->getThumbnail();
-
-    //Get all comment of plan
-    $comment = new Comment($plan['id']);
-    $plan['total_comment']= $comment->count();
-    $plan['list_comment'] = $comment->getComment();
-};
-
-
 // Hiển thị dữ liệu
 
 // Bỏ đi kết quả cuối cùng vì kết quả này dùng để check phân trang thôi
@@ -58,8 +44,7 @@ foreach($data as $plan)
                     <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
                 </div>
                 <div class="reaction">
-                    <a class="button-like like" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                    <a class="button-like {{ $plan['like_status'] }}" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i> 13</a>
                     <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
                 </div>
                 <div class="line-divider"></div>

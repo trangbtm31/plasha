@@ -11,6 +11,7 @@
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^3.2.3",
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.0.4",
     "gulp-rename": "^1.2.2",
@@ -23,6 +24,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "del": "^2.2.2",
     "sticky-kit": "^1.1.3"
   }
 }

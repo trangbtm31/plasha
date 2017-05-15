@@ -75,10 +75,15 @@ function LoadMoreComment(data) {
 
 function likePlan(data) {
     var plan_id = $(data).attr('plan_id');
+
+    //Get element like button
     $element = $('#plan-' + plan_id + ' .button-like');
-    if ($element.hasClass('like'))
+    alert(plan_id);
+
+    //If
+    if ($element.hasClass('dislike'))
     {
-        $element.removeClass('like').addClass("liked");
+        $element.removeClass('dislike').addClass("like");
         $.ajax({
             type: 'get',
             dataType: 'text',
@@ -86,15 +91,22 @@ function likePlan(data) {
             data: {"plan_id": plan_id},
             success: function(result)
             {
-                var x = document.getElementById("comment-plan-" + plan_id);
-                var y = x.getElementsByTagName("button")[0];
-                y.setAttribute("page", comment_page);
                 $element.append(result);
             }
         })
     }
-    else
+    else if ($element.hasClass('like'))
     {
-        $element.removeClass('liked').addClass("like");
+        $element.removeClass('like').addClass("dislike");
+        $.ajax({
+            type: 'get',
+            dataType: 'text',
+            url: 'dislike-ajax/',
+            data: {"plan_id": plan_id},
+            success: function(result)
+            {
+                $element.append(result);
+            }
+        })
     }
 }

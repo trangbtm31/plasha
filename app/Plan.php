@@ -40,6 +40,10 @@ class plan extends Model
             //Count total comment of plan
             $comment = new Comment($plan['id']);
             $plan['total_comment']= $comment->count();
+
+            //Get status like
+            $like = new PlanLike($plan['id']);
+            $plan['like_status'] = $like->getStatus();
         };
 
         return $data;

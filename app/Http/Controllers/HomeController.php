@@ -28,16 +28,21 @@ class HomeController extends Controller
         return view('home', compact('current_user'));
     }
 
+    //Load plan
     public function PlanAjax()
     {
         $current_user = User::getCurrentUserInfo();
         return view('plan/plan-ajax',compact('current_user'));
     }
+
+    //Load comment
     public function CommentAjax()
     {
         $current_user = User::getCurrentUserInfo();
         return view('plan/comment-ajax',compact('current_user'));
     }
+
+    //Update database when like
     public function LikeAjax()
     {
         if(isset($_GET['plan_id'])){
@@ -49,5 +54,19 @@ class HomeController extends Controller
 
         $planLike = new PlanLike($plan_id);
         $planLike->like();
+    }
+
+    //Update database when dislike
+    public function DislikeAjax()
+    {
+        if(isset($_GET['plan_id'])){
+            $plan_id = (int)$_GET['plan_id'];
+        }
+        else {
+            return false;
+        }
+
+        $planLike = new PlanLike($plan_id);
+        $planLike->dislike();
     }
 }

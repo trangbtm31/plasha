@@ -35,6 +35,7 @@ Route::get('/plan-ajax', ['as' => 'plan-ajax', 'uses' => 'HomeController@PlanAja
 Route::get('/comment-ajax/{plan_id}', ['as' => 'comment-ajax', 'uses' => 'HomeController@CommentAjax' ]);
 Route::get('/comment-ajax', ['as' => 'comment-ajax', 'uses' => 'HomeController@CommentAjax' ]);
 Route::get('/like-ajax', ['as' => 'like-ajax', 'uses' => 'HomeController@LikeAjax' ]);
+Route::get('/dislike-ajax', ['as' => 'dislike-ajax', 'uses' => 'HomeController@DislikeAjax' ]);
 
 Route::get('/admin_area', ['middleware' => 'admin', function () {
      return view('welcome');

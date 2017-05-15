@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Requests\Plan\PlanLikeRequest;
 use Illuminate\Support\Facades\Auth;
 
 class PlanLike extends Model
@@ -19,9 +18,56 @@ class PlanLike extends Model
 
     public function like()
     {
-        $this->plan_id = $this->planID;
-        $this->user_id = Auth::id();
-        $this->status = 'like';
-        $this->save();
+        $check_exist = self::where([
+            ['plan_id', '=', $this->planID],
+            ['user_id', Auth::User()->id]
+        ])->get();
+        if( $check_exist->count() < 1 )
+        {
+            $this->plan_id = $this->planID;
+            $this->user_id = Auth::id();
+            $this->status = 'like';
+            $this->save();
+        }
+        else
+        {
+            self::where([
+                ['plan_id', '=', $this->planID],
+                ['user_id', '=', Auth::User()->id]
+            ])->update(['status' => 'like']);
+        }
+    }
+    public function dislike()
+    {
+        $check_exist = self::where([
+            ['plan_id', '=', $this->planID],
+            ['user_id', '=', Auth::User()->id]
+        ])->get();
+        if( $check_exist->count() < 1 )
+        {
+            $this->plan_id = $this->planID;
+            $this->user_id = Auth::id();
+            $this->status = 'dislike';
+            $this->save();
+        }
+        else
+        {
+            self::where([
+                ['plan_id', '=', $this->planID],
+                ['user_id', '=', Auth::User()->id]
+            ])->update(['status' => 'dislike']);
+        }
+    }
+
+    public function getStatus()
+    {
+        $data = json_decode(self::select('status')
+            ->where([
+                ['plan_id', '=', $this->planID],
+                ['user_id', '=', Auth::User()->id]
+            ])
+            ->get(), true);
+        $data = array_shift($data)['status'];
+        return $data;
     }
 }

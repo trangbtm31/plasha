@@ -1044,7 +1044,46 @@ ul.contact li i{
   padding: 12px 0 4px;
 }
 
+/*==================================================
+  Plan CSS
+  ==================================================*/
 
+.comment-wrapper {
+  display: flex;
+  flex-direction:column-reverse;
+}
+
+.button-like {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.button-like:hover {
+  text-decoration: none;
+}
+
+.dislike {
+  color: #709e32;
+}
+.dislike:hover {
+  color: #afd778;
+}
+
+.like {
+  color: #afd778;
+}
+.like:hover {
+  color: #afd778;
+}
 
 
 
