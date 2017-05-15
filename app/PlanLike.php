@@ -20,7 +20,7 @@ class PlanLike extends Model
     {
         $check_exist = self::where([
             ['plan_id', '=', $this->planID],
-            ['user_id', Auth::User()->id]
+            ['user_id', '=', Auth::User()->id]
         ])->get();
         if( $check_exist->count() < 1 )
         {

@@ -5,8 +5,7 @@
 @endsection
 
 @section('head')
-  <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-  <script language="javascript" src="dist/js/home/ajax.js" ></script>
+
 @endsection
 
 @section('content')

@@ -78,7 +78,7 @@ function likePlan(data) {
 
     //Get element like button
     $element = $('#plan-' + plan_id + ' .button-like');
-    alert(plan_id);
+    alert($element.hasClass('dislike'));
 
     //If
     if ($element.hasClass('dislike'))
