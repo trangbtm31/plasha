@@ -21,7 +21,7 @@
             <div class="col-md-3 static">
             <div class="profile-card">
             	<img src="images/users/{{ isset($current_user[0]->avatar)? $current_user[0]->avatar : 'users_default.png' }}" alt="user" class="profile-photo" />
-            	<h5><a href="timeline.html" class="text-white">{{ isset($current_user[0]->first_name)? $current_user[0]->first_name : '' }} {{ isset($current_user[0]->last_name)? $current_user[0]->last_name : '' }}</a></h5>
+            	<h5><a href="timeline.html" class="text-white">{{ Auth::User()->first_name }} {{ Auth::User()->last_name }}</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
