@@ -29,7 +29,7 @@ if ($total > $limit){
 }
 
 // Lấy category
-$category = Plan\Category::getAllCategory();
+$category = Category::getAllCategory();
 
 foreach($data as $plan)
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PlanLike;
 use App\User;
-use App\Plan\Category;
+use App\Category;
 
 class HomeController extends Controller
 {
