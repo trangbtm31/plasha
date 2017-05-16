@@ -16,15 +16,19 @@ class plan extends Model
         $this->user_id = Auth::id();
         $this->name = $request->name;
         $this->description = $request->description;
-        $this->category = 'eating';
+        $this->category = $request->category;
         $this->save();
 
         //Get thumbnail
-        foreach ($request->file('thumbnail') as $thumbnail)
+        if (!empty($request->file('thumbnail')))
         {
-            $image = new PlanThumbnail($this->id);
-            $image->create($thumbnail);
+            foreach ($request->file('thumbnail') as $thumbnail)
+            {
+                $image = new PlanThumbnail($this->id);
+                $image->create($thumbnail);
+            }
         }
+
     }
 
     public function getPlanLimit($start, $limit)

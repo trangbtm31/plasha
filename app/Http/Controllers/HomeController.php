@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PlanLike;
 use App\User;
+use App\Plan\Category;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,8 @@ class HomeController extends Controller
     {
         User::createUserInfo();
         $current_user = User::getCurrentUserInfo();
-        return view('home', compact('current_user'));
+        $category = Category::getAllCategory();
+        return view('home', compact('current_user', 'category'));
     }
 
     //Load plan
