@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PlanLike;
 use App\User;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,8 @@ class HomeController extends Controller
     {
         User::createUserInfo();
         $current_user = User::getCurrentUserInfo();
-        return view('home', compact('current_user'));
+        $category = Category::getAllCategory();
+        return view('home', compact('current_user', 'category'));
     }
 
     //Load plan
@@ -52,9 +54,8 @@ class HomeController extends Controller
         else {
             return false;
         }
-
         $planLike = new PlanLike($plan_id);
-        $planLike->like();
+        return $planLike->like();
     }
 
     //Update database when dislike
@@ -66,8 +67,7 @@ class HomeController extends Controller
         else {
             return false;
         }
-
         $planLike = new PlanLike($plan_id);
-        $planLike->dislike();
+        return $planLike->dislike();
     }
 }

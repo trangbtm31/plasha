@@ -5,8 +5,7 @@
 @endsection
 
 @section('head')
-  <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-  <script language="javascript" src="dist/js/home/ajax.js" ></script>
+
 @endsection
 
 @section('content')
@@ -50,30 +49,18 @@
 
             <!-- Post Create Box
             ================================================= -->
-                  @if(Session::has('message'))
-                    <div class="message">{{ Session::get('message') }}</div>
-                  @endif
-
                   {{ Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) }}
                     {{ csrf_field() }}
                     <div class="create-post">
                       {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
-                      @foreach($errors->get('name') as $error)
-                        <div class="error">{{ $error }}</div>
-                      @endforeach
                         <div class="row">
                           <div class="col-md-10 col-sm-10">
                             <div class="form-group">
                               <img src="images/users/{{ isset($current_user[0]->avatar)? $current_user[0]->avatar : 'users_default.png' }}" alt="" class="profile-photo-md" />
                               <div>
                                 {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
-                                @foreach($errors->get('description') as $error)
-                                  <div class="error">{{ $error }}</div>
-                                @endforeach
                                 {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
-                                @foreach($errors->get('thumbnail') as $error)
-                                  <div class="error">{{ $error }}</div>
-                                @endforeach
+                                {{ Form::select('category', $category, null,['class' => 'form-category']) }}
                               </div>
                             </div>
                           </div>
@@ -83,6 +70,13 @@
                             </div>
                           </div>
                         </div>
+                      <!-- Message for user -->
+                      @if(Session::has('message'))
+                        <div class="message">{{ Session::get('message') }}</div>
+                      @endif
+                      @foreach($errors->all() as $error)
+                        <div class="error">{{ $error }}</div>
+                      @endforeach
                     </div><!-- Post Create Box End-->
                   {{ Form::close() }}
             <!-- Post Content

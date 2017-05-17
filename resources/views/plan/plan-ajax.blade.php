@@ -1,6 +1,5 @@
 <?php
 namespace App;
-
 // Lấy trang hiện tại
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -19,16 +18,19 @@ $start = ($limit * $page) - $limit;
 $plan = new Plan();
 $data = $plan->getPlanLimit($start, $limit + 1);
 $data = json_decode($data, true);
-
 $total = count($data);
 
 // Hiển thị dữ liệu
 
-// Bỏ đi kết quả cuối cùng vì kết quả này dùng để check phân trang thôi
+// Bỏ đi kết quả cuối cùng vì kết quả này dùng để check còn dữ liệu hay không
 // Tuy nhiên chỉ bỏ ở trường hợp ($total > $limit) nếu không ở trang cuối cùng sẽ mất một row
 if ($total > $limit){
     array_pop($data);
 }
+
+// Lấy category
+$category = Category::getAllCategory();
+
 foreach($data as $plan)
 {
     ?>
@@ -37,15 +39,21 @@ foreach($data as $plan)
             <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
         @endforeach
         <div class="post-container">
-            <img src="images/users/{{ $plan["avatar"] }}" alt="user" class="profile-photo-md pull-left" />
+            <img src="images/users/{{ !empty($plan["avatar"]) ? $plan["avatar"] : 'users_default.png' }}" alt="user" class="profile-photo-md pull-left" />
             <div class="post-detail">
                 <div class="user-info">
                     <h5><a href="timeline.html" class="profile-link">{{ $plan["first_name"] }} {{ $plan["last_name"] }}</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></p>
+                    <span class="text-muted">{{ $category[$plan["category"]] }}</span>
+                    <span role="presentation" aria-hidden="true"> · </span>
+                    <span class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></span>
                 </div>
                 <div class="reaction">
-                    <a class="button-like {{ $plan['like_status'] }}" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-blue"><i class="icon ion-chatbox-working"></i> {{ $plan['total_comment'] }}</a>
+                    <a class="button-like {{ $plan['like_status'] }}" onclick="likePlan(this)" plan_id="{{ $plan['id'] }}">
+                        <i class="icon ion-thumbsup"></i><span class="total-like">{{ $plan['total_like'] }}</span>
+                    </a>
+                    <a class="btn text-blue">
+                        <i class="icon ion-chatbox-working"></i><span class="total-like">{{ $plan['total_comment'] }}</span>
+                    </a>
                 </div>
                 <div class="line-divider"></div>
                 <div class="post-title">

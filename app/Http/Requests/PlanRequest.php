@@ -25,14 +25,16 @@ class PlanRequest extends FormRequest
     {
         return [
             'name'        => 'required|max:50',
-            'description' => 'required'
+            'description' => 'required',
+            'category'    => 'required',
+            'thumbnail.*' => 'image|max:2048'
         ];
     }
 
     public function messages()
     {
         return [
-            //
+            'thumbnail' => 'Thumbnail must be an image and not be greater than 2048 kilobytes.'
         ];
     }
 }

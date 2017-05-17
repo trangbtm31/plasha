@@ -78,34 +78,33 @@ function likePlan(data) {
 
     //Get element like button
     $element = $('#plan-' + plan_id + ' .button-like');
-    alert(plan_id);
 
     //If
     if ($element.hasClass('dislike'))
     {
-        $element.removeClass('dislike').addClass("like");
         $.ajax({
             type: 'get',
             dataType: 'text',
-            url: 'like-ajax/',
+            url: 'like-ajax',
             data: {"plan_id": plan_id},
             success: function(result)
             {
-                $element.append(result);
+                $element.removeClass('dislike').addClass("like");
+                $element[0].getElementsByClassName('total-like')[0].textContent = result;
             }
         })
     }
     else if ($element.hasClass('like'))
     {
-        $element.removeClass('like').addClass("dislike");
         $.ajax({
             type: 'get',
             dataType: 'text',
-            url: 'dislike-ajax/',
+            url: 'dislike-ajax',
             data: {"plan_id": plan_id},
             success: function(result)
             {
-                $element.append(result);
+                $element.removeClass('like').addClass("dislike");
+                $element[0].getElementsByClassName('total-like')[0].textContent = result;
             }
         })
     }

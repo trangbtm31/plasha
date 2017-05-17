@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2017 at 05:32 AM
+-- Generation Time: May 15, 2017 at 03:14 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -267,10 +267,25 @@ INSERT INTO `plan_comment` (`id`, `user_id`, `plan_id`, `comment`, `created_at`,
 CREATE TABLE `plan_like` (
   `id` int(11) NOT NULL,
   `plan_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
   `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `plan_like`
+--
+
+INSERT INTO `plan_like` (`id`, `plan_id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(25, 53, 3, 'like', '2017-05-15 08:25:56', '2017-05-15 13:13:37'),
+(26, 54, 3, 'dislike', '2017-05-15 08:25:59', '2017-05-15 13:13:56'),
+(27, 55, 3, 'like', '2017-05-15 08:47:43', '2017-05-15 10:14:31'),
+(28, 48, 3, 'dislike', '2017-05-15 12:26:15', '2017-05-15 12:27:23'),
+(29, 47, 3, 'like', '2017-05-15 12:26:46', '2017-05-15 12:26:46'),
+(30, 51, 3, 'like', '2017-05-15 12:27:16', '2017-05-15 12:27:16'),
+(31, 49, 3, 'like', '2017-05-15 12:27:21', '2017-05-15 12:27:21'),
+(32, 53, 4, 'like', '2017-05-15 12:42:40', '2017-05-15 13:14:12');
 
 -- --------------------------------------------------------
 
@@ -329,7 +344,9 @@ INSERT INTO `plan_thumbnail` (`id`, `plan_id`, `thumbnail`, `created_at`, `updat
 (8, 50, 'images.jpg', '2017-05-14 06:09:25', '2017-05-14 06:09:25'),
 (9, 51, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34'),
 (10, 52, 'cover-is-loading.jpg', '2017-05-14 06:09:46', '2017-05-14 06:09:46'),
-(11, 53, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47');
+(11, 53, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
+(12, 54, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
+(13, 55, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34');
 
 -- --------------------------------------------------------
 
@@ -371,7 +388,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
 (1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '0000-00-00', '', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
-(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '0000-00-00', '', '0S6wRJRzDTr6YBCOJI4ooW0xEV7CflOiZ81I0svggboSwzI7GI6pbhdDtBM2', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
+(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '0000-00-00', '', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
 (3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '0000-00-00', '', 'nMVc10LQb29NPL6pYgXF16ZvS4V3oIKwiBPFsnJwaCGhP9HwUMY5p4K63wTp', NULL, NULL, 1),
 (4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '0000-00-00', '', NULL, NULL, NULL, 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'male', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
@@ -385,7 +402,6 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`
 
 CREATE TABLE `user_info` (
   `user_id` int(10) UNSIGNED NOT NULL,
-  `sex` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `job` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -397,10 +413,11 @@ CREATE TABLE `user_info` (
 -- Dumping data for table `user_info`
 --
 
-INSERT INTO `user_info` (`user_id`, `sex`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
-(3, 'male', 'Ho Chi Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
-(4, 'male', NULL, NULL, NULL, 'user-6.jpg', NULL),
-(5, 'female', NULL, NULL, NULL, 'user-10.jpg', NULL);
+INSERT INTO `user_info` (`user_id`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
+(2, NULL, NULL, NULL, NULL, NULL),
+(3, 'Ho Chi Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
+(4, NULL, NULL, NULL, NULL, NULL),
+(5, NULL, NULL, NULL, 'user-10.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -527,7 +544,8 @@ ALTER TABLE `plan_comment`
 --
 ALTER TABLE `plan_like`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `plan_id` (`plan_id`);
+  ADD KEY `plan_id` (`plan_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `plan_report`
@@ -635,7 +653,7 @@ ALTER TABLE `plan_comment`
 -- AUTO_INCREMENT for table `plan_like`
 --
 ALTER TABLE `plan_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `plan_report`
 --
@@ -650,7 +668,7 @@ ALTER TABLE `plan_share`
 -- AUTO_INCREMENT for table `plan_thumbnail`
 --
 ALTER TABLE `plan_thumbnail`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `relationship`
 --
@@ -721,7 +739,8 @@ ALTER TABLE `plan_comment`
 -- Constraints for table `plan_like`
 --
 ALTER TABLE `plan_like`
-  ADD CONSTRAINT `plan_like_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`);
+  ADD CONSTRAINT `plan_like_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`),
+  ADD CONSTRAINT `plan_like_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `plan_report`
