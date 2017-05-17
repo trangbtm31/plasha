@@ -21,7 +21,7 @@ function add_friend() {
         data: {},
         success: function(result)
         {
-            document.getElementById("list-friend-recommend").innerHTML = result;
+            //document.getElementById("list-friend-recommend").innerHTML = result;
         }
     })
 }
