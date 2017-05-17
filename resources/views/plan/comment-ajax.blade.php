@@ -33,7 +33,7 @@ if ($total > $limit){
     <div class="post-comment">
         <img src="images/users/{{ !empty($comment['avatar']) ? $comment['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm" />
         <p>
-            <a href="timeline.html" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}
+            <a href="{{ route('time-line', ['id' => $comment['user_id']] ) }}" class="profile-link">{{ $comment['first_name'] }} {{ $comment['last_name'] }}</a> {{ $comment['comment'] }}
             <br/>
             <span class="text-muted" style="display: inline-block"><?php echo \Carbon\Carbon::createFromTimestamp(strtotime($comment["created_at"]))->diffForHumans()?></span>
         </p>
