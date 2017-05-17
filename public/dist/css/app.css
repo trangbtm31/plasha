@@ -6909,20 +6909,34 @@ ul.contact li i {
   padding-top: 10px; }
 
 .button-add-friend {
+  margin-top: 10px;
+  box-sizing: border-box;
   background: #27aae1;
-  padding: 0px 25px;
-  border: none;
+  color: #ffffff;
+  border: 1px solid #27aae1;
+  text-align: center;
+  height: 30px;
+  padding: 0px;
   font-size: 10px;
-  border-radius: 4px;
-  color: #fff;
   position: relative;
-  font-weight: 600;
-  outline: none;
   border-radius: 30px; }
 
 .button-add-friend:hover {
   background: #149AC9;
   transition: all 1s; }
+
+.friend-request-sent {
+  box-sizing: border-box;
+  background: transparent;
+  color: #27aae1;
+  border: 1px solid #27aae1;
+  text-align: center;
+  width: 100px;
+  height: 30px;
+  padding: 0px;
+  font-size: 10px;
+  position: relative;
+  border-radius: 30px; }
 
 /*==================================================
   CSS for width 992px

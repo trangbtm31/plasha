@@ -53,6 +53,7 @@ Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanControll
 Route::get('/find-friend', ['as' => 'find-friend', 'uses' => 'Friend\FriendController@FindFriend']);
 Route::get('/reload-recommend-friend', ['as' => 'reload-recommend-friend', 'uses' => 'Friend\FriendController@ReloadRecommendFriend']);
 Route::get('/add-friend-request', ['as' => 'add-friend-request', 'uses' => 'Friend\FriendController@AddFriendRequest']);
+Route::get('/cancel-friend-request', ['as' => 'cancel-friend-request', 'uses' => 'Friend\FriendController@CancelFriendRequest']);
 
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);
