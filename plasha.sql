@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2017 at 03:14 PM
+-- Generation Time: May 17, 2017 at 04:06 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -63,7 +63,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 ('eating', 'Eating'),
-('movie', 'Movie');
+('movie', 'Movie'),
+('sport', 'Sport');
 
 -- --------------------------------------------------------
 
@@ -205,8 +206,12 @@ INSERT INTO `plan` (`id`, `user_id`, `name`, `description`, `category`, `created
 (51, 3, 'A common form of lorem ipsum reads 5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:34', '2017-05-14 06:09:34'),
 (52, 3, 'A common form of lorem ipsum reads 6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:46', '2017-05-14 06:09:46'),
 (53, 3, 'A common form of lorem ipsum reads 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
-(54, 3, 'A common form of lorem ipsum reads 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
-(55, 3, 'A common form of lorem ipsum reads 7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:47', '2017-05-14 06:09:47');
+(54, 3, 'A common form of lorem ipsum reads 8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
+(55, 3, 'A common form of lorem ipsum reads 9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'eating', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
+(56, 3, 'A common form of lorem ipsum reads 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'sport', '2017-05-15 16:52:40', '2017-05-15 16:52:40'),
+(57, 3, 'A common form of lorem ipsum reads 11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'movie', '2017-05-15 16:55:58', '2017-05-15 16:55:58'),
+(67, 3, 'A common form of lorem ipsum reads 12', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'sport', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
+(71, 3, 'A common form of lorem ipsum reads 13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'movie', '2017-05-16 03:06:35', '2017-05-16 03:06:35');
 
 -- --------------------------------------------------------
 
@@ -256,7 +261,10 @@ INSERT INTO `plan_comment` (`id`, `user_id`, `plan_id`, `comment`, `created_at`,
 (38, 3, 53, 'c', '2017-05-14 15:14:01', '2017-05-14 15:14:01'),
 (39, 3, 53, 'd', '2017-05-14 15:14:05', '2017-05-14 15:14:05'),
 (40, 3, 47, 'a1', '2017-05-14 15:38:30', '2017-05-14 15:38:30'),
-(41, 3, 53, 'a10', '2017-05-14 16:50:39', '2017-05-14 16:50:39');
+(41, 3, 53, 'a10', '2017-05-14 16:50:39', '2017-05-14 16:50:39'),
+(42, 3, 53, 'AAA', '2017-05-15 13:16:49', '2017-05-15 13:16:49'),
+(43, 3, 57, 'Ut enim ad minim veniam', '2017-05-15 16:56:11', '2017-05-15 16:56:11'),
+(44, 3, 71, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2017-05-16 03:07:40', '2017-05-16 03:07:40');
 
 -- --------------------------------------------------------
 
@@ -285,7 +293,9 @@ INSERT INTO `plan_like` (`id`, `plan_id`, `user_id`, `status`, `created_at`, `up
 (29, 47, 3, 'like', '2017-05-15 12:26:46', '2017-05-15 12:26:46'),
 (30, 51, 3, 'like', '2017-05-15 12:27:16', '2017-05-15 12:27:16'),
 (31, 49, 3, 'like', '2017-05-15 12:27:21', '2017-05-15 12:27:21'),
-(32, 53, 4, 'like', '2017-05-15 12:42:40', '2017-05-15 13:14:12');
+(32, 53, 4, 'like', '2017-05-15 12:42:40', '2017-05-15 13:14:12'),
+(33, 57, 3, 'like', '2017-05-15 16:56:03', '2017-05-15 16:56:03'),
+(34, 71, 3, 'like', '2017-05-16 03:07:10', '2017-05-16 03:07:28');
 
 -- --------------------------------------------------------
 
@@ -346,7 +356,13 @@ INSERT INTO `plan_thumbnail` (`id`, `plan_id`, `thumbnail`, `created_at`, `updat
 (10, 52, 'cover-is-loading.jpg', '2017-05-14 06:09:46', '2017-05-14 06:09:46'),
 (11, 53, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
 (12, 54, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
-(13, 55, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34');
+(13, 55, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34'),
+(14, 56, 'kitchen.jpg', '2017-05-15 16:52:40', '2017-05-15 16:52:40'),
+(15, 57, 'cat.jpg', '2017-05-15 16:55:58', '2017-05-15 16:55:58'),
+(21, 67, 'cat.jpg', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
+(22, 67, 'cover-is-loading.jpg', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
+(23, 71, 'CinepolisOrlando-0010.jpg', '2017-05-16 03:06:35', '2017-05-16 03:06:35'),
+(24, 71, 'polk-county-5.jpg', '2017-05-16 03:06:35', '2017-05-16 03:06:35');
 
 -- --------------------------------------------------------
 
@@ -355,10 +371,9 @@ INSERT INTO `plan_thumbnail` (`id`, `plan_id`, `thumbnail`, `created_at`, `updat
 --
 
 CREATE TABLE `relationship` (
-  `id` int(11) NOT NULL,
-  `user_one_id` int(11) NOT NULL,
-  `user_two_id` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `user_id_1` int(10) UNSIGNED NOT NULL,
+  `user_id_2` int(10) UNSIGNED NOT NULL,
+  `status` varchar(10) DEFAULT NULL,
   `action_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -387,11 +402,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
-(1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '0000-00-00', '', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
-(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '0000-00-00', '', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
-(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '0000-00-00', '', 'nMVc10LQb29NPL6pYgXF16ZvS4V3oIKwiBPFsnJwaCGhP9HwUMY5p4K63wTp', NULL, NULL, 1),
-(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '0000-00-00', '', NULL, NULL, NULL, 1),
-(5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'male', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
+(1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
+(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
+(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'nMVc10LQb29NPL6pYgXF16ZvS4V3oIKwiBPFsnJwaCGhP9HwUMY5p4K63wTp', NULL, NULL, 1),
+(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', NULL, NULL, NULL, 1),
+(5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
 (6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0);
 
 -- --------------------------------------------------------
@@ -414,10 +429,12 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_id`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
-(2, NULL, NULL, NULL, NULL, NULL),
-(3, 'Ho Chi Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
-(4, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, 'user-10.jpg', NULL);
+(1, 'Đà Nẵng', 'Student', 'USSH', 'user-1', NULL),
+(2, 'Hồ Chí Minh', 'Student', 'UI', 'user-1', NULL),
+(3, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
+(4, 'Vũng Tàu', 'Fresher', 'Solazu', NULL, NULL),
+(5, 'Hà Nội', 'Student', 'University of Information Technology', 'user-10.jpg', NULL),
+(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1', NULL);
 
 -- --------------------------------------------------------
 
@@ -572,7 +589,7 @@ ALTER TABLE `plan_thumbnail`
 -- Indexes for table `relationship`
 --
 ALTER TABLE `relationship`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id_1`,`user_id_2`);
 
 --
 -- Indexes for table `users`
@@ -638,7 +655,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `plan_access`
 --
@@ -648,12 +665,12 @@ ALTER TABLE `plan_access`
 -- AUTO_INCREMENT for table `plan_comment`
 --
 ALTER TABLE `plan_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `plan_like`
 --
 ALTER TABLE `plan_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `plan_report`
 --
@@ -668,12 +685,7 @@ ALTER TABLE `plan_share`
 -- AUTO_INCREMENT for table `plan_thumbnail`
 --
 ALTER TABLE `plan_thumbnail`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `relationship`
---
-ALTER TABLE `relationship`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `users`
 --
