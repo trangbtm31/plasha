@@ -40,4 +40,20 @@ class User extends Authenticatable
         $current_user_id = Auth::id();
         return \DB::table('users')->join('user_info','id','=','user_id')->select('id', 'first_name', 'last_name', 'avatar', 'cover_photo')->where('id',$current_user_id)->get();
     }
+
+    static function getUserInfo($user_id) {
+        return \DB::table('users')->join(
+            'user_info','id','=','user_id'
+        )->select(
+            'id',
+            'first_name',
+            'last_name',
+            'avatar',
+            'cover_photo'
+        )->where('id',$user_id)->get();
+    }
+
+    static function getUserList() {
+        return \DB::table('users')->get();
+    }
 }

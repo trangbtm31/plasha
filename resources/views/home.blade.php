@@ -19,7 +19,7 @@
             <div class="col-md-3 static">
             <div class="profile-card">
             	<img src="images/users/{{ isset($current_user[0]->avatar)? $current_user[0]->avatar : 'users_default.png' }}" alt="user" class="profile-photo" />
-            	<h5><a href="timeline.html" class="text-white">{{ Auth::User()->first_name }} {{ Auth::User()->last_name }}</a></h5>
+            	<h5><a href="{{ route('time-line', ['id' => $current_user[0]->id] )}}" class="text-white">{{ Auth::User()->first_name }} {{ Auth::User()->last_name }}</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
@@ -87,7 +87,7 @@
                   <div id="loadding" class="hidden" style="color:#337ab7; font-size: 20px; font-weight: bold; text-align: center">
                     LOADDING ...
                   </div>
-
+    	</div>
           <!-- Newsfeed Common Side Bar Right
           ================================================= -->
           <div class="col-md-2 static">
@@ -130,7 +130,6 @@
               </div>
             </div>
           </div>
-    	</div>
     	</div>
     </div>
 

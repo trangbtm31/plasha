@@ -19,8 +19,8 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-                  <h3>Sarah Cruiz</h3>
+                  <img src="images/users/{{$user[0]->avatar}}" alt="" class="img-responsive profile-photo" />
+                  <h3>{{ $user[0]->first_name }} {{ $user[0]->last_name }}</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
               </div>
@@ -42,8 +42,8 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
+              <img src="images/users/{{$user[0]->avatar}}" alt="" class="img-responsive profile-photo" />
+              <h4>{{ $user[0]->first_name }} {{ $user[0]->last_name }}</h4>
               <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
@@ -69,7 +69,7 @@
                 <div class="row">
                   <div class="col-md-7 col-sm-7">
                     <div class="form-group">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-md" />
+                      <img src="images/users/{{$user[0]->avatar}}" alt="" class="profile-photo-md" />
                       <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                     </div>
                   </div>
@@ -92,160 +92,44 @@
               <div class="post-content">
 
                 <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">Sometimes ago</p>
-                </div><!--Post Date End-->
-
-                <img src="images/post-images/12.jpg" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="#" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Published a photo about 15 mins ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
+                <!--Post Date End-->
+                <div id="content">
+                   @include('plan.plan-ajax')
                 </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/22/2016</p>
-                </div><!--Post Date End-->
-
-                <img src="images/post-images/13.jpg" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="#" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Yesterday</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
+                <div id="loadding" class="hidden" style="color:#337ab7; font-size: 20px; font-weight: bold; text-align: center">
+                    LOADDING ...
                 </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Sarah</h5>
-                  <p class="text-grey">10/21/2016</p>
-                </div><!--Post Date End-->
-
-                <div class="post-container">
-                  <img src="images/users/user-1.jpg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="#" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-                      <p class="text-muted">2 days ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-4.jpg" alt="" class="profile-photo-sm" />
-                      <p><a href="#" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="images/users/user-1.jpg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
                 </div>
-              </div>
-
-            </div>
+          </div>
             <div class="col-md-2 static">
               <div id="sticky-sidebar">
-                <h4 class="grey">Sarah's activity</h4>
+                <h4 class="grey">{{ $user[0]->first_name }}'s activity</h4>
                 <div class="feed-item">
                   <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
+                    <p><a href="#" class="profile-link">{{ $user[0]->first_name }}</a> Commended on a Photo</p>
                     <p class="text-muted">5 mins ago</p>
                   </div>
                 </div>
                 <div class="feed-item">
                   <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
+                    <p><a href="#" class="profile-link">{{ $user[0]->first_name }}</a> Has posted a photo</p>
                     <p class="text-muted">an hour ago</p>
                   </div>
                 </div>
                 <div class="feed-item">
                   <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
+                    <p><a href="#" class="profile-link">{{ $user[0]->first_name }}</a> Liked her friend's post</p>
                     <p class="text-muted">4 hours ago</p>
                   </div>
                 </div>
                 <div class="feed-item">
                   <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
+                    <p><a href="#" class="profile-link">{{ $user[0]->first_name }}</a> has shared an album</p>
                     <p class="text-muted">a day ago</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>

@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'password' => 'required|min:6',
             'day' => 'required',
             'month' => 'required',
-            'year' => 'required|numeric|min:4',
+            'year' => 'required|numeric|min:4|max:4',
             'gender' => 'required',
         ]);
     }
