@@ -49,8 +49,9 @@ class FriendController extends Controller
     }
 
     public function FriendRequest() {
+        $current_user = User::getCurrentUserInfo();
         $data = (new Friend)->getFriendRequest();
-        return view('friend.friend-request', compact('data'));
+        return view('friend.friend-request', compact('data', 'current_user'));
     }
 
     public function AcceptFriend() {
