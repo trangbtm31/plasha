@@ -1,6 +1,18 @@
 /**
  * Created by Cuong on 17/05/2017.
  */
+function resize_image() {
+    var cw = $('#list-friend-recommend .avatar-photo').width();
+    $('#list-friend-recommend .avatar-photo').css({'height':cw+'px'});
+}
+$(window).bind("load", function() {
+    resize_image();
+});
+
+window.onresize = function(event) {
+    resize_image();
+}
+
 function refresh_recommend_friend() {
     $.ajax({
         type: 'get',
@@ -10,6 +22,7 @@ function refresh_recommend_friend() {
         success: function(result)
         {
             document.getElementById("list-friend-recommend").innerHTML = result;
+            resize_image();
         }
     })
 }
@@ -46,4 +59,32 @@ function add_friend(data) {
             }
         })
     }
+}
+function accept_friend(data) {
+    var user_id = $(data).attr('user_id');
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: 'accept-friend',
+        data: {"user_id": user_id},
+        success: function (result) {
+            if (result['success'] == true) {
+                $(".user-request-"+user_id).remove();
+            }
+        }
+    })
+}
+function deny_friend(data) {
+    var user_id = $(data).attr('user_id');
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: 'deny-friend',
+        data: {"user_id": user_id},
+        success: function (result) {
+            if (result['success'] == true) {
+                $(".user-request-"+user_id).remove();
+            }
+        }
+    })
 }

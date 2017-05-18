@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2017 at 04:06 AM
+-- Generation Time: May 18, 2017 at 04:55 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -374,8 +374,20 @@ CREATE TABLE `relationship` (
   `user_id_1` int(10) UNSIGNED NOT NULL,
   `user_id_2` int(10) UNSIGNED NOT NULL,
   `status` varchar(10) DEFAULT NULL,
-  `action_user_id` int(11) NOT NULL
+  `action_user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `relationship`
+--
+
+INSERT INTO `relationship` (`user_id_1`, `user_id_2`, `status`, `action_user_id`, `created_at`, `updated_at`) VALUES
+(3, 2, 'waiting', 2, '2017-05-18 11:10:05', '2017-05-18 13:57:55'),
+(3, 4, 'none', 3, '2017-05-18 11:06:25', '2017-05-18 13:58:19'),
+(3, 6, 'friend', 3, '2017-05-18 11:10:21', '2017-05-18 13:57:54'),
+(8, 3, 'waiting', 8, '2017-05-18 11:25:39', '2017-05-18 13:54:29');
 
 -- --------------------------------------------------------
 
@@ -405,9 +417,11 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`
 (1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
 (2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
 (3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'nMVc10LQb29NPL6pYgXF16ZvS4V3oIKwiBPFsnJwaCGhP9HwUMY5p4K63wTp', NULL, NULL, 1),
-(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', NULL, NULL, NULL, 1),
+(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', 'duhIvQoBn3Oij7ykpBXrRzqLaDAPqlalAIlMNkQEZvnRgNM6hIPOUJ4tVxCT', NULL, NULL, 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
-(6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0);
+(6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0),
+(7, 'Example', 'User', 'example@gmail.com', '$2y$10$9khzJFVwpnBciyPBZ7DaY.hnr00Aw/FqH4nBRrtwPSXg1WTkt66xW', '1998-03-18', 'male', NULL, '2017-05-17 05:37:34', '2017-05-17 05:37:34', 0),
+(8, 'Liz', 'Lemon', 'lizlemon@example.com', '$2y$10$KQByq.ExT5JXxfuCh6m7e.8/QTWP5TwdTxf9f4AgWHSEH1yBN2f4a', '1989-05-18', 'female', 'YzG2UabLqdCosqfukkqZn7Jc1WncM1YWG38V40mR2PzMmeRTL0lfhJPZO02v', '2017-05-17 05:39:34', '2017-05-17 05:39:34', 0);
 
 -- --------------------------------------------------------
 
@@ -429,12 +443,14 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_id`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
-(1, 'Đà Nẵng', 'Student', 'USSH', 'user-1', NULL),
-(2, 'Hồ Chí Minh', 'Student', 'UI', 'user-1', NULL),
+(1, 'Đà Nẵng', 'Student', 'University of Social Siences and Humanities', 'user-1.jpg', NULL),
+(2, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'user-1.jpg', NULL),
 (3, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
 (4, 'Vũng Tàu', 'Fresher', 'Solazu', NULL, NULL),
 (5, 'Hà Nội', 'Student', 'University of Information Technology', 'user-10.jpg', NULL),
-(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1', NULL);
+(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1.jpg', NULL),
+(7, NULL, 'Development', NULL, NULL, NULL),
+(8, NULL, NULL, 'Solazu Company', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -690,7 +706,7 @@ ALTER TABLE `plan_thumbnail`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `user_report`
 --

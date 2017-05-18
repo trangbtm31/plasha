@@ -26,10 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        User::createUserInfo();
         $current_user = User::getCurrentUserInfo();
         $category = Category::getAllCategory();
-        $recommend_friend = Friend::findRandomUser();
+        $recommend_friend = (new Friend)->findRandomUser();
         return view('home', compact('current_user', 'category', 'recommend_friend'));
     }
 

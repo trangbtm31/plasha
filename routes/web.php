@@ -54,6 +54,10 @@ Route::get('/find-friend', ['as' => 'find-friend', 'uses' => 'Friend\FriendContr
 Route::get('/reload-recommend-friend', ['as' => 'reload-recommend-friend', 'uses' => 'Friend\FriendController@ReloadRecommendFriend']);
 Route::get('/add-friend-request', ['as' => 'add-friend-request', 'uses' => 'Friend\FriendController@AddFriendRequest']);
 Route::get('/cancel-friend-request', ['as' => 'cancel-friend-request', 'uses' => 'Friend\FriendController@CancelFriendRequest']);
+Route::get('/add-friend-request', ['as' => 'add-friend-request', 'uses' => 'Friend\FriendController@AddFriendRequest']);
+Route::get('/friend-request', ['as' => 'friend-request', 'uses' => 'Friend\FriendController@FriendRequest']);
+Route::get('/accept-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@AcceptFriend']);
+Route::get('/deny-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@DenyFriend']);
 
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);

@@ -9,8 +9,14 @@ class Friend extends Model
 {
     protected $table = "relationship";
 
+    function __construct(array $attributes = [])
+    {
+        $this->action_user_id = Auth::User()->id;
+        parent::__construct($attributes);
+    }
+
     /* Find new friend short by random */
-    static function findRandomUser() {
+    public function findRandomUser() {
         //Các user ID không gợi ý kết bạn cho người dùng
         $not_in_user_id = array(Auth::User()->id);
 
@@ -51,7 +57,7 @@ class Friend extends Model
 
     /* Current user request add new friend */
     public function addFriend($user_id) {
-        $this->user_id_1 = $this->action_user_id = Auth::User()->id;
+        $this->user_id_1 = Auth::User()->id;
         $this->user_id_2 = $user_id;
         $this->status    = 'waiting';
 
@@ -81,8 +87,9 @@ class Friend extends Model
     }
 
     /* Update friend status */
+    /* status = ['none', 'waiting', 'friend', 'deny', 'unfriend', 'block'] */
     public function updateFriendStatus($user_id, $status) {
-        $this->user_id_1 = $this->action_user_id = Auth::User()->id;
+        $this->user_id_1 = Auth::User()->id;
         $this->user_id_2 = $user_id;
         return self::where([
             ['user_id_1', '=', $this->user_id_1],
@@ -92,6 +99,47 @@ class Friend extends Model
             ['user_id_1', '=', $this->user_id_2],
             ['user_id_2', '=', $this->user_id_1]
         ])
-        ->update(['status' => $status]);
+        ->update(['status' => $status, 'action_user_id' => $this->action_user_id]);
+    }
+
+    public function getFriendRequest() {
+        $list_friend_id = array();
+
+        //Nếu user hiện tại là user_id_1 thì tìm tất cả user_id_2 đang gửi lời mời kết bạn
+        $friend_arr1 = json_decode(self::select('user_id_2')
+            ->where([
+                ['user_id_1', '=', Auth::User()->id],
+                ['status', '=', 'waiting']
+            ])
+            ->whereNotIn('action_user_id', [Auth::User()->id])
+            ->get(), true);
+        foreach ($friend_arr1 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_2']);
+        }
+
+        //Nếu user hiện tại là user_id_2 thì tìm tất cả user_id_1 đang gửi lời mời kết bạn
+        $friend_arr2 = json_decode(self::select('user_id_1')
+            ->where([
+                ['user_id_2', '=', Auth::User()->id],
+                ['status', '=', 'waiting']
+            ])
+            ->whereNotIn('action_user_id', [Auth::User()->id])
+            ->get(), true);
+        foreach ($friend_arr2 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_1']);
+        }
+
+        $query = json_decode(
+            \DB::table('users')
+                ->join('user_info', 'id', '=', 'user_info.user_id')
+                ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
+                ->whereIn('id', $list_friend_id)
+                ->orderBy('updated_at', 'desc')
+                ->limit(6)
+                ->get()
+            , true);
+        return $query;
     }
 }

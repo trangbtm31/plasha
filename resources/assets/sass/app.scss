@@ -1283,6 +1283,10 @@ ul.contact li i{
 /*==================================================
   Add friend CSS
   ==================================================*/
+.recommend-friend-title {
+  text-align: center;
+}
+
 #list-friend-recommend {
   text-align: left;
 }
@@ -1297,8 +1301,12 @@ ul.contact li i{
   background-color: #cccccc;
 }
 
+#list-friend-recommend .avatar-wrapper {
+  //position: relative; /* If you want text inside of it */
+}
+
 #list-friend-recommend .avatar-photo {
-  padding-top: 10px;
+  margin-top: 10px;
   border-radius: 50%;
   max-width:100%;
   min-width:100%;
@@ -1306,7 +1314,7 @@ ul.contact li i{
 
 #list-friend-recommend .info-wrapper {
   height: 90px;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 #list-friend-recommend .button-add-friend {
