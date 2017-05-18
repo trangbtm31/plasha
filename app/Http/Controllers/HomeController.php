@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PlanLike;
 use App\User;
 use App\Category;
+use App\Friend;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,8 @@ class HomeController extends Controller
         User::createUserInfo();
         $current_user = User::getCurrentUserInfo();
         $category = Category::getAllCategory();
-        return view('home', compact('current_user', 'category'));
+        $recommend_friend = Friend::findRandomUser();
+        return view('home', compact('current_user', 'category', 'recommend_friend'));
     }
 
     //Load plan

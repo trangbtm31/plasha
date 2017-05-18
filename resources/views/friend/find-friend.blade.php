@@ -5,7 +5,7 @@
 @endsection
 
 @section('head')
-    <script language="javascript" src="dist/js/friend/find-friend.js"></script>
+
 @endsection
 
 @section('content')

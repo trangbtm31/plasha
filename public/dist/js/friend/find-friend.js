@@ -22,8 +22,12 @@ function add_friend(data) {
             url: 'add-friend-request',
             data: {"user_id": user_id},
             success: function (result) {
-                if (result['success'] == true) {
-                    data.innerHTML = "Friend Request Sent";
+                //Trường hợp a đã gửi lời mời, sau đó b gửi lời mời thì sẽ trở thành bạn bè
+                if (result['success'] == 'friend') {
+                    data.innerHTML = "Friend";
+                    $(data).removeClass('button-add-friend').addClass('friend-request-sent');
+                } else if (result['success'] == true) {
+                    data.innerHTML = "Sent";
                     $(data).removeClass('button-add-friend').addClass('friend-request-sent');
                 }
             }

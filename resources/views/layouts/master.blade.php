@@ -11,6 +11,7 @@
         <script src="js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <script language="javascript" src="js/jquery.min.js" ></script>
         <script language="javascript" src="dist/js/home/ajax.js" ></script>
+        <script language="javascript" src="dist/js/friend/find-friend.js"></script>
         <title>@yield('title')</title>
         @yield('head')
         <!-- CSRF Token -->

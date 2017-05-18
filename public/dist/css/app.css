@@ -6908,7 +6908,7 @@ ul.contact li i {
   height: 90px;
   padding-top: 10px; }
 
-.button-add-friend {
+#list-friend-recommend .button-add-friend {
   margin-top: 10px;
   box-sizing: border-box;
   background: #27aae1;
@@ -6921,17 +6921,17 @@ ul.contact li i {
   position: relative;
   border-radius: 30px; }
 
-.button-add-friend:hover {
+#list-friend-recommend .button-add-friend:hover {
   background: #149AC9;
   transition: all 1s; }
 
-.friend-request-sent {
+#list-friend-recommend .friend-request-sent {
+  margin-top: 10px;
   box-sizing: border-box;
   background: transparent;
   color: #27aae1;
   border: 1px solid #27aae1;
   text-align: center;
-  width: 100px;
   height: 30px;
   padding: 0px;
   font-size: 10px;

@@ -64,12 +64,19 @@ class Friend extends Model
             ['user_id_2', '=', $this->user_id_1]
         ])
         ->get();
-        if ($check_exist->count() < 1) {
-            $result = $this->save();
-            return $result;
-        } elseif ($check_exist->count() >= 1) {
-            $result = $this->updateFriendStatus($user_id, $this->status);
-            return $result;
+        if ($check_exist->count() < 1) { // Nếu mối quan hệ chưa được tạo thì sẽ khởi tạo
+            return $this->save();
+        } elseif ($check_exist->count() >= 1) {  // Nếu đã tồn tại mối quan hệ
+            // Nếu người đó đã gửi lời mời kết bạn thì sẽ chấp nhận
+            if ($check_exist[0]['status'] == 'waiting')
+            {
+                $this->updateFriendStatus($user_id, 'friend');
+                return 'friend';
+            } else { // Ngược lại sẽ gửi lời mời
+                return $this->updateFriendStatus($user_id, $this->status);
+            }
+        } else {
+            return false;
         }
     }
 
