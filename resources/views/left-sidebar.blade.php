@@ -1,7 +1,7 @@
 <!-- Newsfeed Common Side Bar Left
           ================================================= -->
-<div class="profile-card" style="background-image: url(/images/users/cover-photo/{{ $current_user[0]->cover_photo }})">
-    <img src="images/users/{{ isset($current_user[0]->avatar)? $current_user[0]->avatar : 'users_default.png' }}" alt="user" class="profile-photo"/>
+<div class="profile-card" style="background: linear-gradient(to bottom, rgba(39,170,225,.8), rgba(28,117,188,.8)), url(/images/covers/{{ $current_user[0]->cover_photo }}) no-repeat; background-size:cover">
+    <img src="images/users/{{$current_user[0]->avatar}}" alt="user" class="profile-photo"/>
     <h5><a href="{{ route('time-line', ['id' => $current_user[0]->id] )}}" class="text-white">{{ Auth::User()->first_name }} {{ Auth::User()->last_name }}</a></h5>
     <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
 </div><!--profile card ends-->

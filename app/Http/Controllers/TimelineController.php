@@ -19,9 +19,6 @@ class TimelineController extends Controller {
 
     public function showTimeline($id) {
         $user = User::getUserInfo($id);
-        if($user[0]->avatar == null) {
-            $user[0]->avatar = 'users_default.png';
-        }
         return view('User.time-line', ['user' => $user] );
     }
 

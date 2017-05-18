@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        User::createUserinfo(); //Tạo user_info
         $current_user = User::getCurrentUserInfo();
         $category = Category::getAllCategory();
         $recommend_friend = (new Friend)->findRandomUser();

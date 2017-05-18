@@ -31,7 +31,11 @@ class User extends Authenticatable
     static function createUserInfo() {
         $query = \DB::table('user_info')->select('user_id')->where('user_id','=',Auth::id())->count();
         return $query != 0 ? '' : \DB::table('user_info')->insert(
-            ['user_id' => Auth::id()]
+            [
+                'user_id' => Auth::id(),
+                'avatar' => 'users_default.png',
+                'cover_photo' => 'sunset_winter.png',
+            ]
         );
     }
 

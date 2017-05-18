@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class FriendController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function FindFriend() {
         $current_user = User::getCurrentUserInfo();
         $data = (new Friend)->findRandomUser();

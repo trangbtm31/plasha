@@ -4,9 +4,6 @@
     Plasa news feed !!
 @endsection
 
-@section('head')
-
-@endsection
 
 @section('content')
     @include("layouts.app")
@@ -48,20 +45,5 @@
     	    </div>
         </div>
     </div>
-
-{{--<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">News Feed</div>
-
-                <div class="panel-body">
-                    Hi {{ Auth::user()->name }}! <br>
-                    You are logged in!<br>
-                    Welcome to News Feed !
-                </div>
-            </div>
-        </div>
-    </div>
-</div>--}}
+    @include('layouts.footer')
 @endsection

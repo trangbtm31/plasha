@@ -12,7 +12,7 @@
       <!-- Timeline
       ================================================= -->
       <div class="timeline">
-        <div class="timeline-cover">
+        <div class="timeline-cover" style="background: url(/images/covers/{{ $user[0]->cover_photo }}) no-repeat;background-position: center; background-size:cover">
 
           <!--Timeline Menu for Large Screens-->
           <div class="timeline-nav-bar hidden-sm hidden-xs">
@@ -133,4 +133,6 @@
         </div>
       </div>
     </div>
+</div>
+@include('layouts.footer')
 @endsection
