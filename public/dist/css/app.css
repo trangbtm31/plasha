@@ -6884,7 +6884,9 @@ ul.contact li i {
 /*==================================================
   Plan CSS
   ==================================================*/
-.comment-wrapper {
+/*  Class 'flex-reverse-wrapper' use to reverse content and load more button.
+    It help ajax button hide/show perfect. Please don't change this class */
+.flex-reverse-wrapper {
   display: flex;
   flex-direction: column-reverse; }
 

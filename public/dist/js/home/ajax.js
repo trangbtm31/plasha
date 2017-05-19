@@ -112,3 +112,38 @@ function likePlan(data) {
         })
     }
 }
+
+/* Load more friend online */
+function more_fr_onl(data) {
+    var is_busy = $(data).attr('is_busy');
+    var page = $(data).attr('page');
+
+    if (is_busy == 'true') {
+        return false;
+    }
+    $button = $(data)
+    $button.attr({
+        "is_busy" : true
+    });
+    $button.html('Loading ...');
+
+    page++;
+    $.ajax({
+        type: 'get',
+        dataType: 'text',
+        url: 'load-more-friend-online',
+        data: {"page": page},
+        success: function(result)
+        {
+            $("#friend-chat-online").append(result);
+        }
+    })
+    .always(function()
+    {
+        $button.html('Load more friend');
+        $button.attr({
+            "is_busy" : false,
+            "page"    : page
+        });
+    });
+}

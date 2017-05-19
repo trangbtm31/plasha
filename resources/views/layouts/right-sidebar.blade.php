@@ -8,7 +8,7 @@
   <img src="images/users/{{ $user['avatar'] }}" alt="" class="profile-photo-sm pull-left" />
   <div>
     <h5><strong><a href="{{route('time-line', ['id' => $user['id']])}}">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></strong></h5>
-    <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
+    <a href="javascript:;" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
   </div>
 </div>
 @endforeach

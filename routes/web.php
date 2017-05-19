@@ -38,6 +38,7 @@ Route::get('/comment-ajax/{plan_id}', ['as' => 'comment-ajax', 'uses' => 'HomeCo
 Route::get('/comment-ajax', ['as' => 'comment-ajax', 'uses' => 'HomeController@CommentAjax' ]);
 Route::get('/like-ajax', ['as' => 'like-ajax', 'uses' => 'HomeController@LikeAjax' ]);
 Route::get('/dislike-ajax', ['as' => 'dislike-ajax', 'uses' => 'HomeController@DislikeAjax' ]);
+Route::get('/load-more-friend-online', ['as' => 'load-more-friend-online', 'uses' => 'HomeController@LoadMoreFriendOnline']);
 
 /* Admin role */
 Route::get('/admin_area', ['middleware' => 'admin', function () {

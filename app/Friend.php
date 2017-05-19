@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Friend extends Model
 {
@@ -102,6 +103,52 @@ class Friend extends Model
         ->update(['status' => $status, 'action_user_id' => $this->action_user_id]);
     }
 
+    /* Return list friend with status online or offline */
+    /* When online: isOnline = 1 | When offline: isOnline = '' */
+    static function getFriendOnl($start, $limit) {
+        $list_friend_id = array();
+
+        //Nếu user hiện tại là user_id_1 thì tìm tất cả user_id_2 đang là bạn
+        $friend_arr1 = json_decode(self::select('user_id_2')
+            ->where([
+                ['user_id_1', '=', Auth::User()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get(), true);
+        foreach ($friend_arr1 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_2']);
+        }
+
+        //Nếu user hiện tại là user_id_2 thì tìm tất cả user_id_1 đang là bạn
+        $friend_arr2 = json_decode(self::select('user_id_1')
+            ->where([
+                ['user_id_2', '=', Auth::User()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get(), true);
+        foreach ($friend_arr2 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_1']);
+        }
+
+        $list_friend = json_decode(
+            \DB::table('users')
+                ->join('user_info', 'id', '=', 'user_info.user_id')
+                ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
+                ->whereIn('id', $list_friend_id)
+                ->orderBy('updated_at', 'desc')
+                ->offset($start)
+                ->limit($limit)
+                ->get()
+            , true);
+        foreach ($list_friend as &$friend) {
+            $friend['isOnline'] = Cache::has('user-is-online-' . $friend['id']);
+        }
+        return $list_friend;
+    }
+
+    /* Return List Friend Request */
     public function getFriendRequest($start, $limit) {
         $list_friend_id = array();
 
