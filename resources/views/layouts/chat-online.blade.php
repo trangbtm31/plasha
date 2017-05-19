@@ -30,7 +30,7 @@ if ($total > $limit){
 ?>
 @foreach($list_friend as $friend)
 <li>
-    <a href="newsfeed-messages.html" title="Linda Lohan">
+    <a href="#" title="Linda Lohan">
         <img src="images/users/{{ $friend['avatar'] }}" alt="user" class="img-responsive profile-photo" />
         @if ( $friend['isOnline'] == true )
         <span class="online-dot"></span>
