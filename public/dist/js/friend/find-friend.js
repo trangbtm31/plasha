@@ -83,8 +83,42 @@ function deny_friend(data) {
         data: {"user_id": user_id},
         success: function (result) {
             if (result['success'] == true) {
-                $(".user-request-"+user_id).remove();
+                $("#user-request-"+user_id).remove();
             }
         }
     })
+}
+
+function LoadMoreRequestFriend(data) {
+    var is_busy = $(data).attr('is_busy');
+    var page = $(data).attr('page');
+
+    if (is_busy == 'true') {
+        return false;
+    }
+    $button = $(data)
+    $button.attr({
+        "is_busy" : true
+    });
+    $button.html('Loading ...');
+
+    page++;
+    $.ajax({
+        type: 'get',
+        dataType: 'text',
+        url: 'friend-request-ajax',
+        data: {"page": page},
+        success: function(result)
+        {
+            $(".friend-request-list").append(result);
+        }
+    })
+        .always(function()
+        {
+            $button.html('Load More Request');
+            $button.attr({
+                "is_busy" : false,
+                "page"    : page
+            });
+        });
 }

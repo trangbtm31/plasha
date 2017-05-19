@@ -54,8 +54,7 @@ class FriendController extends Controller
 
     public function FriendRequest() {
         $current_user = User::getCurrentUserInfo();
-        $data = (new Friend)->getFriendRequest();
-        return view('friend.friend-request', compact('data', 'current_user'));
+        return view('friend.friend-request', compact('current_user'));
     }
 
     public function AcceptFriend() {
@@ -83,5 +82,8 @@ class FriendController extends Controller
                 'success' => false
             ));
         }
+    }
+    public function FriendRequestAjax() {
+        return view('friend.friend-request-ajax');
     }
 }

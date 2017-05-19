@@ -30,12 +30,12 @@
               <h4 class="grey"><a href="/friend-request" class="text-green text-center col-xs-12">Friend Requests</a></h4>
             <div class="suggestions" id="sticky-sidebar">
               <h4 class="grey">Who to Follow</h4>
-              @foreach($recommend_friend as $user)
+              @foreach($recommend_friend as $new_friend)
               <div class="follow-user">
-                <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm pull-left" />
+                <img src="images/users/{{ isset($new_friend['avatar'])? $new_friend['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm pull-left" />
                 <div>
-                  <h5><a href="timeline.html">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></h5>
-                  <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
+                  <h5><a href="timeline.html">{{ $new_friend['first_name'] }} {{ $new_friend['last_name'] }}</a></h5>
+                  <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $new_friend['id'] }}">Add friend</a>
                 </div>
               </div>
               @endforeach

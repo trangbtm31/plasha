@@ -43,13 +43,14 @@ function LoadMoreComment(data) {
     var is_busy = $(data).attr('is_busy');
     var comment_page = $(data).attr('page');
 
-    $element = $('#comment-plan-'+plan_id+' .comment-content');
-
-    $button = $(data);
-
-    if (is_busy == true) {
+    if (is_busy == 'true') {
         return false;
     }
+    $button = $(data)
+    $button.attr({
+        "is_busy" : true
+    });
+    $element = $('#comment-plan-'+plan_id+' .comment-content');
     comment_page++;
 
     $button.html('LOADDING ...');
@@ -69,7 +70,9 @@ function LoadMoreComment(data) {
     .always(function()
     {
         $button.html('LOAD MORE');
-        is_busy = false;
+        $button.attr({
+            "is_busy" : false
+        });
     });
 }
 
