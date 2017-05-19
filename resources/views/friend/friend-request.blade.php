@@ -14,7 +14,7 @@ Plasa news feed !!
     <div class="container">
         <div class="row">
             <div class="col-md-3 static">
-                @include('left-sidebar', $current_user)
+                @include('...layouts.left-sidebar', $current_user)
             </div>
             <div class="col-md-9">
                 <h1 class="friend-request-title">Friend Request</h1>

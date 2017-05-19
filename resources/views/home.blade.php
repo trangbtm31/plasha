@@ -7,22 +7,38 @@
 
 @section('content')
     @include("layouts.app")
-    <div id="page-contents">
-    	<div class="container">
-    		<div class="row">
-                <div class="col-md-3 static">
-                    @include('left-sidebar', $current_user)
-                </div>
-    			<div class="col-md-7">
-                  @include('plan.create-plan')
-            <!-- Post Content
+    <div class="news-feed" >
+      <div id="page-contents">
+  	    <div class="container-fluid">
+      		<div class="row">
+                  <div class="col-md-3 static">
+                      @include('layouts.left-sidebar', $current_user)
+                  </div>
+      			<div class="col-md-6">
+                    @include('plan.create-plan')
+              <!-- Post Content
+              ================================================= -->
+                    <div id="content">
+                        @include('plan.plan-ajax')
+                    </div>
+                    <div id="loadding" class="hidden" style="color:#337ab7; font-size: 20px; font-weight: bold; text-align: center">
+                      LOADDING ...
+                    </div>
+      	        </div>
+            <!-- Newsfeed Common Side Bar Right
             ================================================= -->
-                  <div id="content">
-                      @include('plan.plan-ajax')
+            <div class="col-md-3 static">
+                <h4 class="grey"><a href="/friend-request" class="text-green text-center col-xs-12">Friend Requests</a></h4>
+              <div class="suggestions" id="sticky-sidebar">
+                <h4 class="grey">Who to Follow</h4>
+                @foreach($recommend_friend as $user)
+                <div class="follow-user">
+                  <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm pull-left" />
+                  <div>
+                    <h5><a href="timeline.html">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></h5>
+                    <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
                   </div>
-                  <div id="loadding" class="hidden" style="color:#337ab7; font-size: 20px; font-weight: bold; text-align: center">
-                    LOADDING ...
-                  </div>
+<<<<<<< HEAD
     	        </div>
           <!-- Newsfeed Common Side Bar Right
           ================================================= -->
@@ -36,13 +52,15 @@
                 <div>
                   <h5><a href="timeline.html">{{ $new_friend['first_name'] }} {{ $new_friend['last_name'] }}</a></h5>
                   <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $new_friend['id'] }}">Add friend</a>
+=======
+>>>>>>> 0f71e959869581d638ec11b61a8f927c86a7ccf0
                 </div>
+                @endforeach
+                <a href="/find-friend" class="text-green text-center col-xs-12">Find more friend</a>
               </div>
-              @endforeach
-              <a href="/find-friend" class="text-green text-center col-xs-12">Find more friend</a>
             </div>
+      	    </div>
           </div>
-    	    </div>
         </div>
     </div>
     @include('layouts.footer')
