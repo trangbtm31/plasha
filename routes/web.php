@@ -56,6 +56,7 @@ Route::get('/add-friend-request', ['as' => 'add-friend-request', 'uses' => 'Frie
 Route::get('/cancel-friend-request', ['as' => 'cancel-friend-request', 'uses' => 'Friend\FriendController@CancelFriendRequest']);
 Route::get('/add-friend-request', ['as' => 'add-friend-request', 'uses' => 'Friend\FriendController@AddFriendRequest']);
 Route::get('/friend-request', ['as' => 'friend-request', 'uses' => 'Friend\FriendController@FriendRequest']);
+Route::get('/friend-request-ajax', ['as' => 'friend-request-ajax', 'uses' => 'Friend\FriendController@FriendRequestAjax']);
 Route::get('/accept-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@AcceptFriend']);
 Route::get('/deny-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@DenyFriend']);
 

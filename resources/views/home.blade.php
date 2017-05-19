@@ -28,7 +28,7 @@
             <!-- Newsfeed Common Side Bar Right
             ================================================= -->
             <div class="col-md-3 static" data-sticky_column>
-                @include('layouts.right-sidebar')
+                @include('layouts.right-sidebar') 
             </div>
       	    </div>
           </div>

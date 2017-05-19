@@ -102,7 +102,7 @@ class Friend extends Model
         ->update(['status' => $status, 'action_user_id' => $this->action_user_id]);
     }
 
-    public function getFriendRequest() {
+    public function getFriendRequest($start, $limit) {
         $list_friend_id = array();
 
         //Nếu user hiện tại là user_id_1 thì tìm tất cả user_id_2 đang gửi lời mời kết bạn
@@ -137,7 +137,8 @@ class Friend extends Model
                 ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
                 ->whereIn('id', $list_friend_id)
                 ->orderBy('updated_at', 'desc')
-                ->limit(6)
+                ->offset($start)
+                ->limit($limit)
                 ->get()
             , true);
         return $query;
