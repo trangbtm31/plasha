@@ -106,7 +106,31 @@ class Friend extends Model
     /* Return list friend with status online or offline */
     /* When online: isOnline = 1 | When offline: isOnline = '' */
     static function getFriendOnl($start, $limit) {
-        $list_friend_id = getFriendList();
+        $list_friend_id = array();
+
+        //Nếu user hiện tại là user_id_1 thì tìm tất cả user_id_2 đang là bạn
+        $friend_arr1 = json_decode(self::select('user_id_2')
+            ->where([
+                ['user_id_1', '=', Auth::User()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get(), true);
+        foreach ($friend_arr1 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_2']);
+        }
+
+        //Nếu user hiện tại là user_id_2 thì tìm tất cả user_id_1 đang là bạn
+        $friend_arr2 = json_decode(self::select('user_id_1')
+            ->where([
+                ['user_id_2', '=', Auth::User()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get(), true);
+        foreach ($friend_arr2 as $friend)
+        {
+            array_push($list_friend_id, $friend['user_id_1']);
+        }
 
         $list_friend = json_decode(
             \DB::table('users')
@@ -139,7 +163,6 @@ class Friend extends Model
             , true);
         return $query;
     }
-    
     /* Danh sách bạn bè */
     public function getFriendList() {
         $list_friend_id = array();
@@ -167,5 +190,6 @@ class Friend extends Model
             array_push($list_friend_id, $friend['user_id_1']);
         }
         return $list_friend_id;
+
     }
 }
