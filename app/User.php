@@ -48,12 +48,6 @@ class User extends Authenticatable
     static function getUserInfo($user_id) {
         return \DB::table('users')->join(
             'user_info','id','=','user_id'
-        )->select(
-            'id',
-            'first_name',
-            'last_name',
-            'avatar',
-            'cover_photo'
         )->where('id',$user_id)->get();
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Friend;
 
 use App\Friend;
 use App\User;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -86,4 +87,16 @@ class FriendController extends Controller
     public function FriendRequestAjax() {
         return view('friend.friend-request-ajax');
     }
+    public function showFriendList() {
+        $current_user = User::getCurrentUserInfo();
+        $category = Category::getAllCategory();
+        $recommend_friend = (new Friend)->findRandomUser();
+        $friend_list_id = (new Friend)->getFriendList();
+        $friend_list_info = array();
+        foreach($friend_list_id as $key => $friend_id){
+            array_push($friend_list_info,User::getUserInfo($friend_id));
+        }
+        return view('friend.friend-list',compact('current_user', 'category', 'recommend_friend','friend_list_info'));
+    }
+
 }

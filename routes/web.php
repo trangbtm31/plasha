@@ -59,6 +59,7 @@ Route::get('/friend-request', ['as' => 'friend-request', 'uses' => 'Friend\Frien
 Route::get('/friend-request-ajax', ['as' => 'friend-request-ajax', 'uses' => 'Friend\FriendController@FriendRequestAjax']);
 Route::get('/accept-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@AcceptFriend']);
 Route::get('/deny-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendController@DenyFriend']);
+Route::get('/friend-list', ['as' => 'friend-list', 'uses' => 'Friend\FriendController@showFriendList']);
 
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);

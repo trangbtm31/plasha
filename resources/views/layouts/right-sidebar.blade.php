@@ -5,9 +5,9 @@
 <h4 class="grey">Who to Follow</h4>
 @foreach($recommend_friend as $user)
 <div class="follow-user">
-  <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm pull-left" />
+  <img src="images/users/{{ $user['avatar'] }}" alt="" class="profile-photo-sm pull-left" />
   <div>
-    <h5><strong><a href="timeline.html">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></strong></h5>
+    <h5><strong><a href="{{route('time-line', ['id' => $user['id']])}}">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></strong></h5>
     <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
   </div>
 </div>

@@ -143,4 +143,33 @@ class Friend extends Model
             , true);
         return $query;
     }
+    /* Danh sách bạn bè */
+    public function getFriendList() {
+        $friend_list_id = array();
+        $qr_1 = json_decode(self::select('user_id_2')
+            ->where([
+                ['user_id_1', '=', Auth::user()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get());
+        if($qr_1 != null) {
+            for($i = 0; $i<= count($qr_1); $i++){
+                array_push($friend_list_id, $qr_1[$i]->user_id_2);
+            }
+        }
+        $qr_2 = json_decode(self::select('user_id_1')
+            ->where([
+                ['user_id_2', '=', Auth::user()->id],
+                ['status', '=', 'friend']
+            ])
+            ->get());
+
+        if($qr_2 != null) {
+            for($i = 0; $i < count($qr_2); $i++){
+                array_push($friend_list_id, $qr_2[$i]->user_id_1);
+            }
+        }
+        return $friend_list_id;
+
+    }
 }
