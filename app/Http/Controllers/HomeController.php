@@ -14,6 +14,8 @@ class HomeController extends Controller
      *
      * @return void
      */
+    protected $list_friend_onl;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -71,5 +73,9 @@ class HomeController extends Controller
         }
         $planLike = new PlanLike($plan_id);
         return $planLike->dislike();
+    }
+
+    public function LoadMoreFriendOnline() {
+        return view('layouts.chat-online');
     }
 }

@@ -75,7 +75,7 @@ foreach($data as $plan)
                     <p>{{ $plan["description"] }}</p>
                 </div>
                 <div class="line-divider"></div>
-                <div id="comment-plan-{{ $plan["id"] }}" class="comment-wrapper">
+                <div id="comment-plan-{{ $plan["id"] }}" class="flex-reverse-wrapper">
                     <button onclick="LoadMoreComment(this)" class="button button-load-more btn-primary center-block" plan_id="{{ $plan['id'] }}" is_busy="false" page="1" stopped="false">LOAD MORE</button>
                     <div class="comment-content">
                         @include('plan.comment-ajax', ['plan_id' => $plan['id']])
