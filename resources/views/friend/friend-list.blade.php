@@ -4,7 +4,6 @@
     Plasa news feed !!
 @endsection
 
-
 @section('content')
     @include("layouts.app")
     <div class="news-feed" >
@@ -12,7 +11,7 @@
   	    <div class="container-fluid">
       		<div class="row">
                   <div class="col-md-3 static">
-                      @include('layouts.left-sidebar', $current_user)
+                      @include('layouts.left-sidebar')
                   </div>
       			<div class="col-md-6">
                     @include('plan.create-plan')
@@ -28,20 +27,7 @@
             <!-- Newsfeed Common Side Bar Right
             ================================================= -->
             <div class="col-md-3 static">
-                <h4 class="grey"><a href="/friend-request" class="text-green text-center col-xs-12">Friend Requests</a></h4>
-              <div class="suggestions" id="sticky-sidebar">
-                <h4 class="grey">Who to Follow</h4>
-                @foreach($recommend_friend as $user)
-                <div class="follow-user">
-                  <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="" class="profile-photo-sm pull-left" />
-                  <div>
-                    <h5><a href="timeline.html">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></h5>
-                    <a href="#" tabindex="0" role="button" onclick="add_friend(this)" class="text-green button-add-friend" user_id="{{ $user['id'] }}">Add friend</a>
-                  </div>
-                </div>
-                @endforeach
-                <a href="/find-friend" class="text-green text-center col-xs-12">Find more friend</a>
-              </div>
+                @include('layouts.right-sidebar')
             </div>
       	    </div>
           </div>
