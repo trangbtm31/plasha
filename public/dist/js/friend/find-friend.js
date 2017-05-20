@@ -48,6 +48,7 @@ function add_friend(data) {
                     data.innerHTML = "Sent";
                     $(data).removeClass('button-add-friend').addClass('friend-request-sent');
                 }
+                resize_image();
             }
         })
     } else if ($(data).hasClass('friend-request-sent')) {
@@ -61,6 +62,7 @@ function add_friend(data) {
                     data.innerHTML = "Add Friend";
                     $(data).removeClass('friend-request-sent').addClass('button-add-friend');
                 }
+                resize_image();
             }
         })
     }
@@ -76,6 +78,7 @@ function accept_friend(data) {
             if (result['success'] == true) {
                 $(".user-request-"+user_id).remove();
             }
+            resize_image();
         }
     })
 }
@@ -90,6 +93,7 @@ function deny_friend(data) {
             if (result['success'] == true) {
                 $("#user-request-"+user_id).remove();
             }
+            resize_image();
         }
     })
 }
@@ -116,6 +120,7 @@ function LoadMoreRequestFriend(data) {
         success: function(result)
         {
             $(".friend-request-list").append(result);
+            resize_image();
         }
     })
         .always(function()

@@ -159,7 +159,7 @@ class Friend extends Model
                 ->join('user_info', 'id', '=', 'user_info.user_id')
                 ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
                 ->whereIn('id', $list_friend_id)
-                ->orderBy('updated_at', 'desc')
+                ->orderBy('updated_at', 'asc')
                 ->offset($start)
                 ->limit($limit)
                 ->get()

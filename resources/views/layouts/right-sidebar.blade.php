@@ -1,3 +1,8 @@
+<?php
+use App\Friend;
+$recommend_friend = (new Friend)->findRandomUser();
+?>
+
 <h4 class="grey">
     <a href="/friend-request" class="text-green text-center col-xs-12">Friend Requests</a>
 </h4>

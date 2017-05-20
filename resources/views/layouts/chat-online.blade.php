@@ -33,7 +33,9 @@ if ($total > $limit){
     <a href="#" title="Linda Lohan">
         <img src="images/users/{{ $friend['avatar'] }}" alt="user" class="img-responsive profile-photo" />
         @if ( $friend['isOnline'] == true )
-        <span class="online-dot"></span>
+            <span class="online-dot"></span>
+        @else
+            <span class="offline-dot"></span>
         @endif
     </a>
 </li>
