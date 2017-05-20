@@ -772,6 +772,10 @@ ul.online-users li span.online-dot{
   border: 7px solid #fff;
 }
 
+.friend-info {
+  overflow:hidden;
+}
+
 
 /*==================================================
   Chat Room CSS
@@ -1320,38 +1324,8 @@ ul.contact li i{
   text-align: center;
 }
 
-#list-friend-recommend {
-  text-align: left;
-}
-
-#list-friend-recommend .user-recommend{
-  padding: 10px;
-}
-
-#list-friend-recommend .content {
-  padding: 0px 10px 10px 10px;
-  overflow: auto;
-  background-color: #cccccc;
-}
-
-#list-friend-recommend .avatar-wrapper {
-  //position: relative; /* If you want text inside of it */
-}
-
-#list-friend-recommend .avatar-photo {
-  margin-top: 10px;
-  border-radius: 50%;
-  max-width:100%;
-  min-width:100%;
-}
-
-#list-friend-recommend .info-wrapper {
-  height: 90px;
-  padding-top: 5px;
-}
-
 #list-friend-recommend .button-add-friend {
-  margin-top: 10px;
+  width: 25%;
   box-sizing: border-box;
   background: #27aae1;
   color: #ffffff;
@@ -1369,7 +1343,7 @@ ul.contact li i{
 }
 
 #list-friend-recommend .friend-request-sent {
-  margin-top: 10px;
+  width: 25%;
   box-sizing: border-box;
   background: transparent;
   color: #27aae1;

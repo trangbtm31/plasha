@@ -17,9 +17,9 @@
                     <div class="col-md-3 static">
                         @include('layouts.left-sidebar')
                     </div>
-                    <div class="col-md-9">
+                    <div class="friend-list col-md-9">
                         <h1 class="recommend-friend-title">Recommend Friend</h1>
-                        <div id="list-friend-recommend">
+                        <div id="list-friend-recommend" class="row">
                             @include('friend.reload-recommend-friend')
                         </div>
                     </div>

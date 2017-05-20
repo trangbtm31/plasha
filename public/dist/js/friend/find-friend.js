@@ -2,8 +2,13 @@
  * Created by Cuong on 17/05/2017.
  */
 function resize_image() {
-    var cw = $('#list-friend-recommend .avatar-photo').width();
-    $('#list-friend-recommend .avatar-photo').css({'height':cw+'px'});
+    var heights = $(".friend-list .friend-card .friend-info").map(function ()
+        {
+            return $(this).height();
+        }).get(),
+
+        maxHeight = Math.max.apply(null, heights);
+    $('.friend-list .friend-card .friend-info').css({'height':maxHeight+'px'});
 }
 $(window).bind("load", function() {
     resize_image();

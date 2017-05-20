@@ -8,24 +8,23 @@
 ?>
 @foreach($data as $user)
     <div class = "user-recommend user-recommend-{{ $user['id'] }} col-sm-6 col-md-6 col-lg-6">
-        <div class="content">
-            <div class="avatar-wrapper col-xs-4 col-sm-4 col-md-4 col-sm-4">
-                <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="user" class="avatar-photo" />
-                <button onclick="add_friend(this)" class="button button-add-friend center-block col-xs-12 col-sm-12 col-md-12 col-lg-12" user_id="{{ $user['id'] }}">Add Friend</button>
-            </div>
-            <div class="info-wrapper col-xs-8 col-sm-8 col-md-8 col-sm-8">
-                <div class = "name">
-                    <a href="#" class="profile-link">{{ $user['first_name'] }} {{ $user['last_name'] }}</a>
-                </div>
-                @if( $user['address'] )
-                <div class = "address">Live in {{ $user['address'] }}</div>
-                @endif
-                <div class = "job">
-                    {{ $user['job'] }}
-                    @if( !empty($user['job']) && !empty($user['company']) )
-                    at
+        <div class="friend-card">
+            <img src="images/covers/{{ $user['cover_photo'] }}" alt="profile-cover" class="img-responsive cover">
+            <div class="card-info">
+                <img src="images/users/{{ isset($user['avatar'])? $user['avatar'] : 'users_default.png' }}" alt="user" class="profile-photo-lg" />
+                <div class="friend-info">
+                    <button onclick="add_friend(this)" class="button button-add-friend pull-right" user_id="{{ $user['id'] }}">Add Friend</button>
+                    <h5><a href="timeline.html" class="profile-link">{{ $user['first_name'] }} {{ $user['last_name'] }}</a></h5>
+                    @if( $user['address'] )
+                    <p class = "address">Live in {{ $user['address'] }}</p>
                     @endif
-                    {{ $user['company'] }}
+                    <p class = "job">
+                        {{ $user['job'] }}
+                        @if( !empty($user['job']) && !empty($user['company']) )
+                        at
+                        @endif
+                        {{ $user['company'] }}
+                    </p>
                 </div>
             </div>
         </div>
