@@ -1357,6 +1357,42 @@ ul.contact li i{
 }
 
 /*==================================================
+  Friend Request CSS
+  ==================================================*/
+
+.friend-request-item .button {
+  box-sizing: border-box;
+  border: 1px solid #27aae1;
+  text-align: center;
+  height: 30px;
+  padding: 0px;
+  font-size: 10px;
+  position: relative;
+  border-radius: 30px;
+}
+
+.button-accept-friend {
+  width: 20%;
+  background: #27aae1;
+  color: #ffffff;
+  margin-right: 10px;
+}
+.button-accept-friend:hover {
+  background: #149AC9;
+  transition: all 1s;
+}
+
+.button-delete-friend{
+  width: 25%;
+  background: transparent;
+  color: #27aae1;
+}
+.button-delete-friend:hover {
+  background: #DCDCDC;
+  transition: all 1s;
+}
+
+/*==================================================
   CSS for width 992px
   ==================================================*/
 

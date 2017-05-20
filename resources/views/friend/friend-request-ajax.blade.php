@@ -33,8 +33,8 @@ if ($total > $limit){
             <div class="card-info">
                 <img src="images/users/{{ isset($friend['avatar'])? $friend['avatar'] : 'users_default.png' }}" alt="user" class="profile-photo-lg" />
             <div class="friend-info">
-                <button onclick="accept_friend(this)" class="button button-accept-friend pull-right" user_id="{{ $friend['id'] }}" >Accept</button>
                 <button onclick="deny_friend(this)" class="button button-delete-friend pull-right" user_id="{{ $friend['id'] }}" >Delete Request</button>
+                <button onclick="accept_friend(this)" class="button button-accept-friend pull-right" user_id="{{ $friend['id'] }}" >Accept</button>
                 <h5><a href="timeline.html" class="profile-link">{{ $friend['first_name'] }} {{ $friend['last_name'] }}</a></h5>
                 @if( $friend['address'] )
                     <p class = "address">Live in {{ $friend['address'] }}</p>
