@@ -7,14 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class UserInfo extends Model
 {
     protected $table = 'user_info';
-    protected $id = '';
+    protected $primaryKey = 'user_id';
+    protected $fillable = [
+        'user_id', 'address', 'job', 'company', 'avatar', 'cover_photo',
+    ];
 
-    public function __construct($id)
-    {
-        $this->id = $id;
+    public function user(){
+        return $this->belongsTo(User::class);
     }
-    static function getUserByID($id)
+
+    public function messages()
     {
-        return \DB::table('user_info')->join('users','user_info.user_id','=','users.id')->select('users.id','first_name','last_name','avatar')->where('id',$id)->get('');
+        return $this->hasMany(Message::class);
     }
 }

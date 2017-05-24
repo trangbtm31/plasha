@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2017 at 04:55 PM
+-- Generation Time: May 24, 2017 at 07:39 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -141,6 +141,34 @@ CREATE TABLE `location` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`, `updated_at`) VALUES
+(193, 3, 'a', '2017-05-24 05:29:40', '2017-05-24 05:29:40'),
+(194, 4, 'a', '2017-05-24 05:29:47', '2017-05-24 05:29:47'),
+(195, 4, 'a', '2017-05-24 05:30:50', '2017-05-24 05:30:50'),
+(196, 3, 'b', '2017-05-24 05:31:01', '2017-05-24 05:31:01'),
+(197, 3, 'c', '2017-05-24 05:32:54', '2017-05-24 05:32:54'),
+(198, 3, 'd', '2017-05-24 05:34:04', '2017-05-24 05:34:04'),
+(199, 4, 'e', '2017-05-24 05:35:35', '2017-05-24 05:35:35'),
+(200, 4, 'ahihi', '2017-05-24 05:38:03', '2017-05-24 05:38:03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -157,7 +185,8 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2017_04_17_072529_create_admins_table', 2);
+(3, '2017_04_17_072529_create_admins_table', 2),
+(4, '2017_05_21_170420_create_messages_table', 3);
 
 -- --------------------------------------------------------
 
@@ -264,7 +293,18 @@ INSERT INTO `plan_comment` (`id`, `user_id`, `plan_id`, `comment`, `created_at`,
 (41, 3, 53, 'a10', '2017-05-14 16:50:39', '2017-05-14 16:50:39'),
 (42, 3, 53, 'AAA', '2017-05-15 13:16:49', '2017-05-15 13:16:49'),
 (43, 3, 57, 'Ut enim ad minim veniam', '2017-05-15 16:56:11', '2017-05-15 16:56:11'),
-(44, 3, 71, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2017-05-16 03:07:40', '2017-05-16 03:07:40');
+(44, 3, 71, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2017-05-16 03:07:40', '2017-05-16 03:07:40'),
+(45, 3, 71, '1', '2017-05-19 06:46:27', '2017-05-19 06:46:27'),
+(46, 3, 71, '2', '2017-05-19 06:46:31', '2017-05-19 06:46:31'),
+(47, 3, 71, '3', '2017-05-19 06:46:35', '2017-05-19 06:46:35'),
+(48, 3, 71, '4', '2017-05-19 06:46:39', '2017-05-19 06:46:39'),
+(49, 3, 71, '5', '2017-05-19 06:46:43', '2017-05-19 06:46:43'),
+(50, 3, 71, '6', '2017-05-19 06:46:47', '2017-05-19 06:46:47'),
+(51, 3, 71, '7', '2017-05-19 06:46:53', '2017-05-19 06:46:53'),
+(52, 3, 67, '1', '2017-05-19 16:40:15', '2017-05-19 16:40:15'),
+(53, 3, 67, '2', '2017-05-19 16:40:21', '2017-05-19 16:40:21'),
+(54, 3, 67, '3', '2017-05-19 16:40:28', '2017-05-19 16:40:28'),
+(55, 3, 67, '4', '2017-05-19 16:40:34', '2017-05-19 16:40:34');
 
 -- --------------------------------------------------------
 
@@ -384,10 +424,22 @@ CREATE TABLE `relationship` (
 --
 
 INSERT INTO `relationship` (`user_id_1`, `user_id_2`, `status`, `action_user_id`, `created_at`, `updated_at`) VALUES
+(3, 1, 'none', 3, '2017-05-19 05:59:29', '2017-05-20 07:27:31'),
 (3, 2, 'waiting', 2, '2017-05-18 11:10:05', '2017-05-18 13:57:55'),
-(3, 4, 'none', 3, '2017-05-18 11:06:25', '2017-05-18 13:58:19'),
-(3, 6, 'friend', 3, '2017-05-18 11:10:21', '2017-05-18 13:57:54'),
-(8, 3, 'waiting', 8, '2017-05-18 11:25:39', '2017-05-18 13:54:29');
+(3, 4, 'friend', 3, '2017-05-18 11:06:25', '2017-05-20 16:07:09'),
+(3, 5, 'waiting', 5, '2017-05-19 05:59:28', '2017-05-20 16:04:35'),
+(3, 6, 'waiting', 6, '2017-05-18 11:10:21', '2017-05-19 07:20:19'),
+(3, 7, 'waiting', 7, '2017-05-19 05:59:29', '2017-05-19 05:59:29'),
+(3, 8, 'waiting', 8, '2017-05-18 11:25:39', '2017-05-18 13:54:29'),
+(4, 1, 'friend', 4, '2017-05-19 16:02:52', '2017-05-19 16:02:52'),
+(4, 2, 'friend', 4, '2017-05-19 16:02:51', '2017-05-19 16:02:51'),
+(4, 5, 'friend', 4, '2017-05-19 16:02:52', '2017-05-19 16:02:52'),
+(4, 6, 'friend', 4, '2017-05-19 16:02:53', '2017-05-19 16:02:53'),
+(4, 7, 'friend', 4, '2017-05-19 16:02:58', '2017-05-19 16:02:58'),
+(4, 8, 'friend', 4, '2017-05-19 16:02:56', '2017-05-19 16:02:56'),
+(4, 9, 'friend', 4, '2017-05-19 16:02:55', '2017-05-19 16:02:55'),
+(9, 3, 'waiting', 9, '2017-05-20 16:05:53', '2017-05-20 16:05:53'),
+(9, 7, 'none', 9, '2017-05-19 06:26:03', '2017-05-19 06:26:05');
 
 -- --------------------------------------------------------
 
@@ -416,12 +468,13 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
 (1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
 (2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
-(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'nMVc10LQb29NPL6pYgXF16ZvS4V3oIKwiBPFsnJwaCGhP9HwUMY5p4K63wTp', NULL, NULL, 1),
-(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', 'duhIvQoBn3Oij7ykpBXrRzqLaDAPqlalAIlMNkQEZvnRgNM6hIPOUJ4tVxCT', NULL, NULL, 1),
+(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'PgEBBn8rcCjzkzq7FWL5WBbUdsKvHTWwugVTkPHqMeLsUl70ujMBxUdT6QVx', NULL, NULL, 1),
+(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', '53TOwTEH5HIubzLRajovBKUcL7FbJhsN2rItOwtfuWclTVUT7NyQdvhhwBFk', NULL, NULL, 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
 (6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0),
 (7, 'Example', 'User', 'example@gmail.com', '$2y$10$9khzJFVwpnBciyPBZ7DaY.hnr00Aw/FqH4nBRrtwPSXg1WTkt66xW', '1998-03-18', 'male', NULL, '2017-05-17 05:37:34', '2017-05-17 05:37:34', 0),
-(8, 'Liz', 'Lemon', 'lizlemon@example.com', '$2y$10$KQByq.ExT5JXxfuCh6m7e.8/QTWP5TwdTxf9f4AgWHSEH1yBN2f4a', '1989-05-18', 'female', 'YzG2UabLqdCosqfukkqZn7Jc1WncM1YWG38V40mR2PzMmeRTL0lfhJPZO02v', '2017-05-17 05:39:34', '2017-05-17 05:39:34', 0);
+(8, 'Liz', 'Lemon', 'lizlemon@example.com', '$2y$10$KQByq.ExT5JXxfuCh6m7e.8/QTWP5TwdTxf9f4AgWHSEH1yBN2f4a', '1989-05-18', 'female', 'YzG2UabLqdCosqfukkqZn7Jc1WncM1YWG38V40mR2PzMmeRTL0lfhJPZO02v', '2017-05-17 05:39:34', '2017-05-17 05:39:34', 0),
+(9, 'Cuong', 'Cuong', 'cuongcuong@example.com', '$2y$10$NtgMffDCXdULwMhOZ8bccuvyvmfu5XMrKKTVgHPcwI0AGFJ9qZ7J.', '1998-02-17', 'male', 'qSXywKMkT5LTftk7QbXdNubuAYXkOoVMtKFiPyU1AC9FLlbwzzPB3iWuZ0Zb', '2017-05-19 05:57:43', '2017-05-19 05:57:43', 0);
 
 -- --------------------------------------------------------
 
@@ -443,14 +496,15 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_id`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
-(1, 'Đà Nẵng', 'Student', 'University of Social Siences and Humanities', 'user-1.jpg', NULL),
-(2, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'user-1.jpg', NULL),
+(1, 'Đà Nẵng', 'Student', 'University of Social Siences and Humanities', 'user-1.jpg', 'sunset_winter.png'),
+(2, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'user-1.jpg', 'sunset_winter.png'),
 (3, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
-(4, 'Vũng Tàu', 'Fresher', 'Solazu', NULL, NULL),
-(5, 'Hà Nội', 'Student', 'University of Information Technology', 'user-10.jpg', NULL),
-(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1.jpg', NULL),
-(7, NULL, 'Development', NULL, NULL, NULL),
-(8, NULL, NULL, 'Solazu Company', NULL, NULL);
+(4, 'Vũng Tàu', 'Fresher', 'Solazu', 'users_default.png', 'sunset_winter.png'),
+(5, 'Hà Nội', 'Student', 'University of Information Technology', 'user-10.jpg', 'sunset_winter.png'),
+(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1.jpg', 'sunset_winter.png'),
+(7, NULL, 'Development', NULL, 'users_default.png', 'sunset_winter.png'),
+(8, NULL, NULL, 'Solazu Company', 'users_default.png', 'sunset_winter.png'),
+(9, NULL, NULL, NULL, 'users_default.png', 'sunset_winter.png');
 
 -- --------------------------------------------------------
 
@@ -536,6 +590,13 @@ ALTER TABLE `group_member`
 --
 ALTER TABLE `location`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `migrations`
@@ -663,10 +724,15 @@ ALTER TABLE `group`
 ALTER TABLE `group_member`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `plan`
 --
@@ -681,7 +747,7 @@ ALTER TABLE `plan_access`
 -- AUTO_INCREMENT for table `plan_comment`
 --
 ALTER TABLE `plan_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `plan_like`
 --
@@ -706,7 +772,7 @@ ALTER TABLE `plan_thumbnail`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `user_report`
 --
@@ -744,6 +810,12 @@ ALTER TABLE `group_member`
   ADD CONSTRAINT `group_member_ibfk_2` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`);
 
 --
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`);
+
+--
 -- Constraints for table `plan`
 --
 ALTER TABLE `plan`
@@ -777,12 +849,6 @@ ALTER TABLE `plan_report`
   ADD CONSTRAINT `plan_report_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`),
   ADD CONSTRAINT `plan_report_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `plan_report_ibfk_3` FOREIGN KEY (`handler`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `user_info`
---
-ALTER TABLE `user_info`
-  ADD CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `weather`

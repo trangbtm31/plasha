@@ -1,4 +1,4 @@
-  <header id="app">
+<header id="header">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

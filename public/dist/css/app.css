@@ -5951,9 +5951,6 @@ img.profile-photo-xs {
 ul {
   padding-left: 15px; }
 
-ul li {
-  list-style-image: url("../images/bullet.png"); }
-
 .line-divider {
   background: none;
   height: 1px;
@@ -5976,7 +5973,7 @@ textarea {
   box-sizing: border-box;
   width: 100%; }
 
-#app {
+#header {
   min-height: 50px; }
 
 /*==================================================
@@ -6547,17 +6544,17 @@ ul.online-users li span.offline-dot {
   list-style: none;
   margin-bottom: 20px; }
 
-.chat-room .chat-body ul.chat-message li.left .chat-item {
-  background: rgba(141, 198, 63, 0.1);
+.chat-room .chat-body ul.chat-message .left .chat-item {
+  background: rgba(141, 198, 63, 0.5);
   margin-left: 50px;
   padding: 5px 10px;
   position: relative;
   border-radius: 10px; }
 
-.chat-room .chat-body ul.chat-message li.left .chat-item::before {
-  border-bottom: 10px solid transparent;
-  border-right: 8px solid rgba(141, 198, 63, 0.1);
-  border-top: 10px solid transparent;
+.chat-room .chat-body ul.chat-message .left .chat-item::before {
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid rgba(141, 198, 63, 0.5);
+  border-top: 8px solid transparent;
   content: "";
   height: 0;
   left: -8px;
@@ -6565,21 +6562,21 @@ ul.online-users li span.offline-dot {
   top: 10px;
   width: 0; }
 
-.chat-room .chat-body ul.chat-message li.left .chat-item .chat-item-header {
+.chat-room .chat-body ul.chat-message .left .chat-item .chat-item-header {
   border-bottom: 1px dotted #caef8e;
   margin-bottom: 10px; }
 
-.chat-room .chat-body ul.chat-message li.right .chat-item {
-  background: rgba(39, 170, 225, 0.1);
+.chat-room .chat-body ul.chat-message .right .chat-item {
+  background: rgba(39, 170, 225, 0.5);
   margin-right: 50px;
   padding: 5px 10px;
   position: relative;
   border-radius: 10px; }
 
-.chat-room .chat-body ul.chat-message li.right .chat-item::after {
-  border-bottom: 10px solid transparent;
-  border-left: 8px solid rgba(39, 170, 225, 0.1);
-  border-top: 10px solid transparent;
+.chat-room .chat-body ul.chat-message .right .chat-item::after {
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid rgba(39, 170, 225, 0.5);
+  border-top: 8px solid transparent;
   content: "";
   height: 0;
   right: -8px;
@@ -6587,7 +6584,7 @@ ul.online-users li span.offline-dot {
   top: 10px;
   width: 0; }
 
-.chat-room .chat-body ul.chat-message li.right .chat-item .chat-item-header {
+.chat-room .chat-body ul.chat-message .right .chat-item .chat-item-header {
   border-bottom: 1px dotted #bce8f7;
   margin-bottom: 10px; }
 

@@ -39,12 +39,14 @@
 
     </head>
     <body>
+    <div id="app">
         @yield('content')
+    </div>
     </body>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    {{--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>--}}
 
 
 </html>

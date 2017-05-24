@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\UserInfo;
 
 class User extends Authenticatable
 {
@@ -59,4 +60,19 @@ class User extends Authenticatable
     {
         return Cache::has('user-is-online-' . $id);
     }
+
+    /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function user_info(){
+        return $this->hasOne(UserInfo::class);
+    }
+
 }
