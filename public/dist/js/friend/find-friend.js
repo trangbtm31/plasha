@@ -76,7 +76,7 @@ function accept_friend(data) {
         data: {"user_id": user_id},
         success: function (result) {
             if (result['success'] == true) {
-                $(".user-request-"+user_id).remove();
+                $("#user-request-"+user_id).remove();
             }
             resize_image();
         }

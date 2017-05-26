@@ -63,10 +63,11 @@ Route::get('/deny-friend', ['as' => 'accept-friend', 'uses' => 'Friend\FriendCon
 Route::get('/friend-list', ['as' => 'friend-list', 'uses' => 'Friend\FriendController@showFriendList']);
 
 /* Chat page */
-Route::get('/chat-friend-ajax',['as' => 'chat-friend-ajax', 'uses' => 'Chat\ChatController@ChatFriendAjax']);
+Route::get('/chat-friend-ajax', ['as' => 'chat-friend-ajax', 'uses' => 'Chat\ChatController@ChatFriendAjax']);
 Route::get('/chat', 'Chat\ChatController@Chat');\
 Route::get('messages', 'Chat\ChatController@fetchMessages');
 Route::post('messages', 'Chat\ChatController@sendMessage');
+Route::get('/messages-ajax', ['as' => 'messages-ajax', 'uses' => 'Chat\ChatController@MessagesAjax']);
 
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);

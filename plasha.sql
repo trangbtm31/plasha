@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2017 at 07:39 AM
+-- Generation Time: May 26, 2017 at 02:19 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -69,32 +69,46 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chat`
+-- Table structure for table `conversation`
 --
 
-CREATE TABLE `chat` (
+CREATE TABLE `conversation` (
   `id` int(11) NOT NULL,
-  `user_1` int(10) UNSIGNED NOT NULL,
-  `user_2` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `conversation`
+--
+
+INSERT INTO `conversation` (`id`, `created_at`, `updated_at`) VALUES
+(1, '2017-05-25 06:04:00', '0000-00-00 00:00:00'),
+(2, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chat_messages`
+-- Table structure for table `conversation_member`
 --
 
-CREATE TABLE `chat_messages` (
-  `id` int(20) NOT NULL,
-  `chat_id` int(10) NOT NULL,
-  `sender` int(10) UNSIGNED NOT NULL,
-  `receiver` int(10) UNSIGNED NOT NULL,
-  `message` text COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+CREATE TABLE `conversation_member` (
+  `id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `conversation_member`
+--
+
+INSERT INTO `conversation_member` (`id`, `conversation_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, NULL, NULL),
+(2, 1, 4, NULL, NULL),
+(3, 2, 3, NULL, NULL),
+(4, 2, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -146,6 +160,7 @@ CREATE TABLE `location` (
 
 CREATE TABLE `messages` (
   `id` int(10) UNSIGNED NOT NULL,
+  `conversation_id` int(11) DEFAULT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -156,15 +171,17 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`, `updated_at`) VALUES
-(193, 3, 'a', '2017-05-24 05:29:40', '2017-05-24 05:29:40'),
-(194, 4, 'a', '2017-05-24 05:29:47', '2017-05-24 05:29:47'),
-(195, 4, 'a', '2017-05-24 05:30:50', '2017-05-24 05:30:50'),
-(196, 3, 'b', '2017-05-24 05:31:01', '2017-05-24 05:31:01'),
-(197, 3, 'c', '2017-05-24 05:32:54', '2017-05-24 05:32:54'),
-(198, 3, 'd', '2017-05-24 05:34:04', '2017-05-24 05:34:04'),
-(199, 4, 'e', '2017-05-24 05:35:35', '2017-05-24 05:35:35'),
-(200, 4, 'ahihi', '2017-05-24 05:38:03', '2017-05-24 05:38:03');
+INSERT INTO `messages` (`id`, `conversation_id`, `user_id`, `message`, `created_at`, `updated_at`) VALUES
+(205, 1, 3, 'a', '2017-05-25 04:23:40', '2017-05-25 04:23:40'),
+(206, 2, 3, 'b', '2017-05-25 04:23:48', '2017-05-25 04:23:48'),
+(207, 1, 4, 'd', '2017-05-25 04:26:03', '2017-05-25 04:26:03'),
+(208, 1, 3, 'e', '2017-05-25 04:26:06', '2017-05-25 04:26:06'),
+(209, 1, 3, 'f', '2017-05-25 04:26:12', '2017-05-25 04:26:12'),
+(210, 1, 4, 'd', '2017-05-25 04:54:15', '2017-05-25 04:54:15'),
+(211, 1, 3, 'h', '2017-05-25 04:54:20', '2017-05-25 04:54:20'),
+(212, NULL, 3, 'q', '2017-05-25 08:10:26', '2017-05-25 08:10:26'),
+(213, NULL, 3, '1', '2017-05-25 08:10:41', '2017-05-25 08:10:41'),
+(214, NULL, 4, '2', '2017-05-25 08:10:45', '2017-05-25 08:10:45');
 
 -- --------------------------------------------------------
 
@@ -424,21 +441,21 @@ CREATE TABLE `relationship` (
 --
 
 INSERT INTO `relationship` (`user_id_1`, `user_id_2`, `status`, `action_user_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 'none', 3, '2017-05-19 05:59:29', '2017-05-20 07:27:31'),
-(3, 2, 'waiting', 2, '2017-05-18 11:10:05', '2017-05-18 13:57:55'),
-(3, 4, 'friend', 3, '2017-05-18 11:06:25', '2017-05-20 16:07:09'),
-(3, 5, 'waiting', 5, '2017-05-19 05:59:28', '2017-05-20 16:04:35'),
-(3, 6, 'waiting', 6, '2017-05-18 11:10:21', '2017-05-19 07:20:19'),
-(3, 7, 'waiting', 7, '2017-05-19 05:59:29', '2017-05-19 05:59:29'),
-(3, 8, 'waiting', 8, '2017-05-18 11:25:39', '2017-05-18 13:54:29'),
+(3, 1, 'friend', 3, '2017-05-19 05:59:29', '2017-05-25 04:34:12'),
+(3, 2, 'friend', 3, '2017-05-18 11:10:05', '2017-05-25 04:34:30'),
+(3, 4, 'friend', 3, '2017-05-18 11:06:25', '2017-05-25 04:33:50'),
+(3, 5, 'waiting', 5, '2017-05-19 05:59:28', '2017-05-25 04:31:02'),
+(3, 6, 'friend', 3, '2017-05-18 11:10:21', '2017-05-25 04:34:32'),
+(3, 7, 'waiting', 7, '2017-05-19 05:59:29', '2017-05-25 04:31:14'),
+(3, 8, 'friend', 3, '2017-05-18 11:25:39', '2017-05-25 04:34:36'),
+(3, 9, 'friend', 3, '2017-05-20 16:05:53', '2017-05-25 04:34:37'),
 (4, 1, 'friend', 4, '2017-05-19 16:02:52', '2017-05-19 16:02:52'),
 (4, 2, 'friend', 4, '2017-05-19 16:02:51', '2017-05-19 16:02:51'),
 (4, 5, 'friend', 4, '2017-05-19 16:02:52', '2017-05-19 16:02:52'),
 (4, 6, 'friend', 4, '2017-05-19 16:02:53', '2017-05-19 16:02:53'),
-(4, 7, 'friend', 4, '2017-05-19 16:02:58', '2017-05-19 16:02:58'),
+(4, 7, 'waiting', 7, '2017-05-19 16:02:58', '2017-05-19 16:02:58'),
 (4, 8, 'friend', 4, '2017-05-19 16:02:56', '2017-05-19 16:02:56'),
-(4, 9, 'friend', 4, '2017-05-19 16:02:55', '2017-05-19 16:02:55'),
-(9, 3, 'waiting', 9, '2017-05-20 16:05:53', '2017-05-20 16:05:53'),
+(4, 9, 'friend', 9, '2017-05-19 16:02:55', '2017-05-19 16:02:55'),
 (9, 7, 'none', 9, '2017-05-19 06:26:03', '2017-05-19 06:26:05');
 
 -- --------------------------------------------------------
@@ -468,7 +485,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
 (1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
 (2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
-(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'PgEBBn8rcCjzkzq7FWL5WBbUdsKvHTWwugVTkPHqMeLsUl70ujMBxUdT6QVx', NULL, NULL, 1),
+(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'RfDXjSIk9OfgzuODZErkPuoXjYdEA9sAY98r16pz2UDSKQ6qHiV1hp7G21eu', NULL, NULL, 1),
 (4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', '53TOwTEH5HIubzLRajovBKUcL7FbJhsN2rItOwtfuWclTVUT7NyQdvhhwBFk', NULL, NULL, 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
 (6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0),
@@ -555,21 +572,18 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `chat`
+-- Indexes for table `conversation`
 --
-ALTER TABLE `chat`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_1` (`user_1`),
-  ADD KEY `user_2` (`user_2`);
+ALTER TABLE `conversation`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chat_messages`
+-- Indexes for table `conversation_member`
 --
-ALTER TABLE `chat_messages`
+ALTER TABLE `conversation_member`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `chat_id` (`chat_id`),
-  ADD KEY `sender` (`sender`),
-  ADD KEY `receiver` (`receiver`);
+  ADD KEY `conversation_id` (`conversation_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `group`
@@ -596,7 +610,8 @@ ALTER TABLE `location`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `conversation_id` (`conversation_id`);
 
 --
 -- Indexes for table `migrations`
@@ -704,15 +719,15 @@ ALTER TABLE `weather`
 ALTER TABLE `admin`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `chat`
+-- AUTO_INCREMENT for table `conversation`
 --
-ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `conversation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `chat_messages`
+-- AUTO_INCREMENT for table `conversation_member`
 --
-ALTER TABLE `chat_messages`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `conversation_member`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `group`
 --
@@ -727,7 +742,7 @@ ALTER TABLE `group_member`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -788,19 +803,11 @@ ALTER TABLE `weather`
 --
 
 --
--- Constraints for table `chat`
+-- Constraints for table `conversation_member`
 --
-ALTER TABLE `chat`
-  ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`user_1`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `chat_ibfk_2` FOREIGN KEY (`user_2`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `chat_messages`
---
-ALTER TABLE `chat_messages`
-  ADD CONSTRAINT `chat_messages_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `chat` (`id`),
-  ADD CONSTRAINT `chat_messages_ibfk_2` FOREIGN KEY (`sender`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `chat_messages_ibfk_3` FOREIGN KEY (`receiver`) REFERENCES `users` (`id`);
+ALTER TABLE `conversation_member`
+  ADD CONSTRAINT `conversation_member_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`),
+  ADD CONSTRAINT `conversation_member_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `group_member`
@@ -813,7 +820,8 @@ ALTER TABLE `group_member`
 -- Constraints for table `messages`
 --
 ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`);
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`);
 
 --
 -- Constraints for table `plan`

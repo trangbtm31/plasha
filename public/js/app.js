@@ -11292,45 +11292,6 @@ Vue.component('chat-form', __webpack_require__(39));
 
 Vue.component('example', __webpack_require__(41));
 
-var app = new Vue({
-    el: '#app',
-
-    data: {
-        messages: []
-    },
-
-    created: function created() {
-        var _this = this;
-
-        this.fetchMessages();
-        Echo.private('chat').listen('MessageSent', function (e) {
-            _this.messages.push({
-                message: e.message.message,
-                user: e.user,
-                user_info: e.user_info
-            });
-        });
-    },
-
-
-    methods: {
-        fetchMessages: function fetchMessages() {
-            var _this2 = this;
-
-            axios.get('/messages').then(function (response) {
-                _this2.messages = response.data;
-            });
-        },
-        addMessage: function addMessage(message) {
-            this.messages.push(message);
-
-            axios.post('/messages', message).then(function (response) {
-                console.log(response.data);
-            });
-        }
-    }
-});
-
 /**
  * function for attaching sticky feature
  **/

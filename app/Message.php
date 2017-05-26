@@ -24,8 +24,19 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function user_info()
     {
         return $this->belongsTo(UserInfo::class, 'user_id');
+    }
+
+    public function conversation()
+    {
+        return $this->belongsTo(Conversation::class);
+    }
+
+    public function conversation_member()
+    {
+        return $this->belongsToMany(ConversationMember::class);
     }
 }

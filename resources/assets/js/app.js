@@ -18,42 +18,6 @@ Vue.component('chat-form', require('./components/ChatForm.vue'));
 
 Vue.component('example', require('./components/Example.vue'));
 
-const app = new Vue({
-    el: '#app',
-
-    data: {
-        messages: []
-    },
-
-    created() {
-        this.fetchMessages();
-        Echo.private('chat')
-            .listen('MessageSent', (e) => {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user,
-                    user_info: e.user_info
-                });
-            });
-    },
-
-    methods: {
-        fetchMessages() {
-            axios.get('/messages').then(response => {
-                this.messages = response.data;
-            });
-        },
-
-        addMessage(message) {
-            this.messages.push(message);
-
-            axios.post('/messages', message).then(response => {
-                console.log(response.data);
-            });
-        }
-    }
-});
-
 /**
  * function for attaching sticky feature
  **/

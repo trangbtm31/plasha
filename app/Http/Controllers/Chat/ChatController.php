@@ -54,4 +54,8 @@ class ChatController extends Controller
 
         return ['status' => 'Message Sent!'];
     }
+
+    public function MessagesAjax(){
+        return view('chat.messages-ajax');
+    }
 }

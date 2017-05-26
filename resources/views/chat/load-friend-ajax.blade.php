@@ -29,7 +29,7 @@ if ($total > $limit){
 }
 ?>
 @foreach($list_friend as $friend)
-<li class="active">
+<li class="active" user_id="{{ $friend['id'] }}" is_busy="false" onclick="LoadMessage(this)">
     <a href="#contact-1" data-toggle="tab">
         <div class="contact">
             <img src="images/users/{{ $friend['avatar'] }}" alt="" class="profile-photo-sm pull-left">
