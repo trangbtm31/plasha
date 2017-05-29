@@ -147,3 +147,19 @@ function more_fr_onl(data) {
         });
     });
 }
+
+function auto_place() {
+    var total_cost = document.getElementById('total_cost').value;
+    var find_place = document.querySelector('input[name="find_place"]:checked').value;
+
+    $.ajax({
+        type: 'get',
+        dataType: 'text',
+        url: 'auto-find-place',
+        data: {"total_cost": total_cost, "find_place": find_place},
+        success: function(result)
+        {
+            document.getElementById('recommend-place').innerHTML = result;
+        }
+    })
+}

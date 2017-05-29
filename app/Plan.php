@@ -62,4 +62,9 @@ class plan extends Model
 
         return $data;
     }
+
+    public function place()
+    {
+        return $this->belongsToMany(Place::class);
+    }
 }

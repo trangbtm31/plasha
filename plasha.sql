@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2017 at 03:32 PM
+-- Generation Time: May 29, 2017 at 04:25 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -62,6 +62,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
+('drink', 'Drink'),
 ('eating', 'Eating'),
 ('movie', 'Movie'),
 ('sport', 'Sport');
@@ -232,15 +233,30 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `place` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `time_open` time DEFAULT NULL,
-  `time_close` time NOT NULL,
+  `time_close` time DEFAULT NULL,
   `time_stay` time DEFAULT NULL,
-  `cost` int(10) NOT NULL,
+  `cost` int(10) DEFAULT NULL,
+  `star` int(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `place`
+--
+
+INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `created_at`, `updated_at`) VALUES
+(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', NULL, '09:00:00', '23:00:00', '02:00:00', 200000, 5, '2017-05-28 07:00:00', '2017-05-28 07:00:00'),
+(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', NULL, '08:30:00', '00:00:00', '02:00:00', 150000, 5, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '02:00:00', 25000, 3, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 20000, 2, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '01:00:00', 30000, 3, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '01:00:00', 15000, 2, '2017-05-27 17:00:00', '2017-05-27 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -801,7 +817,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `place`
 --
 ALTER TABLE `place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `plan`
 --

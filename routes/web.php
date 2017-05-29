@@ -49,6 +49,7 @@ Route::get('/admin_area', ['middleware' => 'admin', function () {
 Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create']);;
 Route::post('/post-comment/{plan_id}', ['as' => 'post-comment', 'uses' => 'Plan\PlanController@postComment']);
 Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create' ]);
+Route::get('/auto-find-place', ['as' => 'auto-find-place', 'uses' => 'Plan\PlanController@autoFindPlace' ]);
 
 /* Friend */
 Route::get('/find-friend', ['as' => 'find-friend', 'uses' => 'Friend\FriendController@FindFriend']);

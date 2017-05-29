@@ -12,6 +12,13 @@
                     {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
                     {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
                     {{ Form::select('category', $category, null,['class' => 'form-category']) }}
+                    {{ Form::number('price', '', array('id' => 'total_cost', 'class' => 'form-control', 'placeholder' => 'Enter total cost for this plan', 'maxlength' => '10')) }}
+                    {{ Form::radio('find_place', 'random', false, ['class' => '']) }} Random <br/>
+                    {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
+                    {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
+                    {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
+                    <button type="button" class="btn btn-primary" onclick="auto_place()">Gợi ý</button>
+                    <div id="recommend-place"></div>
                 </div>
             </div>
         </div>
