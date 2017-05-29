@@ -70,15 +70,12 @@ class Place extends Model
     static function findSaveMoney($total_cost = 0, $num_place = 1) {
         $places = Place::where('cost', '<=', $total_cost)->orderBy('cost', 'DESC')->get()->toArray();
         $data = array();
-        if($num_place == 1) {
-            $data = $places[0];
-        } else {
-            $results = Place::SaveMoney($places, $total_cost, $num_place, 0, count($places) - 1);
+        $results = Place::SaveMoney($places, $total_cost, $num_place, 0, count($places) - 1);
+        if (!empty($results)) {
             foreach ($results as $result) {
                 array_push($data, $places[$result]);
             }
         }
-
         return $data;
     }
 
