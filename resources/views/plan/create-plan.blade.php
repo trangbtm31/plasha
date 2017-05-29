@@ -17,7 +17,14 @@
                     {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                     {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
                     {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
-                    <button type="button" class="btn btn-primary" onclick="auto_place()">Gợi ý</button>
+                    {{ Form::label('max-place', 'Max Place', ['class' => 'max-place']) }}
+                    {{ Form::select('max_place', [
+                        '1' => 'One',
+                        '2' => 'Two',
+                        '3' => 'Three',
+                        '4' => 'Four'
+                    ], null, ['class' => 'max-place', 'id' => 'max-place']) }}
+                    <button type="button" class="btn btn-primary" onclick="auto_place()">Suggest</button>
                     <div id="recommend-place"></div>
                 </div>
             </div>
