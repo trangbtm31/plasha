@@ -151,15 +151,31 @@ function more_fr_onl(data) {
 function auto_place() {
     var total_cost = document.getElementById('total_cost').value;
     var find_place = document.querySelector('input[name="find_place"]:checked').value;
+    var num_place = $('#max-place').val();
 
     $.ajax({
         type: 'get',
         dataType: 'text',
         url: 'auto-find-place',
-        data: {"total_cost": total_cost, "find_place": find_place},
+        data: {"total_cost": total_cost, "find_place": find_place, "num_place": num_place},
         success: function(result)
         {
             document.getElementById('recommend-place').innerHTML = result;
         }
     })
+}
+
+var find_place = document.getElementsByName("find_place");
+
+var showNumPlace = function() {
+    var find = document.querySelector('input[name="find_place"]:checked').value;
+    if ( find == 'save-money' || find == 'luxury-place' ){
+        $('.max-place').removeClass('hidden');
+    } else {
+        $('.max-place').addClass('hidden');
+    }
+}
+
+for (var i = 0; i < find_place.length; i++) {
+    find_place[i].addEventListener('click', showNumPlace);
 }

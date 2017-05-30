@@ -11,7 +11,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/sticky-kit.min.js"></script>
         <script language="javascript" src="js/jquery.min.js" ></script>
-        <script language="javascript" src="dist/js/home/ajax.js" ></script>
         <script language="javascript" src="dist/js/friend/find-friend.js"></script>
         <script src="js/jquery.scrollbar.min.js"></script>
         <script src="js/script.js"></script>
@@ -47,6 +46,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script language="javascript" src="dist/js/home/ajax.js" ></script>
     {{--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>--}}
 
 

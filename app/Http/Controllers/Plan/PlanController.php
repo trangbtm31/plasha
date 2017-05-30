@@ -25,13 +25,14 @@ class PlanController extends Controller
     {
         $total_cost = (isset($_GET['total_cost']) && !empty($_GET['total_cost'])) ? (int)$_GET['total_cost'] : '0';
         $find_place = (isset($_GET['find_place']) && !empty($_GET['find_place'])) ? $_GET['find_place'] : 'random';
+        $num_place = (isset($_GET['num_place']) && !empty($_GET['num_place'])) ? $_GET['num_place'] : '1';
 
         switch ($find_place) {
             case 'random':
                 $data = Place::findRandom($total_cost);
                 break;
             case 'save-money':
-                $data = Place::findSaveMoney($total_cost);
+                $data = Place::findSaveMoney($total_cost, $num_place);
                 break;
             case 'many-place':
                 $data = Place::findManyPlace($total_cost);
@@ -42,8 +43,7 @@ class PlanController extends Controller
             default:
                 $data = Place::findRandom($total_cost);
         }
-
-
+        
         return view('plan.auto-place', compact('data'));
     }
 
