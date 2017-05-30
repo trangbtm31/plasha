@@ -13,6 +13,7 @@
         <script language="javascript" src="js/jquery.min.js" ></script>
         <script language="javascript" src="dist/js/friend/find-friend.js"></script>
         <script src="js/jquery.scrollbar.min.js"></script>
+        <script src="js/jquery.datetimepicker.full.min.js"></script>
         <script src="js/script.js"></script>
         @yield('scripts')
         <title>@yield('title')</title>
@@ -30,6 +31,7 @@
         <!-- Ionicons -->
         <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" />
         <!-- Scripts -->
         <script>
             window.Laravel = {!! json_encode([

@@ -66,16 +66,19 @@ class AutoPlanController extends Controller
      * $parent     : Mảng lưu trữ giá trị của hàm đệ quy cha
      */
     protected $max_total_cost = 0; //Tổng cost lớn nhất
-    protected function SaveMoney($places, $l, $r, $sum=0, $recursive=1, $parent = []) {
+    protected function SaveMoney($places, $l, $r, $recursive=1, $parent = []) {
         //Nếu số địa điểm trùng với số lần đệ quy thì so sánh tổng
         if ($this->num_place == $recursive) {
             for ($i = $l; $i <= $r; $i++) {
-                $total = $sum + $places[$i]['cost']; //Tính tổng con
+                $child = $parent;
+                array_push($child, $places[$i]); //Thêm $i vào mảng con
+                $total = 0;
+                foreach ($child as $place) {
+                    $total += $place['cost'];
+                }
                 if ($total > $this->max_total_cost && $total <= $this->total_cost) {
                     $this->max_total_cost = $total;          //Cập nhật giá trị $max
-                    $child = $parent;
-                    array_push($child, $places[$i]); //Thêm $i vào mảng con
-                    return $child; // Vì chuỗi places đã sắp xếp giá giảm dần, nếu cộng tiếp thì $total sẽ <= $max
+                    return $child;
                 }
             }
         } else { //Đệ quy đến khi số địa điểm trùng với số lần đệ quy
@@ -85,7 +88,7 @@ class AutoPlanController extends Controller
                 $child = $parent;
                 array_push($child, $places[$i]); //Thêm $i vào mảng con
                 //Gọi đệ quy
-                $loop = $this->SaveMoney($places, $i+1, $r, $sum + $places[$i]['cost'], $recursive, $child);
+                $loop = $this->SaveMoney($places, $i+1, $r, $recursive, $child);
                 //Nếu có tổng tổ hợp lớn hơn thì $loop sẽ không rỗng.
                 if (!empty($loop)) {
                     $data = $loop;

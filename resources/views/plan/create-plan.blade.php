@@ -34,6 +34,10 @@
                              '3' => 'Three',
                              '4' => 'Four'
                          ], null, ['class' => 'max-place', 'id' => 'max-place']) }}
+                         <input id="datetimepicker" type="text" >
+                         <script>
+                             jQuery('#datetimepicker').datetimepicker();
+                         </script>
                          <button type="button" class="btn btn-primary" onclick="auto_place()">Suggest</button>
                          <div id="recommend-place"></div>
                      </div>
