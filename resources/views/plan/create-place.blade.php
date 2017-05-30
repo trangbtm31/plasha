@@ -2,6 +2,7 @@
     ================================================= -->
     {{ Form::open(array('route'=>'handle-create-place', 'method' => 'post', 'files' => true)) }}
     	<div class="create-place">
+    	<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
     	<h2>Place </h2>
             <div class="row">
                 <div class="col-md-12 col-sm-12">

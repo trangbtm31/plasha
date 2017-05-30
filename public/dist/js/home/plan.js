@@ -7,11 +7,12 @@ function activaTab(tab){
 };
 
 function create_place(){
+
 	$.get({
         url: 'create-place',
         success:function(result)
         {
-            $('#create-place').html(result);
+            $('#create-place').append(result);
         }
     })
 }

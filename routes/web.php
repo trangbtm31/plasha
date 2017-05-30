@@ -52,9 +52,7 @@ Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanControll
 Route::get('/auto-find-place', ['as' => 'auto-find-place', 'uses' => 'Plan\AutoPlanController@autoFindPlace' ]);
 Route::post('/handle-create-plan', ['as' => 'handle-create-plan', 'uses' => 'Plan\PlanController@handleCreate' ]);
 Route::post('/create-place', ['as' => 'handle-create-place', 'uses' => 'Plan\PlanController@handleCreatePlace' ]);
-Route::get('/create-place', ['as' => 'create-place', function(){
-    return \View::make('plan.create-place');
-}]);
+Route::get('/create-place', ['as' => 'create-place', 'uses' => 'Plan\PlanController@showCreatePlace']);
 
 /* Friend */
 Route::get('/find-friend', ['as' => 'find-friend', 'uses' => 'Friend\FriendController@FindFriend']);
