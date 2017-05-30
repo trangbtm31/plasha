@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2017 at 04:25 AM
+-- Generation Time: May 30, 2017 at 06:31 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -402,6 +402,8 @@ INSERT INTO `plan_like` (`id`, `plan_id`, `user_id`, `status`, `created_at`, `up
 CREATE TABLE `plan_place` (
   `plan_id` int(11) NOT NULL,
   `place_id` int(11) NOT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
