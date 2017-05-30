@@ -4,7 +4,6 @@
     Plasa news feed !!
 @endsection
 
-
 @section('content')
     @include("layouts.app")
     <div class="news-feed" >

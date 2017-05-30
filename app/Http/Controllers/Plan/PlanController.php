@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Plan;
 
 use App\Http\Controllers\Controller;
 use App\Plan;
+use App\PlanHandleCreate;
 use App\Place;
 use App\Http\Requests\PlanRequest;
+use App\Http\Requests\HandlePlanRequest;
 use App\Comment;
 use App\Http\Requests\Plan\PlanCommentRequest;
 
@@ -54,5 +56,17 @@ class PlanController extends Controller
         } catch (Exception $e){
             print_r('Error: ' . $e);
         }
+    }
+    public function handleCreate(HandlePlanRequest $request)
+    {
+        $plan = new HandlePlan();
+        $plan->Create($request);
+        return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
+    }
+    public function handleCreatePlace(PlaceRequest $request)
+    {
+        $plan = new HandlePlan();
+        $plan->Create($request);
+        return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
     }
 }

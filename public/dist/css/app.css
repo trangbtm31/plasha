@@ -6393,6 +6393,19 @@ ul.online-users li span.offline-dot {
   color: #27aae1; }
 
 /*==================================================
+  Place Create CSS
+  ==================================================*/
+.create-place {
+  width: 100%;
+  min-height: 90px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f1f2f2;
+  background: rgba(255, 255, 255, 0.4); }
+  .create-place input {
+    margin: 5px; }
+
+/*==================================================
   Post Contents CSS
   ==================================================*/
 .post-content {

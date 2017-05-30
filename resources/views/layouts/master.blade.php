@@ -13,9 +13,9 @@
         <script language="javascript" src="js/jquery.min.js" ></script>
         <script language="javascript" src="dist/js/home/ajax.js" ></script>
         <script language="javascript" src="dist/js/friend/find-friend.js"></script>
-        <link href="dist/css/jquery.scrollbar.css" rel="stylesheet">
         <script src="js/jquery.scrollbar.min.js"></script>
         <script src="js/script.js"></script>
+        @yield('scripts')
         <title>@yield('title')</title>
         @yield('head')
         <!-- CSRF Token -->
@@ -24,6 +24,7 @@
         <!-- Styles -->
 
         <link href="dist/css/app.css" rel="stylesheet">
+        <link href="dist/css/jquery.scrollbar.css" rel="stylesheet">
         <link href="dist/css/ionicons.min.css" rel="stylesheet">
         <link href="dist/css/font-awesome.min.css" rel="stylesheet">
         <link href="css/emoji-css/emoji.css" rel="stylesheet">
