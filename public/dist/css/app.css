@@ -6377,7 +6377,8 @@ ul.online-users li span.offline-dot {
   margin-right: 10px; }
 
 .create-post .tools {
-  padding: 8px 0 10px; }
+  padding: 8px 0 10px;
+  float: right; }
 
 .create-post .tools ul.publishing-tools {
   display: inline-block;
@@ -6402,8 +6403,11 @@ ul.online-users li span.offline-dot {
   margin-bottom: 20px;
   border-bottom: 1px solid #f1f2f2;
   background: rgba(255, 255, 255, 0.4); }
-  .create-place input {
+  .create-place input, .create-place textarea {
     margin: 5px; }
+  .create-place .close-button {
+    float: right;
+    font-size: 20px; }
 
 /*==================================================
   Post Contents CSS

@@ -1,5 +1,6 @@
 @section('scripts')
   <script language="javascript" src="dist/js/home/plan.js" ></script>
+  <script src="js/jquery.datetimepicker.full.min.js"></script>
 @endsection
 <h2>Create Plan</h2>
   <ul class="nav nav-tabs">
@@ -75,13 +76,15 @@
                             {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
                             {{ Form::select('category', $category, null,['class' => 'form-category']) }}
                             <div id='create-place'></div>
-                            <button type="button" class="btn btn-primary" onclick="create_place()">Add Place</button>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <button type="button" class="btn btn-primary" onclick="create_place()">Add Place</button>
+                                </div>
+                                <div class="tools col-md-6 col-sm-6">
+                                    {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2">
-                    <div class="tools">
-                        {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}
                     </div>
                 </div>
             </div>

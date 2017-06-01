@@ -7,12 +7,19 @@ function activaTab(tab){
 };
 
 function create_place(){
-
-	$.get({
+	$.ajax({
+        type: 'get',
         url: 'create-place',
         success:function(result)
         {
             $('#create-place').append(result);
         }
     })
+}
+
+function remove_place() {
+    $('#create-place').on('click', '.close', function(e) {
+        e.preventDefault();
+        $(this).parent().remove();
+    });
 }

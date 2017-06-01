@@ -45,6 +45,6 @@ class PlanController extends Controller
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
     }
     public function showCreatePlace() {
-        return \View::make('plan.create-place');
+        return view('plan.create-place');
     }
 }
