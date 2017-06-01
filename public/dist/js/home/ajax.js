@@ -152,12 +152,19 @@ function auto_place() {
     var total_cost = document.getElementById('total_cost').value;
     var find_place = document.querySelector('input[name="find_place"]:checked').value;
     var num_place = $('#max-place').val();
+    var start_time = $('#start-time').val();
+    var end_time = $('#end-time').val();
 
     $.ajax({
         type: 'get',
         dataType: 'text',
         url: 'auto-find-place',
-        data: {"total_cost": total_cost, "find_place": find_place, "num_place": num_place},
+        data: {"total_cost": total_cost,
+            "find_place": find_place,
+            "num_place": num_place,
+            "start_time" : start_time,
+            "end_time" : end_time,
+        },
         success: function(result)
         {
             document.getElementById('recommend-place').innerHTML = result;
