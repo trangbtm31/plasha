@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Plan;
 
 use App\Place;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
@@ -52,7 +51,7 @@ class AutoPlanController extends Controller
                 $data = $this->findSaveMoney();
                 break;
         }
-        return view( 'plan.auto-place', array ('data' => $data, 'max_cost' => $this->max_cost) );
+        return view( 'plan.auto-place', ['places' => $data, 'max_cost' => $this->max_cost, 'num_place' => $this->num_place] );
     }
 
     /* Hàm chuyển thời gian thành số phút
@@ -179,6 +178,7 @@ class AutoPlanController extends Controller
             array_push($child, $places[$i]); //Thêm $i vào mảng con
             if( $this->checkPlaces($child) ) { //Nếu đã tìm thấy phù hợp thì thoát vòng lặp
                 $flag = true; //Đánh dấu đã tìm thấy
+                $this->num_place++;
                 break;
             }
         }
@@ -196,6 +196,7 @@ class AutoPlanController extends Controller
         }
     }
     protected function findManyPlace() {
+        $this->num_place = 0;
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
         return $this->ManyPlace($places, 0, count($places) - 1);
     }

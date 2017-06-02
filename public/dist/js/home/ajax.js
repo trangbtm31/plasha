@@ -151,7 +151,7 @@ function more_fr_onl(data) {
 function auto_place() {
     var total_cost = document.getElementById('total_cost').value;
     var find_place = document.querySelector('input[name="find_place"]:checked').value;
-    var num_place = $('#max-place').val();
+    var num_place = $('#num-place').val();
     var start_time = $('#start-time').val();
     var end_time = $('#end-time').val();
 
@@ -176,10 +176,11 @@ var find_place = document.getElementsByName("find_place");
 
 var showNumPlace = function() {
     var find = document.querySelector('input[name="find_place"]:checked').value;
+    var num_place = $('.num-place');
     if ( find == 'save-money' || find == 'luxury-place' ){
-        $('.max-place').removeClass('hidden');
+        num_place.removeClass('hidden');
     } else {
-        $('.max-place').addClass('hidden');
+        num_place.addClass('hidden');
     }
 }
 

@@ -1,17 +1,19 @@
-@if (!empty($data))
-    Expected cost: {{ $max_cost }}
-    @foreach( $data as $place )
+{{ Form::text( 'number_place', $num_place, array('class' => 'hidden') ) }}
+@if (!empty($places))
+    Expected cost: {{ Form::text( 'max_cost', $max_cost, ['class' => '', 'readonly' => ''] ) }}
+    @for( $i = 0; $i < $num_place; $i++ )
         <div class="post-content">
-            Name: {{ $place['name'] }} <br/>
-            Address: {{ $place['address'] }} <br/>
-            Cost: {{ $place['cost'] }} <br/>
-            Star: {{ $place['star'] }} <br/>
-            Open: {{ $place['time_open'] }} - {{ $place['time_close'] }} <br/>
-            Time Stay: {{ $place['time_stay'] }} <br/>
-            Come on: {{ $place['come_on'] }} <br/>
-            Leave at: {{ $place['leave_at'] }} <br/>
+            {{ Form::text( 'place_id_'.$i, $places[$i]['id'], array('class' => 'hidden') ) }}
+            Name: {{ $places[$i]['name'] }} <br/>
+            Address: {{ $places[$i]['address'] }} <br/>
+            Cost: {{ $places[$i]['cost'] }} <br/>
+            Star: {{ $places[$i]['star'] }} <br/>
+            Open: {{ $places[$i]['time_open'] }} - {{ $places[$i]['time_close'] }} <br/>
+            Time Stay: {{ $places[$i]['time_stay'] }} <br/>
+            Come on: {{ Form::text('come_on_'.$i, $places[$i]['come_on'], ['class' => '']) }} <br/>
+            Leave at: {{ Form::text('leave_at_'.$i, $places[$i]['leave_at'], ['class' => '']) }} <br/>
         </div>
-    @endforeach
+    @endfor
 @else
     Sorry... We can't find any place suit with you.
 @endif

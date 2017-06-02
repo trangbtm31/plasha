@@ -10,7 +10,7 @@
     <div id="auto-plan" class="tab-pane">
      <!-- Post Create Box
      ================================================= -->
-     {{ Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) }}
+     {{ Form::open(array('route'=>'auto-create-plan', 'method' => 'post', 'files' => true)) }}
      {{ csrf_field() }}
      <div class="create-post">
          {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
@@ -26,22 +26,22 @@
                          {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                          {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
                          {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
-                         {{ Form::label('max-place', 'Max Place', ['class' => 'max-place']) }}
-                         {{ Form::select('max_place', [
+                         {{ Form::label('num_place', 'Number Place', ['class' => 'num-place']) }}
+                         {{ Form::select('num_place', [
                              '1' => 'One',
                              '2' => 'Two',
                              '3' => 'Three',
                              '4' => 'Four'
-                         ], null, ['class' => 'max-place', 'id' => 'max-place']) }}
+                         ], null, ['class' => 'num-place', 'id' => 'num-place']) }}
                          <div class="row">
                              <div class="col-md-6 col-sm-6">
-                                 {{ Form::text('start-time', '', array('class' => 'form-control', 'id' => 'start-time', 'placeholder' => 'Start Time')) }}
+                                 {{ Form::text('start_time', '', array('class' => 'form-control', 'id' => 'start-time', 'placeholder' => 'Start Time')) }}
                                  <script>
                                      jQuery('#start-time').datetimepicker();
                                  </script>
                              </div>
                              <div class="col-md-6 col-sm-6">
-                                 {{ Form::text('end-time', '', array('class' => 'form-control', 'id' => 'end-time', 'placeholder' => 'End Time')) }}
+                                 {{ Form::text('end_time', '', array('class' => 'form-control', 'id' => 'end-time', 'placeholder' => 'End Time')) }}
                                  <script>
                                      jQuery('#end-time').datetimepicker();
                                  </script>
