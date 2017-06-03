@@ -1,17 +1,16 @@
 {{ Form::text( 'number_place', $num_place, array('class' => 'hidden') ) }}
 @if (!empty($places))
-    Expected cost: {{ Form::text( 'max_cost', $max_cost, ['class' => '', 'readonly' => ''] ) }}
+    Expected cost: {{ Form::text( 'max_cost', $max_cost, ['class' => 'fake-input', 'readonly' => ''] ) }}
     @for( $i = 0; $i < $num_place; $i++ )
         <div class="post-content">
-            {{ Form::text( 'place_id_'.$i, $places[$i]['id'], array('class' => 'hidden') ) }}
+            {{ Form::text( 'place_id[]', $places[$i]['id'], array('class' => 'hidden') ) }}
             Name: {{ $places[$i]['name'] }} <br/>
             Address: {{ $places[$i]['address'] }} <br/>
             Cost: {{ $places[$i]['cost'] }} <br/>
             Star: {{ $places[$i]['star'] }} <br/>
             Open: {{ $places[$i]['time_open'] }} - {{ $places[$i]['time_close'] }} <br/>
-            Time Stay: {{ $places[$i]['time_stay'] }} <br/>
-            Come on: {{ Form::text('come_on_'.$i, $places[$i]['come_on'], ['class' => '']) }} <br/>
-            Leave at: {{ Form::text('leave_at_'.$i, $places[$i]['leave_at'], ['class' => '']) }} <br/>
+            Come on: {{ Form::text('come_on[]', $places[$i]['come_on'], ['class' => 'fake-input', 'readonly' => '']) }} <br/>
+            Leave at: {{ Form::text('leave_at[]', $places[$i]['leave_at'], ['class' => 'fake-input', 'readonly' => '']) }} <br/>
         </div>
     @endfor
 @else

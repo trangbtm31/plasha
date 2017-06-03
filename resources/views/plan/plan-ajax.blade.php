@@ -33,9 +33,6 @@ if ($total > $limit){
     array_pop($data);
 }
 
-// Lấy category
-$category = Category::getAllCategory();
-
 foreach($data as $plan)
 {
     ?>
@@ -54,7 +51,6 @@ foreach($data as $plan)
             <div class="post-detail">
                 <div class="user-info">
                     <h5><a href="{{route('time-line', ['id' => $plan['user_id']] ) }}" class="profile-link">{{ $plan["first_name"] }} {{ $plan["last_name"] }}</a> <span class="following">following</span></h5>
-                    <span class="text-muted">{{ $category[$plan["category"]] }}</span>
                     <span role="presentation" aria-hidden="true"> · </span>
                     <span class="text-muted">Published about <?php echo \Carbon\Carbon::createFromTimestamp(strtotime($plan["created_at"]))->diffForHumans()?></span>
                 </div>

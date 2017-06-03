@@ -25,9 +25,9 @@ class PlanController extends Controller
         for ($i=0; $i < $request->number_place; $i++) {
             $PlanPlace = new PlanPlace();
             $PlanPlace->plan_id = $plan->id;
-            $PlanPlace->place_id = $request->get('place_id_'.$i);
-            $PlanPlace->start_time = $request->get('come_on_'.$i);
-            $PlanPlace->end_time = $request->get('leave_at_'.$i);
+            $PlanPlace->place_id = $request->get('place_id')[$i];
+            $PlanPlace->start_time = $request->get('come_on')[$i];
+            $PlanPlace->end_time = $request->get('leave_at')[$i];
             $PlanPlace->save();
         }
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);

@@ -22,7 +22,6 @@
                      <div>
                          {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
                          {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
-                         {{ Form::select('category', $category, null,['class' => 'form-category']) }}
                          {{ Form::number('price', '', array('id' => 'total_cost', 'class' => 'form-control', 'placeholder' => 'Enter total cost for this plan', 'maxlength' => '10')) }}
                          {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                          {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
@@ -83,7 +82,6 @@
                         <div>
                             {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Plan Description', 'cols' => '50', 'rows' => '1' )) }}
                             {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
-                            {{ Form::select('category', $category, null,['class' => 'form-category']) }}
                             <div id='create-place'></div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
