@@ -1,15 +1,6 @@
 $(document).ready(function(){
   activaTab('auto-plan');
 
-    $('form .submit-place').on('click', function(){
-        var url = "create-place",
-            that = $(this),
-            data = {};
-        that.find('[name]').each(function(index,value){
-            console.log(value);
-        })
-        return false;
-    });
 });
 
 
@@ -28,6 +19,15 @@ function add_place(){
     })
 }
 
+$('form .submit-place').on('click', function(){
+    var url = "create-place",
+        that = $(this),
+        data = {};
+    that.find('[name]').each(function(index,value){
+        console.log(value);
+    })
+    return false;
+});
 function create_place() {
 
     $('form.create_place').on('submit', function(){

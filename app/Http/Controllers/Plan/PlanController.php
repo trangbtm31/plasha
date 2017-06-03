@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Plan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlanRequest;
+use App\Http\Requests\HandlePlanRequest;
+use App\Http\Requests\Plan\PlanCommentRequest;
+use App\PlanHandle;
+use App\PlaceHandle;
+use App\Category;
+use App\Comment;
 use App\Plan;
 use App\PlanPlace;
 use App\PlanHandleCreate;
 use App\Place;
 use App\AutoPlan;
-use App\Http\Requests\PlanRequest;
-use App\Http\Requests\HandlePlanRequest;
-use App\Comment;
-use App\Http\Requests\Plan\PlanCommentRequest;
 
 class PlanController extends Controller
 {

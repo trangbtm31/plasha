@@ -17,7 +17,7 @@
                             {{ Form::textarea('place_description[]', '', array('class' => 'form-control col-md-12', 'placeholder' => 'Place \'s Description', 'cols' => '50', 'rows' => '3' )) }}
                             {{--{{ Form::textarea('place_tips[]', '', array('class' => 'form-control col-md-12', 'placeholder' => 'Tips for this Place', 'cols' => '50', 'rows' => '2' )) }}--}}
                             {{ Form::file('place_thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
-                            {{ Form::select('place_category', $category, null,['class' => 'form-category form-control']) }}
+                            {{ Form::select('place_category[]', $category, null,['class' => 'form-category form-control']) }}
                             <div class="row">
                                 <div class="col-md-6">
                                 {{ Form::text('placce_time_open[]','', array('class' => 'form-control time', 'placeholder' => 'Open time')) }}
