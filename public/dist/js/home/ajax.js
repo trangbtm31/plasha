@@ -36,7 +36,10 @@ $(document).ready(function()
             });
             return false;
         }
+
     });
+
+
 });
 function LoadMoreComment(data) {
     var plan_id = $(data).attr('plan_id');
@@ -178,4 +181,26 @@ var showNumPlace = function() {
 
 for (var i = 0; i < find_place.length; i++) {
     find_place[i].addEventListener('click', showNumPlace);
+}
+
+function create_place() {
+    $('form.create_place').on('submit', function(){
+        var url = "create-place",
+            that = $(this),
+            data = {};
+        that.find('[name]').each(function(index,value){
+            console.log(value);
+        })
+        return false;
+    })
+    /*var data = {}
+     $.ajax({
+     type: 'post',
+     url: 'create-place',
+     success:function(result)
+     {
+     $('#create-place').append(result);
+     }
+     })*/
+
 }

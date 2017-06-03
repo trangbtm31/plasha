@@ -3,14 +3,15 @@
 namespace App;
 
 use App\Http\Requests\HandlePlanRequest;
+use App\PlaceHandle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
-class HandlePlan extends Model
+class PlanHandle extends Model
 {
     protected $table = 'plan';
 
-    public function Create(PlanRequest $request)
+    public function Create(HandlePlanRequest $request)
     {
         //Insert database
         $this->user_id = Auth::id();
@@ -32,6 +33,6 @@ class HandlePlan extends Model
     }
     public function place()
     {
-        return $this->belongsToMany(HandlePlace::class);
+        return $this->belongsToMany('\App\PlaceHandle','place_place','plan_id','place_id');
     }
 }

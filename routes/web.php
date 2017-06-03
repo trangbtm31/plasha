@@ -51,7 +51,7 @@ Route::post('/post-comment/{plan_id}', ['as' => 'post-comment', 'uses' => 'Plan\
 Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create' ]);
 Route::get('/auto-find-place', ['as' => 'auto-find-place', 'uses' => 'Plan\AutoPlanController@autoFindPlace' ]);
 Route::post('/handle-create-plan', ['as' => 'handle-create-plan', 'uses' => 'Plan\PlanController@handleCreate' ]);
-Route::post('/create-place', ['as' => 'handle-create-place', 'uses' => 'Plan\PlanController@handleCreatePlace' ]);
+/*Route::post('/create-place', ['as' => 'handle-create-place', 'uses' => 'Plan\PlanController@handleCreatePlace' ]);*/
 Route::get('/create-place', ['as' => 'create-place', 'uses' => 'Plan\PlanController@showCreatePlace']);
 
 /* Friend */

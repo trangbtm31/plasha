@@ -11,7 +11,7 @@
     <div id="auto-plan" class="tab-pane">
      <!-- Post Create Box
      ================================================= -->
-     {{ Form::open(array('route'=>'create-plan', 'method' => 'post', 'files' => true)) }}
+     {{ Form::open(array('method' => 'post', 'files' => true)) }}
      {{ csrf_field() }}
      <div class="create-post">
          {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
@@ -78,7 +78,7 @@
                             <div id='create-place'></div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <button type="button" class="btn btn-primary" onclick="create_place()">Add Place</button>
+                                    <button type="button" class="btn btn-primary" onclick="add_place()">Add Place</button>
                                 </div>
                                 <div class="tools col-md-6 col-sm-6">
                                     {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}

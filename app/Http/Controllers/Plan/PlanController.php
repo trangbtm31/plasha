@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Plan;
 
 use App\Http\Controllers\Controller;
-use App\Plan;
-use App\PlanHandleCreate;
-use App\Place;
-use App\AutoPlan;
 use App\Http\Requests\PlanRequest;
 use App\Http\Requests\HandlePlanRequest;
-use App\Comment;
 use App\Http\Requests\Plan\PlanCommentRequest;
+use App\Plan;
+use App\PlanHandle;
+use App\PlaceHandle;
+use App\AutoPlan;
+use App\Category;
+use App\Comment;
 
 class PlanController extends Controller
 {
@@ -34,17 +35,21 @@ class PlanController extends Controller
     }
     public function handleCreate(HandlePlanRequest $request)
     {
-        $plan = new HandlePlan();
-        $plan->Create($request);
+        $plan_info = new PlanHandle();
+        $place = new PlaceHandle();
+        $plan_info->Create($request);
+        $place->Create($request);
+
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
     }
-    public function handleCreatePlace(PlaceRequest $request)
+    /*public function handleCreatePlace(PlaceRequest $request)
     {
         $plan = new HandlePlan();
         $plan->Create($request);
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
-    }
+    }*/
     public function showCreatePlace() {
-        return view('plan.create-place');
+        $category = Category::getAllCategory();
+        return view('plan.create-place',compact('category'));
     }
 }
