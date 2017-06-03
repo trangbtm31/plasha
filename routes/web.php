@@ -46,9 +46,8 @@ Route::get('/admin_area', ['middleware' => 'admin', function () {
 }]);
 
 /* Plan */
-Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create']);;
 Route::post('/post-comment/{plan_id}', ['as' => 'post-comment', 'uses' => 'Plan\PlanController@postComment']);
-Route::post('/create-plan', ['as' => 'create-plan', 'uses' => 'Plan\PlanController@create' ]);
+Route::post('/auto-create-plan', ['as' => 'auto-create-plan', 'uses' => 'Plan\PlanController@autoCreate' ]);
 Route::get('/auto-find-place', ['as' => 'auto-find-place', 'uses' => 'Plan\AutoPlanController@autoFindPlace' ]);
 Route::post('/handle-create-plan', ['as' => 'handle-create-plan', 'uses' => 'Plan\PlanController@handleCreate' ]);
 /*Route::post('/create-place', ['as' => 'handle-create-place', 'uses' => 'Plan\PlanController@handleCreatePlace' ]);*/

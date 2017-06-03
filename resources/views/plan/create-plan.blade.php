@@ -11,7 +11,7 @@
     <div id="auto-plan" class="tab-pane">
      <!-- Post Create Box
      ================================================= -->
-     {{ Form::open(array('method' => 'post', 'files' => true)) }}
+     {{ Form::open(array('route'=>'auto-create-plan', 'method' => 'post', 'files' => true)) }}
      {{ csrf_field() }}
      <div class="create-post">
          {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
@@ -24,28 +24,32 @@
                          {{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}
                          {{ Form::select('category', $category, null,['class' => 'form-category']) }}
                          {{ Form::number('price', '', array('id' => 'total_cost', 'class' => 'form-control', 'placeholder' => 'Enter total cost for this plan', 'maxlength' => '10')) }}
-                         {{ Form::radio('find_place', 'random', false, ['class' => '']) }} Random <br/>
                          {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                          {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
                          {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
-                         {{ Form::label('max-place', 'Max Place', ['class' => 'max-place']) }}
-                         {{ Form::select('max_place', [
+                         {{ Form::label('num_place', 'Number Place', ['class' => 'num-place']) }}
+                         {{ Form::select('num_place', [
                              '1' => 'One',
                              '2' => 'Two',
                              '3' => 'Three',
                              '4' => 'Four'
-                         ], null, ['class' => 'max-place', 'id' => 'max-place']) }}
-                         <input id="datetimepicker" type="text" >
-                         <script>
-                             jQuery('#datetimepicker').datetimepicker();
-                         </script>
+                         ], null, ['class' => 'num-place', 'id' => 'num-place']) }}
+                         <div class="row">
+                             <div class="col-md-6 col-sm-6">
+                                 {{ Form::text('start_time', '', array('class' => 'form-control', 'id' => 'start-time', 'placeholder' => 'Start Time')) }}
+                                 <script>
+                                     jQuery('#start-time').datetimepicker();
+                                 </script>
+                             </div>
+                             <div class="col-md-6 col-sm-6">
+                                 {{ Form::text('end_time', '', array('class' => 'form-control', 'id' => 'end-time', 'placeholder' => 'End Time')) }}
+                                 <script>
+                                     jQuery('#end-time').datetimepicker();
+                                 </script>
+                             </div>
+                         </div>
                          <button type="button" class="btn btn-primary" onclick="auto_place()">Suggest</button>
                          <div id="recommend-place"></div>
-                     </div>
-                     <div class="col-md-2 col-sm-2">
-                         <div class="tools">
-                             {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}
-                         </div>
                      </div>
                  </div>
                  <!-- Message for user -->
@@ -56,6 +60,11 @@
                      <div class="error">{{ $error }}</div>
                  @endforeach
              </div><!-- Post Create Box End-->
+             <div class="col-md-2 col-sm-2">
+                 <div class="tools">
+                     {{ Form::submit('Publish', array('class' => 'btn btn-primary pull-right')) }}
+                 </div>
+             </div>
              {{ Form::close() }}
          </div>
      </div>

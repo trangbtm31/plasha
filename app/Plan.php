@@ -17,6 +17,9 @@ class plan extends Model
         $this->name = $request->name;
         $this->description = $request->description;
         $this->category = $request->category;
+        $this->total_cost = $request->max_cost;
+        $this->start_time = $request->start_time;
+        $this->end_time = $request->end_time;
         $this->save();
 
         //Get thumbnail

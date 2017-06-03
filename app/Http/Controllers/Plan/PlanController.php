@@ -3,23 +3,30 @@
 namespace App\Http\Controllers\Plan;
 
 use App\Http\Controllers\Controller;
+use App\Plan;
+use App\PlanPlace;
+use App\PlanHandleCreate;
+use App\Place;
+use App\AutoPlan;
 use App\Http\Requests\PlanRequest;
 use App\Http\Requests\HandlePlanRequest;
-use App\Http\Requests\Plan\PlanCommentRequest;
-use App\Plan;
-use App\PlanHandle;
-use App\PlaceHandle;
-use App\AutoPlan;
-use App\Category;
 use App\Comment;
+use App\Http\Requests\Plan\PlanCommentRequest;
 
 class PlanController extends Controller
 {
-    //
-    public function create(PlanRequest $request)
+    public function autoCreate(PlanRequest $request)
     {
         $plan = new Plan();
         $plan->Create($request);
+        for ($i=0; $i < $request->number_place; $i++) {
+            $PlanPlace = new PlanPlace();
+            $PlanPlace->plan_id = $plan->id;
+            $PlanPlace->place_id = $request->get('place_id_'.$i);
+            $PlanPlace->start_time = $request->get('come_on_'.$i);
+            $PlanPlace->end_time = $request->get('leave_at_'.$i);
+            $PlanPlace->save();
+        }
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
     }
 
