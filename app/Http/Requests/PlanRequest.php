@@ -26,7 +26,6 @@ class PlanRequest extends FormRequest
         return [
             'name'        => 'required|max:50',
             'description' => 'required',
-            'category'    => 'required',
             'thumbnail.*' => 'image|max:2048'
         ];
     }
