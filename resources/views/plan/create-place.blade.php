@@ -20,7 +20,7 @@
                             {{ Form::select('place_category[]', $category, null,['class' => 'form-category form-control']) }}
                             <div class="row">
                                 <div class="col-md-6">
-                                {{ Form::text('placce_time_open[]','', array('class' => 'form-control time', 'placeholder' => 'Open time')) }}
+                                {{ Form::text('place_time_open[]','', array('class' => 'form-control time', 'placeholder' => 'Open time')) }}
                                 </div>
                                 <div class="col-md-6">
                                 {{ Form::text('place_time_close[]','', array('class' => 'form-control time', 'placeholder' => 'Close time')) }}

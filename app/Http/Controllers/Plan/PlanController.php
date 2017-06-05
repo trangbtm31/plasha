@@ -44,11 +44,39 @@ class PlanController extends Controller
         }
     }
     public function handleCreate(HandlePlanRequest $request)
-    {
+    {/*
+        echo "<pre>";
+        print_r($request->place_name);
+        echo "</pre>";
+        exit();*/
         $plan_info = new PlanHandle();
-        $place = new PlaceHandle();
         $plan_info->Create($request);
-        $place->Create($request);
+        /*$now = Carbon::now('utc')->toDateTimeString();*/
+        for($i = 0; $i < count($request->place_name); $i++) {
+            $data = array('name' => $request->place_name[$i],
+            'address' => $request->place_address[$i],
+            'description' => $request->place_description[$i],
+            /*'category' => $request->place_category[$i],*/
+            'time_open' => $request->place_time_open[$i],
+            'time_close' => $request->place_time_close[$i],
+            'time_start' => $request->place_time_start[$i],
+            'time_end' => $request->place_time_end[$i],
+            'cost' => $request->place_cost[$i],
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=> date('Y-m-d H:i:s')
+            );
+            Place::insert($data);
+            //Get thumbnail
+            /*if (!empty($request->file('place_thumbnail')))
+            {
+                foreach ($request->file('place_thumbnail') as $thumbnail)
+                {
+                    $image = new PlanThumbnail($this->id);
+                    $image->create($thumbnail);
+                }
+            }*/
+
+        };
 
         return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
     }
