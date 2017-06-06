@@ -17,7 +17,6 @@ class PlanHandle extends Model
         $this->user_id = Auth::id();
         $this->name = $request->name;
         $this->description = $request->description;
-        $this->category = $request->category;
         $this->save();
 
         //Get thumbnail

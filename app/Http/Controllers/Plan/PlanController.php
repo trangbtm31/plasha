@@ -59,13 +59,21 @@ class PlanController extends Controller
             /*'category' => $request->place_category[$i],*/
             'time_open' => $request->place_time_open[$i],
             'time_close' => $request->place_time_close[$i],
-            'time_start' => $request->place_time_start[$i],
-            'time_end' => $request->place_time_end[$i],
             'cost' => $request->place_cost[$i],
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=> date('Y-m-d H:i:s')
             );
-            Place::insert($data);
+
+            $place_id = Place::insertGetId($data);
+
+            //Insert into plan_place table
+            $PlanPlace = new PlanPlace();
+            $PlanPlace->plan_id = $plan_info->id;
+            $PlanPlace->place_id = $place_id;
+            $PlanPlace->start_time = $request->get('place_time_start')[$i];
+            $PlanPlace->end_time = $request->get('place_time_end')[$i];
+            $PlanPlace->save();
+
             //Get thumbnail
             /*if (!empty($request->file('place_thumbnail')))
             {

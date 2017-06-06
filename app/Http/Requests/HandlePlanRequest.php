@@ -26,7 +26,6 @@ class HandlePlanRequest extends FormRequest
         return [
             'name'        => 'required|max:50',
             'description' => 'required',
-            'category'    => 'required',
             'thumbnail.*' => 'image|max:2048',
             'place_name'        => 'required|max:50',
             'place_description' => 'required',
