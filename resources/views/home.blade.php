@@ -14,7 +14,9 @@
                       @include('layouts.left-sidebar')
                   </div>
       			<div class="col-md-6">
-                    @include('plan.create-plan')
+                    <div class="create_plan">
+                        @include('plan.create-plan')
+                    </div>
               <!-- Post Content
               ================================================= -->
                     <div id="content">
