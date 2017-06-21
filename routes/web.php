@@ -72,5 +72,17 @@ Route::get('messages', 'Chat\ChatController@fetchMessages');
 Route::post('messages', 'Chat\ChatController@sendMessage');
 Route::get('/messages-ajax', ['as' => 'messages-ajax', 'uses' => 'Chat\ChatController@MessagesAjax']);
 
+/* Admin page */
+Route::get('/admin',['as' => 'admin', 'uses' => 'Admin\AdminController@AdminPage']);
+Route::post('/add-admin-permission',['as' => 'add-admin-permission', 'uses' => 'Admin\AdminController@AddAdminPermission']);
+Route::post('/del-admin-permission',['as' => 'del-admin-permission', 'uses' => 'Admin\AdminController@DelAdminPermission']);
+Route::get('/add-new-place',['as' => 'add-new-place', 'uses' => 'Admin\AdminController@AddNewPlace']);
+Route::post('/insert-place',['as' => 'insert-place', 'uses' => 'Admin\AdminController@InsertPlace']);
+Route::get('/all-place',['as' => 'all-place', 'uses' => 'Admin\AdminController@AllPlace']);
+Route::post('/info-place',['as' => 'info-place', 'uses' => 'Admin\AdminController@InfoPlace']);
+Route::post('/edit-place-form',['as' => 'edit-place-form', 'uses' => 'Admin\AdminController@EditPlaceForm']);
+Route::post('/edit-place',['as' => 'edit-place', 'uses' => 'Admin\AdminController@EditPlace']);
+Route::post('/del-place',['as' => 'del-place', 'uses' => 'Admin\AdminController@DelPlace']);
+
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);

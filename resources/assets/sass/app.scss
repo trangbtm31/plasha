@@ -734,6 +734,7 @@ ul.online-users li span.offline-dot{
   margin-bottom: 20px;
   overflow: hidden;
   position: relative;
+  color: cadetblue;
 }
 
 .post-content img.post-image, video.post-video, .google-maps{
@@ -1382,6 +1383,10 @@ ul.contact li i{
 .fake-input {
   background-color: transparent;
   border: none;
+}
+
+.create-post .form-group input.fake-input {
+  color: cadetblue;
 }
 
 /*==================================================
