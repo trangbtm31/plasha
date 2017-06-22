@@ -5918,9 +5918,12 @@ img.profile-photo-lg {
   border-radius: 50%; }
 
 img.profile-photo-md {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%; }
+  height: 70px;
+  width: 70px;
+  border: 5px solid #FFF;
+  border-radius: 50%;
+  position: relative !important;
+  z-index: 5; }
 
 img.profile-photo-sm {
   height: 40px;
@@ -6377,7 +6380,7 @@ ul.online-users li span.offline-dot {
   min-height: 90px;
   padding: 20px;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 4px;
   border: 1px solid #ddd; }
 
@@ -6422,9 +6425,9 @@ ul.online-users li span.offline-dot {
   min-height: 90px;
   padding: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #f1f2f2;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px; }
+  border: 1px solid #f1f2f2;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 20px; }
   .create-place input, .create-place textarea, .create-place select {
     margin: 5px; }
   .create-place .close-button {
@@ -6452,33 +6455,68 @@ ul.online-users li span.offline-dot {
 
 .post-content .post-container {
   padding: 20px; }
+  .post-content .post-container .post-detail {
+    margin-left: 45px; }
+    .post-content .post-container .post-detail .user-info {
+      background: rgba(9, 255, 182, 0.81);
+      z-index: -1;
+      padding: 1px;
+      margin-top: 5px;
+      border-radius: 0px 30px 30px 0px;
+      min-width: 100px;
+      padding-right: 50px; }
+      .post-content .post-container .post-detail .user-info p, .post-content .post-container .post-detail .user-info h5 {
+        margin-left: 35px;
+        margin-top: 5px; }
+    .post-content .post-container .post-detail .post-text {
+      line-height: 24px;
+      margin: 0; }
+    .post-content .post-container .post-detail .reaction {
+      position: absolute;
+      right: 0;
+      top: 0; }
+    .post-content .post-container .post-detail .post-comment {
+      display: inline-flex;
+      margin: 10px auto;
+      width: 100%; }
+      .post-content .post-container .post-detail .post-comment img.profile-photo-sm {
+        margin-right: 10px; }
+      .post-content .post-container .post-detail .post-comment .form-control {
+        height: 30px;
+        box-shadow: none;
+        margin: 7px 0;
+        min-width: 0; }
+  .post-content .post-container .post-title p {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 0; }
 
-.post-content .post-container .post-detail {
-  margin-left: 65px;
-  position: relative; }
-
-.post-content .post-container .post-detail .post-text {
-  line-height: 24px;
-  margin: 0; }
-
-.post-content .post-container .post-detail .reaction {
-  position: absolute;
-  right: 0;
-  top: 0; }
-
-.post-content .post-container .post-detail .post-comment {
-  display: inline-flex;
-  margin: 10px auto;
-  width: 100%; }
-
-.post-content .post-container .post-detail .post-comment img.profile-photo-sm {
-  margin-right: 10px; }
-
-.post-content .post-container .post-detail .post-comment .form-control {
-  height: 30px;
-  box-shadow: none;
-  margin: 7px 0;
-  min-width: 0; }
+#plan-place {
+  /*width: 100%; height: 250px;
+  overflow: hidden;
+  ul {
+    overflow:hidden;
+    li {
+      display: inline-block;
+    }
+  }*/ }
+  #plan-place li {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    background: rgba(255, 210, 241, 0.81);
+    border-radius: 10px; }
+    #plan-place li .place-info {
+      vertical-align: middle;
+      padding: 10px 0; }
+    #plan-place li div, #plan-place li span {
+      padding: 0; }
+    #plan-place li .place-stay-time {
+      font-size: 16px;
+      font-weight: bold; }
+    #plan-place li .place-address {
+      font-style: italic; }
 
 /*==================================================
   Nearby People CSS

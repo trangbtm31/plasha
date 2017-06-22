@@ -40,7 +40,6 @@
 	                            </div>
                             </div>
                             {{ Form::number('place_cost[]','', array('class' => 'form-control','placeholder'=>'Cost'))}}
-                            <a class="btn btn-primary submit-place"  >Ghim</a>
                             
                         </div>
                     </div>

@@ -20,6 +20,7 @@
         <link href="css/emoji-css/emoji.css" rel="stylesheet">
         <!-- Ionicons -->
         <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="css/tipped.css" rel="stylesheet">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css" />
         <!-- Scripts -->
@@ -30,6 +31,7 @@
         <script src="js/sticky-kit.min.js"></script>
         <script language="javascript" src="dist/js/friend/find-friend.js"></script>
         <script src="js/jquery.scrollbar.min.js"></script>
+        <script src="js/tipped.js"></script>
         <script src="js/script.js"></script>
         @yield('scripts')
         <script>
