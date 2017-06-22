@@ -24,16 +24,17 @@ class PlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'place_name'        => 'required|max:50',
-            'place_description' => 'required',
-            'place_category'    => 'required',
-            'place_thumbnail.*' => 'image|max:2048',
-            'place_name'        => 'required|max:50',
-            'place_address'    => 'required',
-            'place_thumbnail'  => 'image|max:2048',
-            'place_time_start' => 'required',
-            'place_time_end'   => 'required',
-            'place_cost'       => 'required'
+            'name'        => 'required|max:100',
+            'address'     => 'required|max:100',
+            'description' => 'required',
+            'thumbnail.*' => 'image|max:2048',
+            'thumbnail'   => 'image|max:2048',
+            'time_open'   => 'required',
+            'time_close'  => 'required',
+            'time_stay'   => 'required',
+            'cost'        => 'required',
+            'star'        => 'integer',
+            'category_id' => 'required|max:30'
         ];
     }
 
