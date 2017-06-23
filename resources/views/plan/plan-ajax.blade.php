@@ -75,7 +75,7 @@ foreach($data as $plan)
                         </div>
                     </div>
                     <p>{{ $plan["description"] }}</p>
-                    <p><b>Start at : </b>{{ $plan["start_time"] }}<b> to </b>{{ $plan["end_time"] }}</p>
+                    <p><b>Start at : </b>{{ date('H:i d-m-Y', strtotime($plan["start_time"])) }}<b> to </b>{{ date('H:i d-m-Y', strtotime($plan["end_time"])) }}</p>
                 </div>
                 <div class="line-divider"></div>
                 <div id="plan-place">
