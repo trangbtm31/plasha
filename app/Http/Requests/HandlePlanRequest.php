@@ -36,7 +36,8 @@ class HandlePlanRequest extends FormRequest
             'place_thumbnail.*'  => 'image|max:2048',
             'place_time_start' => 'required',
             'place_time_end'   => 'required',
-            'place_cost'       => 'required'
+            'place_cost'       => 'required',
+            'total_cost'       => ''
         ];
     }
 

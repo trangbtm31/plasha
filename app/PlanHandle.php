@@ -17,6 +17,9 @@ class PlanHandle extends Model
         $this->user_id = Auth::id();
         $this->name = $request->name;
         $this->description = $request->description;
+        $this->total_cost = $request->total_cost;
+        $this->start_time = $request->start_time;
+        $this->end_time = $request->end_time;
         $this->save();
 
         //Get thumbnail

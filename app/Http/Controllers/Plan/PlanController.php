@@ -50,6 +50,26 @@ class PlanController extends Controller
         print_r($request->place_name);
         echo "</pre>";
         exit();*/
+
+        $request->total_cost = 0;
+        foreach ($request->place_cost as $cost) {
+            $request->total_cost += $cost;
+        }
+
+        $request->start_time = $request->place_time_start[0];
+        foreach ($request->place_time_start as $time) {
+            if ( strtotime($request->start_time) > strtotime($time) ) {
+                $request->start_time = $time;
+            }
+        }
+
+        $request->end_time = $request->place_time_end[0];
+        foreach ($request->place_time_end as $time) {
+            if ( strtotime($request->end_time) < strtotime($time) ) {
+                $request->end_time = $time;
+            }
+        }
+
         $plan_info = new PlanHandle();
         $plan_info->Create($request);
         /*$now = Carbon::now('utc')->toDateTimeString();*/
@@ -76,13 +96,13 @@ class PlanController extends Controller
             $PlanPlace->save();
 
             //Get thumbnail
-            if (!empty($request->file('place_thumbnail')))
+            if (!empty($request->file('place_thumbnail')[$i]))
             {
-                foreach ($request->file('place_thumbnail') as $thumbnail)
-                {
+//                foreach ($request->file('place_thumbnail') as $thumbnail)
+//                {
                     $image = new PlaceThumbnail($PlanPlace->place_id);
-                    $image->create($thumbnail);
-                }
+                    $image->create($request->file('place_thumbnail')[$i]);
+//                }
             }
 
         };
