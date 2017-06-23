@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PlanRequest;
 use App\Http\Requests\HandlePlanRequest;
 use App\Http\Requests\Plan\PlanCommentRequest;
+use App\PlaceThumbnail;
 use App\PlanHandle;
 use App\PlaceHandle;
 use App\Category;
@@ -75,14 +76,14 @@ class PlanController extends Controller
             $PlanPlace->save();
 
             //Get thumbnail
-            /*if (!empty($request->file('place_thumbnail')))
+            if (!empty($request->file('place_thumbnail')))
             {
                 foreach ($request->file('place_thumbnail') as $thumbnail)
                 {
-                    $image = new PlanThumbnail($this->id);
+                    $image = new PlaceThumbnail($PlanPlace->place_id);
                     $image->create($thumbnail);
                 }
-            }*/
+            }
 
         };
 

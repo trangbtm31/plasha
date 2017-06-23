@@ -21,15 +21,15 @@ class plan extends Model
         $this->end_time = $request->end_time;
         $this->save();
 
-        //Get thumbnail
-        if (!empty($request->file('thumbnail')))
-        {
-            foreach ($request->file('thumbnail') as $thumbnail)
-            {
-                $image = new PlanThumbnail($this->id);
-                $image->create($thumbnail);
-            }
-        }
+//        //Get thumbnail
+//        if (!empty($request->file('thumbnail')))
+//        {
+//            foreach ($request->file('thumbnail') as $thumbnail)
+//            {
+//                $image = new PlanThumbnail($this->id);
+//                $image->create($thumbnail);
+//            }
+//        }
 
     }
 
@@ -55,10 +55,10 @@ class plan extends Model
 
         foreach ($data as $plan)
         {
-            //Get all thumbnail of plan
-            $thumbnail = new PlanThumbnail($plan['id']);
-            $plan['total_thumbnail']= $thumbnail->count();
-            $plan['list_thumbnail'] = $thumbnail->getThumbnail();
+//            //Get all thumbnail of plan
+//            $thumbnail = new PlanThumbnail($plan['id']);
+//            $plan['total_thumbnail']= $thumbnail->count();
+//            $plan['list_thumbnail'] = $thumbnail->getThumbnail();
 
             //Count total comment of plan
             $comment = new Comment($plan['id']);
@@ -79,6 +79,12 @@ class plan extends Model
                                 ->where("$this->table.id", '=', $plan['id'])
                                 ->orderby('plan_place.start_time', 'asc')
                                 ->get();
+
+            //Get Thumbnail for place
+            foreach ($plan['plan_place'] as $place) {
+                $thumbnail = new PlaceThumbnail($place['place_id']);
+                $place['place_thumbnail'] = $thumbnail->getThumbnail();
+            }
         };
 
         return $data;

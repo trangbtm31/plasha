@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2017 at 07:13 AM
+-- Generation Time: Jun 23, 2017 at 08:06 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -243,7 +243,6 @@ CREATE TABLE `place` (
   `cost` int(10) DEFAULT NULL,
   `star` int(1) DEFAULT NULL,
   `category_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `thumbnail` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -252,19 +251,46 @@ CREATE TABLE `place` (
 -- Dumping data for table `place`
 --
 
-INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `thumbnail`, `created_at`, `updated_at`) VALUES
-(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', 'Nice', '08:00:00', '23:00:00', '03:00:00', 200000, 5, 'movie', 'lotte-cantavil.jpg', '2017-05-28 07:00:00', '2017-06-21 12:38:26'),
-(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, 'movie', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', '', '08:30:00', '00:00:00', '02:00:00', 150000, 4, 'movie', NULL, '2017-05-27 17:00:00', '2017-06-20 14:52:36'),
-(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '03:00:00', 25000, 3, 'drink', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', '', '09:00:00', '21:00:00', '01:00:00', 20000, 2, 'eating', NULL, '2017-05-27 17:00:00', '2017-06-20 14:09:57'),
-(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', '', '07:00:00', '22:00:00', '03:00:00', 30000, 3, 'drink', NULL, '2017-05-27 17:00:00', '2017-06-20 14:09:28'),
-(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 15000, 2, 'drink', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', NULL, NULL, NULL),
-(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '03:00:00', 120000, 4, 'eating', NULL, NULL, NULL),
-(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 35000, 3, 'eating', 'sansan.jpg', NULL, NULL),
-(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '00:30:00', 65000, 4, 'eating', NULL, NULL, NULL),
-(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '00:30:00', 35000, 3, 'eating', NULL, NULL, NULL);
+INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `created_at`, `updated_at`) VALUES
+(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', 'Nice', '08:00:00', '23:00:00', '03:00:00', 200000, 5, 'movie', '2017-05-28 07:00:00', '2017-06-21 12:38:26'),
+(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, 'movie', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', '', '08:30:00', '00:00:00', '02:00:00', 150000, 4, 'movie', '2017-05-27 17:00:00', '2017-06-20 14:52:36'),
+(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '03:00:00', 25000, 3, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', '', '09:00:00', '21:00:00', '01:00:00', 20000, 2, 'eating', '2017-05-27 17:00:00', '2017-06-20 14:09:57'),
+(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', '', '07:00:00', '22:00:00', '03:00:00', 30000, 3, 'drink', '2017-05-27 17:00:00', '2017-06-20 14:09:28'),
+(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 15000, 2, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', NULL, NULL),
+(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '03:00:00', 120000, 4, 'eating', NULL, NULL),
+(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 35000, 3, 'eating', NULL, NULL),
+(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '00:30:00', 65000, 4, 'eating', NULL, NULL),
+(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '00:30:00', 35000, 3, 'eating', NULL, NULL),
+(13, '1', '1', '1', '10:00:00', '16:00:00', NULL, 20000, NULL, NULL, '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
+(14, 'Hima Coffee Rooftop', 'Tầng 12, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Mới lượn thử quán về! Không gian quả đúng như miêu tả, mát, thoáng, thư giãn như ở lounge. Máy bay lên xuống lấp lánh xanh xanh đỏ đỏ! Món nước lạ và hấp dẫn! Soda Wild Rose. Cảm giác thiệt đã và sang chảnh mà giá quá ư bình dân!', '13:00:00', '19:00:00', NULL, 50000, NULL, NULL, '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
+(15, 'Hima Coffee Rooftop', 'Tầng 12, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Perfect!!!', '08:00:00', '22:00:00', NULL, 80000, NULL, NULL, '2017-06-23 05:45:57', '2017-06-23 05:45:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `place_thumbnail`
+--
+
+CREATE TABLE `place_thumbnail` (
+  `id` int(20) NOT NULL,
+  `place_id` int(11) NOT NULL,
+  `thumbnail` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `place_thumbnail`
+--
+
+INSERT INTO `place_thumbnail` (`id`, `place_id`, `thumbnail`, `created_at`, `updated_at`) VALUES
+(25, 15, 'foody-hima-coffee.jpg', '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
+(26, 15, 'hmbbd-jpg-265-636244923970677852.jpg', '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
+(27, 1, 'lotte-cantavil.jpg', '2017-06-23 06:04:27', '2017-06-23 06:04:27'),
+(28, 10, 'sansan.jpg', '2017-06-23 06:05:28', '2017-06-23 06:05:28');
 
 -- --------------------------------------------------------
 
@@ -311,7 +337,10 @@ INSERT INTO `plan` (`id`, `user_id`, `name`, `description`, `transportation`, `s
 (76, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 12:00:00', '2017-06-23 17:00:00', 450000, NULL, '2017-06-23 04:51:44', '2017-06-23 04:51:44'),
 (77, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 12:00:00', '2017-06-23 17:00:00', 450000, NULL, '2017-06-23 04:52:09', '2017-06-23 04:52:09'),
 (78, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:52:52', '2017-06-23 04:52:52'),
-(79, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:53:24', '2017-06-23 04:53:24');
+(79, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:53:24', '2017-06-23 04:53:24'),
+(80, 3, '1', '1', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
+(81, 3, 'Hima Coffee Rooftop', 'Coffe đi bà con', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
+(82, 3, 'Hima Coffee Rooftop', 'Coffe đi bà con', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:45:57', '2017-06-23 05:45:57');
 
 -- --------------------------------------------------------
 
@@ -432,7 +461,10 @@ INSERT INTO `plan_place` (`plan_id`, `place_id`, `start_time`, `end_time`, `crea
 (72, 1, '2017-06-23 04:00:00', '2017-06-23 07:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
 (72, 2, '2017-06-23 07:00:00', '2017-06-23 09:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
 (72, 10, '2017-06-23 03:00:00', '2017-06-23 04:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
-(79, 2, '2017-06-23 06:00:00', '2017-06-23 08:00:00', '2017-06-23 04:53:24', '2017-06-23 04:53:24');
+(79, 2, '2017-06-23 06:00:00', '2017-06-23 08:00:00', '2017-06-23 04:53:24', '2017-06-23 04:53:24'),
+(80, 13, '2017-06-23 06:00:00', '2017-07-23 09:00:00', '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
+(81, 14, '2017-06-23 07:00:00', '2017-06-23 09:00:00', '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
+(82, 15, '2017-06-23 06:00:00', '2017-06-23 09:00:00', '2017-06-23 05:45:57', '2017-06-23 05:45:57');
 
 -- --------------------------------------------------------
 
@@ -464,42 +496,6 @@ CREATE TABLE `plan_share` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `plan_thumbnail`
---
-
-CREATE TABLE `plan_thumbnail` (
-  `id` int(20) NOT NULL,
-  `plan_id` int(11) NOT NULL,
-  `thumbnail` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `plan_thumbnail`
---
-
-INSERT INTO `plan_thumbnail` (`id`, `plan_id`, `thumbnail`, `created_at`, `updated_at`) VALUES
-(4, 47, 'cat.jpg', '2017-05-13 08:19:20', '2017-05-13 08:19:20'),
-(5, 47, 'images.jpg', '2017-05-13 08:19:20', '2017-05-13 08:19:20'),
-(6, 48, 'kitchen.jpg', '2017-05-13 08:20:25', '2017-05-13 08:20:25'),
-(7, 49, 'cat.jpg', '2017-05-14 06:09:11', '2017-05-14 06:09:11'),
-(8, 50, 'images.jpg', '2017-05-14 06:09:25', '2017-05-14 06:09:25'),
-(9, 51, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34'),
-(10, 52, 'cover-is-loading.jpg', '2017-05-14 06:09:46', '2017-05-14 06:09:46'),
-(11, 53, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
-(12, 54, 'cover-is-loading.jpg', '2017-05-14 06:09:47', '2017-05-14 06:09:47'),
-(13, 55, 'kitchen.jpg', '2017-05-14 06:09:34', '2017-05-14 06:09:34'),
-(14, 56, 'kitchen.jpg', '2017-05-15 16:52:40', '2017-05-15 16:52:40'),
-(15, 57, 'cat.jpg', '2017-05-15 16:55:58', '2017-05-15 16:55:58'),
-(21, 67, 'cat.jpg', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
-(22, 67, 'cover-is-loading.jpg', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
-(23, 71, 'CinepolisOrlando-0010.jpg', '2017-05-16 03:06:35', '2017-05-16 03:06:35'),
-(24, 71, 'polk-county-5.jpg', '2017-05-16 03:06:35', '2017-05-16 03:06:35');
 
 -- --------------------------------------------------------
 
@@ -728,6 +724,13 @@ ALTER TABLE `place`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `place_thumbnail`
+--
+ALTER TABLE `place_thumbnail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `place_id` (`place_id`);
+
+--
 -- Indexes for table `plan`
 --
 ALTER TABLE `plan`
@@ -777,12 +780,6 @@ ALTER TABLE `plan_report`
 -- Indexes for table `plan_share`
 --
 ALTER TABLE `plan_share`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `plan_thumbnail`
---
-ALTER TABLE `plan_thumbnail`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -860,12 +857,17 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `place`
 --
 ALTER TABLE `place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `place_thumbnail`
+--
+ALTER TABLE `place_thumbnail`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `plan_access`
 --
@@ -891,11 +893,6 @@ ALTER TABLE `plan_report`
 --
 ALTER TABLE `plan_share`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `plan_thumbnail`
---
-ALTER TABLE `plan_thumbnail`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -941,6 +938,12 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `place`
   ADD CONSTRAINT `place_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
+
+--
+-- Constraints for table `place_thumbnail`
+--
+ALTER TABLE `place_thumbnail`
+  ADD CONSTRAINT `place_thumbnail_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `place` (`id`);
 
 --
 -- Constraints for table `plan`

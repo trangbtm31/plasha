@@ -83,7 +83,7 @@ foreach($data as $plan)
                         @foreach($plan['plan_place'] as $plan_place)
                         <li class="row">
                             <div class="col-md-5">
-                                <img src="/images/places/{{ !empty($plan_place['thumbnail'])? $plan_place['thumbnail'] : 'sunset_winter.png'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
+                                <img src="/images/places/{{ !empty($plan_place['place_thumbnail'])? $plan_place['place_thumbnail'][0]['thumbnail'] : 'sunset_winter.png'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
                             </div>
                             <div class="col-md-7 place-info">
                                 <span class="place-stay-time">{{ date('H:i d-m-Y', strtotime($plan_place['start_time'])) }} to {{ date('H:m d-m-Y', strtotime($plan_place['end_time'])) }}</span><br>
