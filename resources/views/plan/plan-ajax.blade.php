@@ -168,7 +168,6 @@ foreach($data as $plan)
     <?php
 }
 
-// Nếu hết dữ liệu thì stop không phân trang nữa
 if ($total <= $limit){
     echo '<script language="javascript">stopped = true; </script>';
 }
