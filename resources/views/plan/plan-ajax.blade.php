@@ -68,43 +68,33 @@ foreach($data as $plan)
                 <div class="post-text">
                     <div class="detail row">
                         <div class="col-md-6">
-                            <b>Category :</b> Đi ăn{{--{{ $plan["category"] }}--}}
+                            <b>Total cost: </b> {{ $plan["total_cost"] }} VND
                         </div>
                         <div class="col-md-6">
-                            <b>Total cost: </b> 500.000đ {{--{{ $plan["price"] }}--}}
+                            {{--<b>Category :</b> Đi ăn{{ $plan["category_id"] }}--}}
                         </div>
                     </div>
                     <p>{{ $plan["description"] }}</p>
-                    <p><b>Start at : </b> 08.00 03/06/2017<b> to</b> 12.00 05/06/2017</p>
+                    <p><b>Start at : </b>{{ $plan["start_time"] }}<b> to </b>{{ $plan["end_time"] }}</p>
                 </div>
                 <div class="line-divider"></div>
                 <div id="plan-place">
                     <ul>
+                        @foreach($plan['plan_place'] as $plan_place)
                         <li class="row">
-                            <div class="col-md-6">
-                                <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
+                            <div class="col-md-5">
+                                <img src="/images/places/{{ !empty($plan_place['thumbnail'])? $plan_place['thumbnail'] : 'sunset_winter.png'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
                             </div>
-                            <div class="col-md-6 place-info">
-                                <span class="place-stay-time">12:00 to 23:00</span><br>
-                                <span class="place-name"><strong>Công viên văn hóa suối tiên</strong></span><br>
-                                <span class="place-address">Khu phố 6, phường Linh Trung, quận Thủ Đức</span><br>
-                                <span class="place-open-time">Open at: 06:00AM</span><br>
-                                <span class="place-close-time">Close at: 00:00AM</span><br>
-                                <span class="place-cost">Chi phí dự tính: 200.000đ</span>
+                            <div class="col-md-7 place-info">
+                                <span class="place-stay-time">{{ date('H:i d-m-Y', strtotime($plan_place['start_time'])) }} to {{ date('H:m d-m-Y', strtotime($plan_place['end_time'])) }}</span><br>
+                                <span class="place-name"><strong>{{ $plan_place['name'] }}</strong></span><br>
+                                <span class="place-address">{{ $plan_place['address'] }}</span><br>
+                                <span class="place-open-time">Open at: {{ date('H:i', strtotime($plan_place['time_open'])) }}</span><br>
+                                <span class="place-close-time">Close at: {{ date('H:i', strtotime($plan_place['time_close'])) }}</span><br>
+                                <span class="place-cost">Expected cost: {{ $plan_place['cost'] }} VND</span>
                             </div>
                         </li>
-                        <li style="list-style-type: none;">
-                            <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
-                            <span style="position: absolute;">12:00 to 23:00</span>
-                        </li>
-                        <li style="list-style-type: none;">
-                            <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
-                            <span style="position: absolute;">12:00 to 23:00</span>
-                        </li>
-                        <li style="list-style-type: none;">
-                            <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
-                            <span style="position: absolute;">12:00 to 23:00</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 {{--<div id ="control">
