@@ -20,14 +20,14 @@ class PlanHandle extends Model
         $this->save();
 
         //Get thumbnail
-        if (!empty($request->file('thumbnail')))
-        {
-            foreach ($request->file('thumbnail') as $thumbnail)
-            {
-                $image = new PlanThumbnail($this->id);
-                $image->create($thumbnail);
-            }
-        }
+//        if (!empty($request->file('thumbnail')))
+//        {
+//            foreach ($request->file('thumbnail') as $thumbnail)
+//            {
+//                $image = new PlanThumbnail($this->id);
+//                $image->create($thumbnail);
+//            }
+//        }
 
 
     }
