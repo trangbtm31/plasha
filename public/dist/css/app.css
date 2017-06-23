@@ -6503,6 +6503,7 @@ ul.online-users li span.offline-dot {
     }
   }*/ }
   #plan-place li {
+    display: inline-block;
     list-style-type: none;
     margin: 10px;
     padding: 10px;
