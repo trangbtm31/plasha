@@ -85,35 +85,7 @@ foreach($data as $plan)
                                 <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
                             </div>
                             <div class="col-md-6" id="place-info-1" hidden>
-                                <span class="place-stay-time">12to 23:00</span><br>
-                                <span class="place-name"><strong>Công viên văn hóa suối tiên</strong></span><br>
-                                <span class="place-address">Khu phố 6, phường Linh Trung, quận Thủ Đức</span><br>
-                                <span class="place-open-time">Open at: 06:00AM</span><br>
-                                <span class="place-close-time">Close at: 00:00AM</span><br>
-                                <span class="place-cost">Chi phí dự tính: 200.000đ</span>
-                            </div>
-                        </li>
-
-                        <li class="row">
-                            <div class="col-md-6" id=" place-img-2">
-                                <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
-                            </div>
-                            <div class="col-md-6" id="place-info-2" hidden>
-                                <span class="place-stay-time">12:00 to 23:00</span><br>
-                                <span class="place-name"><strong>Công viên văn hóa suối tiên</strong></span><br>
-                                <span class="place-address">Khu phố 6, phường Linh Trung, quận Thủ Đức</span><br>
-                                <span class="place-open-time">Open at: 06:00AM</span><br>
-                                <span class="place-close-time">Close at: 00:00AM</span><br>
-                                <span class="place-cost">Chi phí dự tính: 200.000đ</span>
-                            </div>
-                        </li>
-
-                        <li class="row">
-                            <div class="col-md-6" id="place-img-3">
-                                <img src="/images/sunset_winter.png"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
-                            </div>
-                            <div class="col-md-6" id="place-info-3" hidden>
-                                <span class="place-stay-time">12:00 to 23:00</span><br>
+                                <span class="place-stay-time">12 to 23:00</span><br>
                                 <span class="place-name"><strong>Công viên văn hóa suối tiên</strong></span><br>
                                 <span class="place-address">Khu phố 6, phường Linh Trung, quận Thủ Đức</span><br>
                                 <span class="place-open-time">Open at: 06:00AM</span><br>
