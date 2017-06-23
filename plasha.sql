@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2017 at 02:31 PM
+-- Generation Time: Jun 23, 2017 at 07:13 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -243,6 +243,7 @@ CREATE TABLE `place` (
   `cost` int(10) DEFAULT NULL,
   `star` int(1) DEFAULT NULL,
   `category_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `thumbnail` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -251,19 +252,19 @@ CREATE TABLE `place` (
 -- Dumping data for table `place`
 --
 
-INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', NULL, '09:00:00', '23:00:00', '02:00:00', 200000, 5, 'movie', '2017-05-28 07:00:00', '2017-05-28 07:00:00'),
-(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, 'movie', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', NULL, '08:30:00', '00:00:00', '02:00:00', 150000, 1, 'movie', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '03:00:00', 25000, 3, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 20000, 2, 'eating', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 30000, 3, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 15000, 2, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', NULL, NULL),
-(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '03:00:00', 120000, 4, 'eating', NULL, NULL),
-(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 35000, 3, 'eating', NULL, NULL),
-(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '00:30:00', 65000, 4, 'eating', NULL, NULL),
-(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '00:30:00', 35000, 3, 'eating', NULL, NULL);
+INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `thumbnail`, `created_at`, `updated_at`) VALUES
+(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', 'Nice', '08:00:00', '23:00:00', '03:00:00', 200000, 5, 'movie', 'lotte-cantavil.jpg', '2017-05-28 07:00:00', '2017-06-21 12:38:26'),
+(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, 'movie', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', '', '08:30:00', '00:00:00', '02:00:00', 150000, 4, 'movie', NULL, '2017-05-27 17:00:00', '2017-06-20 14:52:36'),
+(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '03:00:00', 25000, 3, 'drink', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', '', '09:00:00', '21:00:00', '01:00:00', 20000, 2, 'eating', NULL, '2017-05-27 17:00:00', '2017-06-20 14:09:57'),
+(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', '', '07:00:00', '22:00:00', '03:00:00', 30000, 3, 'drink', NULL, '2017-05-27 17:00:00', '2017-06-20 14:09:28'),
+(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 15000, 2, 'drink', NULL, '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
+(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', NULL, NULL, NULL),
+(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '03:00:00', 120000, 4, 'eating', NULL, NULL, NULL),
+(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 35000, 3, 'eating', 'sansan.jpg', NULL, NULL),
+(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '00:30:00', 65000, 4, 'eating', NULL, NULL, NULL),
+(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '00:30:00', 35000, 3, 'eating', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -302,7 +303,15 @@ INSERT INTO `plan` (`id`, `user_id`, `name`, `description`, `transportation`, `s
 (56, 3, 'A common form of lorem ipsum reads 10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', NULL, NULL, 0, '', '2017-05-15 16:52:40', '2017-05-15 16:52:40'),
 (57, 3, 'A common form of lorem ipsum reads 11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', NULL, NULL, 0, '', '2017-05-15 16:55:58', '2017-05-15 16:55:58'),
 (67, 3, 'A common form of lorem ipsum reads 12', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', NULL, NULL, 0, '', '2017-05-15 17:37:59', '2017-05-15 17:37:59'),
-(71, 3, 'A common form of lorem ipsum reads 13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', NULL, NULL, 0, '', '2017-05-16 03:06:35', '2017-05-16 03:06:35');
+(71, 3, 'A common form of lorem ipsum reads 13', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', NULL, NULL, 0, '', '2017-05-16 03:06:35', '2017-05-16 03:06:35'),
+(72, 3, 'A common form of lorem ipsum reads 14', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 10:00:00', '2017-06-23 22:00:00', 485000, NULL, '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
+(73, 3, 'A common form of lorem ipsum reads 14', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 08:00:00', '2017-06-23 15:00:00', 450000, NULL, '2017-06-23 04:48:00', '2017-06-23 04:48:00'),
+(74, 3, 'A common form of lorem ipsum reads 14', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 08:00:00', '2017-06-23 15:00:00', 450000, NULL, '2017-06-23 04:50:11', '2017-06-23 04:50:11'),
+(75, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 08:00:00', '2017-06-23 15:00:00', NULL, NULL, '2017-06-23 04:50:52', '2017-06-23 04:50:52'),
+(76, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 12:00:00', '2017-06-23 17:00:00', 450000, NULL, '2017-06-23 04:51:44', '2017-06-23 04:51:44'),
+(77, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 12:00:00', '2017-06-23 17:00:00', 450000, NULL, '2017-06-23 04:52:09', '2017-06-23 04:52:09'),
+(78, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:52:52', '2017-06-23 04:52:52'),
+(79, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:53:24', '2017-06-23 04:53:24');
 
 -- --------------------------------------------------------
 
@@ -366,7 +375,9 @@ INSERT INTO `plan_comment` (`id`, `user_id`, `plan_id`, `comment`, `created_at`,
 (52, 3, 67, '1', '2017-05-19 16:40:15', '2017-05-19 16:40:15'),
 (53, 3, 67, '2', '2017-05-19 16:40:21', '2017-05-19 16:40:21'),
 (54, 3, 67, '3', '2017-05-19 16:40:28', '2017-05-19 16:40:28'),
-(55, 3, 67, '4', '2017-05-19 16:40:34', '2017-05-19 16:40:34');
+(55, 3, 67, '4', '2017-05-19 16:40:34', '2017-05-19 16:40:34'),
+(58, 3, 79, '1', '2017-06-23 05:11:51', '2017-06-23 05:11:51'),
+(59, 3, 79, '2', '2017-06-23 05:11:54', '2017-06-23 05:11:54');
 
 -- --------------------------------------------------------
 
@@ -396,8 +407,7 @@ INSERT INTO `plan_like` (`id`, `plan_id`, `user_id`, `status`, `created_at`, `up
 (30, 51, 3, 'like', '2017-05-15 12:27:16', '2017-05-15 12:27:16'),
 (31, 49, 3, 'like', '2017-05-15 12:27:21', '2017-05-15 12:27:21'),
 (32, 53, 4, 'like', '2017-05-15 12:42:40', '2017-05-15 13:14:12'),
-(33, 57, 3, 'like', '2017-05-15 16:56:03', '2017-05-15 16:56:03'),
-(34, 71, 3, 'like', '2017-05-16 03:07:10', '2017-05-16 03:07:28');
+(33, 57, 3, 'like', '2017-05-15 16:56:03', '2017-05-15 16:56:03');
 
 -- --------------------------------------------------------
 
@@ -413,6 +423,16 @@ CREATE TABLE `plan_place` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `plan_place`
+--
+
+INSERT INTO `plan_place` (`plan_id`, `place_id`, `start_time`, `end_time`, `created_at`, `updated_at`) VALUES
+(72, 1, '2017-06-23 04:00:00', '2017-06-23 07:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
+(72, 2, '2017-06-23 07:00:00', '2017-06-23 09:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
+(72, 10, '2017-06-23 03:00:00', '2017-06-23 04:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
+(79, 2, '2017-06-23 06:00:00', '2017-06-23 08:00:00', '2017-06-23 04:53:24', '2017-06-23 04:53:24');
 
 -- --------------------------------------------------------
 
@@ -557,15 +577,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
-(1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-04-16 20:47:05', 0),
-(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-04-30 22:29:56', 0),
-(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'RfDXjSIk9OfgzuODZErkPuoXjYdEA9sAY98r16pz2UDSKQ6qHiV1hp7G21eu', NULL, NULL, 1),
-(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', '53TOwTEH5HIubzLRajovBKUcL7FbJhsN2rItOwtfuWclTVUT7NyQdvhhwBFk', NULL, NULL, 1),
+(1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-06-18 13:53:54', 0),
+(2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-06-18 13:53:54', 0),
+(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'pVj3FG4ZBh3lp9MNQrTiSQrriLWnd7wC7RcV6sIsYw2zYyF4tuYNCwGJ8EWI', NULL, NULL, 1),
+(4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', '53TOwTEH5HIubzLRajovBKUcL7FbJhsN2rItOwtfuWclTVUT7NyQdvhhwBFk', NULL, '2017-06-21 14:37:34', 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
 (6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0),
 (7, 'Example', 'User', 'example@gmail.com', '$2y$10$9khzJFVwpnBciyPBZ7DaY.hnr00Aw/FqH4nBRrtwPSXg1WTkt66xW', '1998-03-18', 'male', NULL, '2017-05-17 05:37:34', '2017-05-17 05:37:34', 0),
 (8, 'Liz', 'Lemon', 'lizlemon@example.com', '$2y$10$KQByq.ExT5JXxfuCh6m7e.8/QTWP5TwdTxf9f4AgWHSEH1yBN2f4a', '1989-05-18', 'female', 'YzG2UabLqdCosqfukkqZn7Jc1WncM1YWG38V40mR2PzMmeRTL0lfhJPZO02v', '2017-05-17 05:39:34', '2017-05-17 05:39:34', 0),
-(9, 'Cuong', 'Cuong', 'cuongcuong@example.com', '$2y$10$NtgMffDCXdULwMhOZ8bccuvyvmfu5XMrKKTVgHPcwI0AGFJ9qZ7J.', '1998-02-17', 'male', 'qSXywKMkT5LTftk7QbXdNubuAYXkOoVMtKFiPyU1AC9FLlbwzzPB3iWuZ0Zb', '2017-05-19 05:57:43', '2017-05-19 05:57:43', 0);
+(9, 'Cuong', 'Cuong', 'cuongcuong@example.com', '$2y$10$NtgMffDCXdULwMhOZ8bccuvyvmfu5XMrKKTVgHPcwI0AGFJ9qZ7J.', '1998-02-17', 'male', 'qSXywKMkT5LTftk7QbXdNubuAYXkOoVMtKFiPyU1AC9FLlbwzzPB3iWuZ0Zb', '2017-05-19 05:57:43', '2017-05-19 05:57:43', 0),
+(10, 'Cuong', 'Cuong', 'cuong1@example.com', '$2y$10$NtgMffDCXdULwMhOZ8bccuvyvmfu5XMrKKTVgHPcwI0AGFJ9qZ7J.', '1998-02-17', 'male', 'qSXywKMkT5LTftk7QbXdNubuAYXkOoVMtKFiPyU1AC9FLlbwzzPB3iWuZ0Zb', '2017-05-19 05:57:43', '2017-05-19 05:57:43', 0);
 
 -- --------------------------------------------------------
 
@@ -844,7 +865,7 @@ ALTER TABLE `place`
 -- AUTO_INCREMENT for table `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `plan_access`
 --
@@ -854,12 +875,12 @@ ALTER TABLE `plan_access`
 -- AUTO_INCREMENT for table `plan_comment`
 --
 ALTER TABLE `plan_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `plan_like`
 --
 ALTER TABLE `plan_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `plan_report`
 --
@@ -879,7 +900,7 @@ ALTER TABLE `plan_thumbnail`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `user_report`
 --
