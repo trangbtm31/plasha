@@ -84,5 +84,8 @@ Route::post('/edit-place-form',['middleware' => 'admin', 'as' => 'edit-place-for
 Route::post('/edit-place',['middleware' => 'admin', 'as' => 'edit-place', 'uses' => 'Admin\AdminController@EditPlace']);
 Route::post('/del-place',['middleware' => 'admin', 'as' => 'del-place', 'uses' => 'Admin\AdminController@DelPlace']);
 
+/* Add google location to database */
+Route::get('/add-google-location', ['middleware' => 'admin', 'as' => 'add-google-location', 'uses' => 'Place\PlaceController@addGoogleLocation']);
+
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);

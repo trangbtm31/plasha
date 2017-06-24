@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2017 at 08:06 AM
+-- Generation Time: Jun 24, 2017 at 05:34 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -65,7 +65,8 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 ('drink', 'Drink'),
 ('eating', 'Eating'),
 ('movie', 'Movie'),
-('sport', 'Sport');
+('sport', 'Sport'),
+('swimming', 'Swimming');
 
 -- --------------------------------------------------------
 
@@ -182,7 +183,9 @@ INSERT INTO `messages` (`id`, `conversation_id`, `user_id`, `message`, `created_
 (211, 1, 3, 'h', '2017-05-25 04:54:20', '2017-05-25 04:54:20'),
 (212, NULL, 3, 'q', '2017-05-25 08:10:26', '2017-05-25 08:10:26'),
 (213, NULL, 3, '1', '2017-05-25 08:10:41', '2017-05-25 08:10:41'),
-(214, NULL, 4, '2', '2017-05-25 08:10:45', '2017-05-25 08:10:45');
+(214, NULL, 4, '2', '2017-05-25 08:10:45', '2017-05-25 08:10:45'),
+(215, NULL, 3, 'Hello Everybody', '2017-06-23 09:36:33', '2017-06-23 09:36:33'),
+(216, NULL, 4, 'a', '2017-06-23 09:36:41', '2017-06-23 09:36:41');
 
 -- --------------------------------------------------------
 
@@ -243,6 +246,8 @@ CREATE TABLE `place` (
   `cost` int(10) DEFAULT NULL,
   `star` int(1) DEFAULT NULL,
   `category_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lat` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lng` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -251,22 +256,36 @@ CREATE TABLE `place` (
 -- Dumping data for table `place`
 --
 
-INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', 'Nice', '08:00:00', '23:00:00', '03:00:00', 200000, 5, 'movie', '2017-05-28 07:00:00', '2017-06-21 12:38:26'),
-(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:00:00', 250000, 5, 'movie', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', '', '08:30:00', '00:00:00', '02:00:00', 150000, 4, 'movie', '2017-05-27 17:00:00', '2017-06-20 14:52:36'),
-(4, 'Trà Sữa It\'s Time', 'Đối Diện Đại Học Quốc Tế, Làng Đại Học,  Quận Thủ Đức, TP. HCM', NULL, '08:00:00', '22:00:00', '03:00:00', 25000, 3, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(5, 'Kem Xôi - Làng Đại Học', 'Làng Đại Học, P. Linh Trung,  Quận Thủ Đức, TP. HCM', '', '09:00:00', '21:00:00', '01:00:00', 20000, 2, 'eating', '2017-05-27 17:00:00', '2017-06-20 14:09:57'),
-(6, 'Trà Sữa Yo Yo', 'Đối Diện Cổng Sau Trường Đại Học Thể Dục Thể Thao TP Hồ Chí Minh,  Quận Thủ Đức, TP. HCM', '', '07:00:00', '22:00:00', '03:00:00', 30000, 3, 'drink', '2017-05-27 17:00:00', '2017-06-20 14:09:28'),
-(7, 'Trà Sữa Sahara', 'Đối Diện Cổng Sau Trường Đại Học Khoa Học Tự Nhiên,  Quận Thủ Đức, TP. HCM', NULL, '07:00:00', '22:00:00', '03:00:00', 15000, 2, 'drink', '2017-05-27 17:00:00', '2017-05-27 17:00:00'),
-(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', NULL, NULL),
-(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '03:00:00', 120000, 4, 'eating', NULL, NULL),
-(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '01:00:00', 35000, 3, 'eating', NULL, NULL),
-(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '00:30:00', 65000, 4, 'eating', NULL, NULL),
-(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '00:30:00', 35000, 3, 'eating', NULL, NULL),
-(13, '1', '1', '1', '10:00:00', '16:00:00', NULL, 20000, NULL, NULL, '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
-(14, 'Hima Coffee Rooftop', 'Tầng 12, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Mới lượn thử quán về! Không gian quả đúng như miêu tả, mát, thoáng, thư giãn như ở lounge. Máy bay lên xuống lấp lánh xanh xanh đỏ đỏ! Món nước lạ và hấp dẫn! Soda Wild Rose. Cảm giác thiệt đã và sang chảnh mà giá quá ư bình dân!', '13:00:00', '19:00:00', NULL, 50000, NULL, NULL, '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
-(15, 'Hima Coffee Rooftop', 'Tầng 12, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Perfect!!!', '08:00:00', '22:00:00', NULL, 80000, NULL, NULL, '2017-06-23 05:45:57', '2017-06-23 05:45:57');
+INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_close`, `time_stay`, `cost`, `star`, `category_id`, `lat`, `lng`, `created_at`, `updated_at`) VALUES
+(1, 'Lotte Cinema - Parkson Cantavil', 'Tầng 7 Parkson Cantavil, 1 Song Hành, P. An Phú,  Quận 2, TP. HCM', 'Nice', '08:00:00', '23:00:00', '02:30:00', 200000, 5, 'movie', '10.8015333', '106.7472678', '2017-05-28 07:00:00', '2017-06-24 11:27:37'),
+(2, 'CGV Thủ Đức', 'Tầng 5, TTTM Vincom Thủ Đức, 216 Võ Văn Ngân, P. Bình Thọ, Q. Thủ Đức, Tp. Hồ Chí Minh', 'Tiên phong trong việc mang đến dịch vụ giải trí tại khu vực Thủ Đức, CGV Thủ Đức đã trở thành rạp chiếu phim nhộn nhịp nhất khi có làng đại học bao quanh. CGV Thủ Đức còn đem đến loại ghế Sweetbox phục vụ cho nhiều đôi bạn trẻ.', '08:30:00', '23:00:00', '02:30:00', 250000, 5, 'movie', '10.8505662', '106.7653083', '2017-05-27 17:00:00', '2017-06-24 11:33:15'),
+(3, 'BHD - LÊ VĂN VIỆT', 'Tầng 4, toà nhà Vincom Plaza Lê Văn Việt, số 50 Lê Văn Việt, Quận 9, TP.HCM', '', '08:30:00', '00:00:00', '02:30:00', 150000, 4, 'movie', '10.8456724', '106.7791289', '2017-05-27 17:00:00', '2017-06-24 12:08:41'),
+(8, 'Vỹ Dạ Quán - Quán Nhậu Bình Dân', '146 Võ Văn Tần, P. 6,  Quận 3, TP. HCM', NULL, '16:00:00', '23:30:00', '03:00:00', 120000, 3, 'eating', '10.7749453', '106.6887059', NULL, '2017-06-24 11:32:05'),
+(9, 'Kaffir - Thai Foods', '29 Đỗ Quang Đẩu,  Quận 1, TP. HCM', NULL, '13:00:00', '23:50:00', '02:00:00', 120000, 4, 'eating', '10.8011648', '106.6838346', NULL, '2017-06-24 12:16:43'),
+(10, 'San San - Mì Gà Quay - Hoa Lan', '147 Hoa Lan, P. 2,  Quận Phú Nhuận, TP. HCM', NULL, '09:00:00', '21:00:00', '02:00:00', 35000, 3, 'eating', '10.7977835', '106.6882224', NULL, '2017-06-24 11:27:38'),
+(11, 'Phở Dậu - Phở Bắc Gia Truyền', 'Cư Xá 288, Hẻm 288 M1 Nam Kì Khởi Nghĩa, P. 8,  Quận 3, TP. HCM', NULL, '05:00:00', '11:00:00', '02:00:00', 65000, 4, 'eating', '10.7898615', '106.6850652', NULL, '2017-06-24 12:16:44'),
+(12, 'Phở Bò Phú Gia', '146E Lý Chính Thắng, P. 7,  Quận 3, TP. HCM', NULL, '06:00:00', '11:00:00', '02:00:00', 35000, 3, 'eating', '10.786473', '106.6845282', NULL, '2017-06-24 11:28:39'),
+(14, 'Hima Coffee Rooftop', 'Tầng 12, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Mới lượn thử quán về! Không gian quả đúng như miêu tả, mát, thoáng, thư giãn như ở lounge. Máy bay lên xuống lấp lánh xanh xanh đỏ đỏ! Món nước lạ và hấp dẫn! Soda Wild Rose. Cảm giác thiệt đã và sang chảnh mà giá quá ư bình dân!', '13:00:00', '19:00:00', '02:00:00', 50000, 5, 'drink', '10.8016493', '106.6520333', '2017-06-23 05:43:45', '2017-06-24 12:11:10'),
+(15, 'Rooftop Coffee', 'Tầng 13, Tòa Nhà ATHENA, 146 - 148 Cộng Hòa, P. 4,  Quận Tân Bình, TP. HCM', 'Perfect!!!', '08:00:00', '22:00:00', '02:00:00', 80000, 4, 'drink', '10.8016493', '106.6520333', '2017-06-23 05:45:57', '2017-06-24 12:12:18'),
+(16, 'Chú Tèo Buffet Nướng', '955 Hậu Giang, Phường 11,  Quận 6, TP. HCM', NULL, '16:00:00', '22:00:00', '02:00:00', 120000, 3, 'eating', '10.7456219', '106.626644', '2017-06-23 16:17:32', '2017-06-24 12:12:19'),
+(17, 'Food House Restaurant - Phan Xích Long', '133 - 135 Phan Xích Long, P. 7,  Quận Phú Nhuận, TP. HCM', NULL, '08:00:00', '23:00:00', '02:00:00', 200000, 5, 'eating', '10.7985186', '106.6881288', '2017-06-23 16:23:16', '2017-06-24 12:12:19'),
+(18, 'Phố Nhật - Noodle & Sushi', '39 Nguyễn Thái Học , P. Cầu Ông Lãnh,  Quận 1, TP. HCM', NULL, '10:00:00', '23:00:00', '02:00:00', 250000, 5, 'eating', '10.766991', '106.6957761', '2017-06-23 16:27:57', '2017-06-24 11:32:28'),
+(20, 'La Bettola Saigon - Italian Cuisine', '82 Xuân Thủy, P. Thảo Điền,  Quận 2, TP. HCM', NULL, '11:00:00', '22:00:00', '02:00:00', 300000, 5, 'eating', '10.8035602', '106.7340611', '2017-06-23 16:37:47', '2017-06-24 12:12:20'),
+(21, 'Mộc - Riêu & Nướng - Lam Sơn', '9A Lam Sơn, P. 2,  Quận Tân Bình, TP. HCM', NULL, '06:00:00', '22:00:00', '02:00:00', 180000, 4, 'eating', '10.8079471', '106.6664663', '2017-06-23 16:40:27', '2017-06-24 11:28:22'),
+(22, 'Galaxy Cinema - Nguyễn Du', '116 Nguyễn Du,  Quận 1, TP. HCM', NULL, '09:00:00', '23:30:00', '02:30:00', 165000, 5, 'movie', '10.772937', '106.693387', '2017-06-23 16:42:51', '2017-06-24 12:08:44'),
+(23, 'Hồ Bơi Văn Thánh - Điện Biên Phủ', '48/10 Điện Biên Phủ, P. 22,  Quận Bình Thạnh, TP. HCM', NULL, '09:00:00', '21:00:00', '01:30:00', 60000, 4, 'swimming', '10.7995679', '106.7174578', '2017-06-23 16:45:20', '2017-06-24 11:29:07'),
+(24, 'Hồ Bơi Lan Anh', '291 Cách Mạng Tháng 8, P. 12,  Quận 10, TP. HCM', NULL, '06:00:00', '21:00:00', '01:30:00', 50000, 3, 'swimming', '10.7793278', '106.6786446', '2017-06-23 16:46:31', '2017-06-24 11:33:51'),
+(25, 'Bowling Dream Game - AEON Mall', 'Tầng 3 AEON Mall, 30 Bờ Bao Tân Thắng, P. Sơn Kỳ,  Quận Tân Phú, TP. HCM', NULL, '09:00:00', '21:00:00', '02:00:00', 165000, 4, 'sport', '10.8017161', '106.6179324', '2017-06-23 16:48:24', '2017-06-24 12:12:21'),
+(26, 'Massé SaiGon Pool Club', '150/9 Nguyễn Trãi,  Quận 1, TP. HCM', 'Karaoke, Beer club, Thăm quan & chụp ảnh, Billiards, Sân khấu, Khu chơi Game, Giao cơm văn phòng, Khu Ẩm Thực', '11:00:00', '02:00:00', '04:00:00', 500000, 5, 'sport', '10.7699769', '106.6902502', '2017-06-23 16:52:58', '2017-06-24 12:12:22'),
+(27, 'Escape Room Việt Nam - Trò chơi thoát hiểm', 'Lầu 5, TTTM Crescent Mall, 101 Tôn Dật Tiên, P. Tân Phú,  Quận 7, TP. HCM', NULL, '10:00:00', '22:00:00', '01:00:00', 285000, 5, 'sport', '10.7287097', '106.7188056', '2017-06-23 16:55:59', '2017-06-24 12:08:46'),
+(28, 'Nhà hàng The Deck Saigon', '38 Nguyễn Ư Dĩ, P. Thảo Điền,  Quận 2, TP. HCM', NULL, '08:30:00', '23:30:00', '02:00:00', 385000, 5, 'eating', '10.806938', '106.7445592', '2017-06-23 16:57:11', '2017-06-24 11:34:10'),
+(29, 'Morico - Modern Japanese Restaurant Cafe', '30 Lê Lợi, P. Bến Nghé,  Quận 1, TP. HCM', NULL, '09:00:00', '23:00:00', '03:00:00', 150000, 5, 'drink', '10.7743308', '106.7007185', '2017-06-23 17:01:14', '2017-06-24 11:32:46'),
+(30, 'Monkey In Black Cafe', '263 Trần Quang Khải, P. Tân Định,  Quận 1, TP. HCM', NULL, '08:00:00', '22:00:00', '02:00:00', 70000, 5, 'drink', '10.7912789', '106.6881478', '2017-06-23 17:02:25', '2017-06-24 11:32:47'),
+(31, 'Starbucks Coffee - Phạm Hồng Thái', 'Phạm Hồng Thái,  Quận 1, TP. HCM', NULL, '07:00:00', '00:00:00', '03:00:00', 120000, 5, 'drink', '10.7712356', '106.6945839', '2017-06-23 17:04:20', '2017-06-24 12:11:12'),
+(32, 'Trà Sữa Gong Cha', '79 Hồ Tùng Mậu,  Quận 1, TP. HCM', NULL, '08:30:00', '21:30:00', '02:00:00', 60000, 3, 'drink', '10.772025', '106.703671', '2017-06-23 17:17:07', '2017-06-24 11:32:08'),
+(33, 'Koi Thé Café', '76 Ngô Đức Kế, P. Bến Nghé,  Quận 1, TP. HCM', NULL, '09:00:00', '22:00:00', '03:00:00', 50000, 3, 'drink', '10.772304', '106.704156', '2017-06-23 17:18:52', '2017-06-24 11:28:42'),
+(34, 'Hot & Cold - Trà Sữa & Xiên Que - Sư Vạn Hạnh', '824/2 Sư Vạn Hạnh, P. 12,  Quận 10, TP. HCM', NULL, '08:30:00', '22:00:00', '02:00:00', 45000, 3, 'drink', '10.7755974', '106.6677152', '2017-06-23 17:20:44', '2017-06-24 12:12:23'),
+(35, 'Hồ bơi Lâm Viên', '155 Linh Trung,  Quận Thủ Đức, TP. HCM', NULL, '05:30:00', '21:00:00', '01:30:00', 20000, 3, 'swimming', '10.8600134', '106.7808991', '2017-06-24 14:28:11', '2017-06-24 14:28:17');
 
 -- --------------------------------------------------------
 
@@ -290,7 +309,27 @@ INSERT INTO `place_thumbnail` (`id`, `place_id`, `thumbnail`, `created_at`, `upd
 (25, 15, 'foody-hima-coffee.jpg', '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
 (26, 15, 'hmbbd-jpg-265-636244923970677852.jpg', '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
 (27, 1, 'lotte-cantavil.jpg', '2017-06-23 06:04:27', '2017-06-23 06:04:27'),
-(28, 10, 'sansan.jpg', '2017-06-23 06:05:28', '2017-06-23 06:05:28');
+(28, 10, 'sansan.jpg', '2017-06-23 06:05:28', '2017-06-23 06:05:28'),
+(29, 16, 'chuteo-avatar1.jpg', '2017-06-23 16:17:32', '2017-06-23 16:17:32'),
+(30, 16, 'chu-teo-buffet.jpg', '2017-06-23 16:17:32', '2017-06-23 16:17:32'),
+(31, 17, 'foody-album12-jpg-299-636323690511199801.jpg', '2017-06-23 16:23:16', '2017-06-23 16:23:16'),
+(32, 18, 'kake-udon_s-jpg-250-636334771544767466.jpg', '2017-06-23 16:27:57', '2017-06-23 16:27:57'),
+(34, 20, 'foody-album4-jpg-950-636336543950480504.jpg', '2017-06-23 16:37:47', '2017-06-23 16:37:47'),
+(35, 21, 'dsc04219-001-jpg-571-636087534085372032.jpg', '2017-06-23 16:40:27', '2017-06-23 16:40:27'),
+(36, 22, 'foody-mobile-galaxy-cinema-tp-hcm.jpg', '2017-06-23 16:42:51', '2017-06-23 16:42:51'),
+(37, 23, 'foody-mobile-hmb-van-jpg-357-635725679543868039.jpg', '2017-06-23 16:45:20', '2017-06-23 16:45:20'),
+(38, 24, 'foody-mobile-ho-boi-lan-anh-mb-jp-343-635684223054336078.jpg', '2017-06-23 16:46:31', '2017-06-23 16:46:31'),
+(39, 25, 'foody-mobile-bowling-dream-game-aeon-mall-tp-hcm-140204125138.jpg', '2017-06-23 16:48:24', '2017-06-23 16:48:24'),
+(40, 26, 'foody-mobile-fghfgh-jpg-709-636232058331400632.jpg', '2017-06-23 16:52:58', '2017-06-23 16:52:58'),
+(41, 27, 'foody-escape-room-viet-nam-829-635894828269523043.jpg', '2017-06-23 16:55:59', '2017-06-23 16:55:59'),
+(42, 28, 'foody-mobile-mobile-jpg-580-635768870501612945.jpg', '2017-06-23 16:57:11', '2017-06-23 16:57:11'),
+(43, 29, 'foody-mobile-12-jpg-121-636216258751627621.jpg', '2017-06-23 17:01:14', '2017-06-23 17:01:14'),
+(44, 30, 'foody-mobile-zas-jpg-258-636086627918162406.jpg', '2017-06-23 17:02:25', '2017-06-23 17:02:25'),
+(45, 31, 'foody-mobile-mobile-jpg-409-635744522405981690.jpg', '2017-06-23 17:04:20', '2017-06-23 17:04:20'),
+(46, 32, 'foody-tra-sua-gong-cha-635483579496024394.jpg', '2017-06-23 17:17:07', '2017-06-23 17:17:07'),
+(47, 33, 'foody-mobile-t0bo2c08-jpg-574-635912293727197879.jpg', '2017-06-23 17:18:52', '2017-06-23 17:18:52'),
+(48, 34, 'foody-mobile-w6-jpg-709-635768916498605734.jpg', '2017-06-23 17:20:44', '2017-06-23 17:20:44'),
+(49, 35, 'foody-mobile-hmb-lv-jpg-461-635727399027248152.jpg', '2017-06-24 14:28:11', '2017-06-24 14:28:11');
 
 -- --------------------------------------------------------
 
@@ -340,7 +379,8 @@ INSERT INTO `plan` (`id`, `user_id`, `name`, `description`, `transportation`, `s
 (79, 3, 'A common form', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL, '2017-06-23 13:00:00', '2017-06-23 16:00:00', 250000, NULL, '2017-06-23 04:53:24', '2017-06-23 04:53:24'),
 (80, 3, '1', '1', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
 (81, 3, 'Hima Coffee Rooftop', 'Coffe đi bà con', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
-(82, 3, 'Hima Coffee Rooftop', 'Coffe đi bà con', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:45:57', '2017-06-23 05:45:57');
+(82, 3, 'Hima Coffee Rooftop', 'Coffe đi bà con', NULL, NULL, NULL, NULL, NULL, '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
+(83, 3, 'A', 'A', NULL, '2017-06-24 07:00:00', '2017-06-24 21:00:00', 855000, NULL, '2017-06-24 12:51:05', '2017-06-24 12:51:05');
 
 -- --------------------------------------------------------
 
@@ -406,7 +446,10 @@ INSERT INTO `plan_comment` (`id`, `user_id`, `plan_id`, `comment`, `created_at`,
 (54, 3, 67, '3', '2017-05-19 16:40:28', '2017-05-19 16:40:28'),
 (55, 3, 67, '4', '2017-05-19 16:40:34', '2017-05-19 16:40:34'),
 (58, 3, 79, '1', '2017-06-23 05:11:51', '2017-06-23 05:11:51'),
-(59, 3, 79, '2', '2017-06-23 05:11:54', '2017-06-23 05:11:54');
+(59, 3, 79, '2', '2017-06-23 05:11:54', '2017-06-23 05:11:54'),
+(60, 3, 82, 'Wow! Great!!!', '2017-06-23 09:19:03', '2017-06-23 09:19:03'),
+(61, 4, 82, 'I\'ll come with you', '2017-06-23 09:20:13', '2017-06-23 09:20:13'),
+(62, 3, 82, 'really?', '2017-06-23 09:20:27', '2017-06-23 09:20:27');
 
 -- --------------------------------------------------------
 
@@ -462,9 +505,14 @@ INSERT INTO `plan_place` (`plan_id`, `place_id`, `start_time`, `end_time`, `crea
 (72, 2, '2017-06-23 07:00:00', '2017-06-23 09:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
 (72, 10, '2017-06-23 03:00:00', '2017-06-23 04:00:00', '2017-06-23 02:40:22', '2017-06-23 02:40:22'),
 (79, 2, '2017-06-23 06:00:00', '2017-06-23 08:00:00', '2017-06-23 04:53:24', '2017-06-23 04:53:24'),
-(80, 13, '2017-06-23 06:00:00', '2017-07-23 09:00:00', '2017-06-23 05:38:26', '2017-06-23 05:38:26'),
 (81, 14, '2017-06-23 07:00:00', '2017-06-23 09:00:00', '2017-06-23 05:43:45', '2017-06-23 05:43:45'),
-(82, 15, '2017-06-23 06:00:00', '2017-06-23 09:00:00', '2017-06-23 05:45:57', '2017-06-23 05:45:57');
+(82, 15, '2017-06-23 06:00:00', '2017-06-23 09:00:00', '2017-06-23 05:45:57', '2017-06-23 05:45:57'),
+(83, 1, '2017-06-24 01:00:00', '2017-06-24 03:30:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05'),
+(83, 11, '2017-06-24 00:00:00', '2017-06-24 01:00:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05'),
+(83, 17, '2017-06-24 05:30:00', '2017-06-24 06:30:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05'),
+(83, 22, '2017-06-24 06:30:00', '2017-06-24 09:00:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05'),
+(83, 23, '2017-06-24 03:30:00', '2017-06-24 04:30:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05'),
+(83, 25, '2017-06-24 04:30:00', '2017-06-24 05:30:00', '2017-06-24 12:51:05', '2017-06-24 12:51:05');
 
 -- --------------------------------------------------------
 
@@ -517,11 +565,11 @@ CREATE TABLE `relationship` (
 --
 
 INSERT INTO `relationship` (`user_id_1`, `user_id_2`, `status`, `action_user_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 'friend', 3, '2017-05-19 05:59:29', '2017-05-25 04:34:12'),
-(3, 2, 'friend', 3, '2017-05-18 11:10:05', '2017-05-25 04:34:30'),
+(3, 1, 'none', 3, '2017-05-19 05:59:29', '2017-05-25 04:34:12'),
+(3, 2, 'none', 3, '2017-05-18 11:10:05', '2017-05-25 04:34:30'),
 (3, 4, 'friend', 3, '2017-05-18 11:06:25', '2017-05-25 04:33:50'),
 (3, 5, 'waiting', 5, '2017-05-19 05:59:28', '2017-05-25 04:31:02'),
-(3, 6, 'friend', 3, '2017-05-18 11:10:21', '2017-05-25 04:34:32'),
+(3, 6, 'none', 3, '2017-05-18 11:10:21', '2017-05-25 04:34:32'),
 (3, 7, 'waiting', 7, '2017-05-19 05:59:29', '2017-05-25 04:31:14'),
 (3, 8, 'friend', 3, '2017-05-18 11:25:39', '2017-05-25 04:34:36'),
 (3, 9, 'friend', 3, '2017-05-20 16:05:53', '2017-05-25 04:34:37'),
@@ -575,7 +623,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `DOB`, `Gender`, `remember_token`, `created_at`, `updated_at`, `admin`) VALUES
 (1, '', 'admin', 'trangbtm31@gmail.com', '$2y$10$exjS2x6zLKw92V80e8gbJ./W247ZS4.gJtfyxR416GWGZZq7V.KoC', '1995-05-31', 'female', 'h3qJ78RUg1sJgf2fzuB65BwLq2sS3spkRt4zV2eaumAwT6G1tqcQE92NizAx', '2017-04-16 20:47:05', '2017-06-18 13:53:54', 0),
 (2, '', 'admin_1', 'annie.btmt@gmail.com', '$2y$10$zDRwXYHcor/9p8CqkNaYvetIGDb77Yz/w289nzORnWECh6Tey9r4C', '1995-05-31', 'female', 'Vo9REjShiaopKjPWrJdml96OhSUkbNsIEm9fgjn3znzMEDWs6dKVOgQkoyut', '2017-04-17 19:48:55', '2017-06-18 13:53:54', 0),
-(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'pVj3FG4ZBh3lp9MNQrTiSQrriLWnd7wC7RcV6sIsYw2zYyF4tuYNCwGJ8EWI', NULL, NULL, 1),
+(3, 'Cương', 'Admin', 'ngoccuonggl249@gmail.com', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1995-09-24', 'male', 'Goh1qsEcAwPyppg9zxe52lGv1HZFdjrESpz7j8zkAlfamIQd1seokxmswK9r', NULL, NULL, 1),
 (4, 'Ngọc', 'Cương', '13520091@gm.uit.edu.vn', '$2a$06$0va9K1U6M6Bf/iflyByWy.PBMGh8zgThK7GzRxtvM0YPvIeRDrTVq', '1993-05-31', 'male', '53TOwTEH5HIubzLRajovBKUcL7FbJhsN2rItOwtfuWclTVUT7NyQdvhhwBFk', NULL, '2017-06-21 14:37:34', 1),
 (5, 'Bùi Trương', 'Trang', 'ssd@hdgd.xghfig', '$2y$10$81tEj3d8ssQvlv6HLhLXYu1JphfSNy6Sge03sZyqYMSb2PKDXoJL2', '1970-01-01', 'female', '6tENs1ueK8v3L77YHSnZAiMVqS4z2sTeRY5JJvQokyVrTecGDZHIalMu91P4', '2017-05-10 09:21:14', '2017-05-10 09:21:14', 0),
 (6, 'Bùi Trương', 'Trang', '13520911@gm.uit.edu.vn', '$2y$10$Ul2WX9x4Bso3KT47Gl24CeUFSGl6R90kSZarCXKBVoC1C.pT4Boa2', '1995-05-31', 'female', NULL, '2017-05-10 03:57:13', '2017-05-10 03:57:13', 0),
@@ -604,15 +652,15 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_id`, `address`, `job`, `company`, `avatar`, `cover_photo`) VALUES
-(1, 'Đà Nẵng', 'Student', 'University of Social Siences and Humanities', 'user-1.jpg', 'sunset_winter.png'),
+(1, 'Đà Nẵng', 'Student', 'University of Social Siences and Humanities', 'user-5.jpg', 'sunset_winter.png'),
 (2, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'user-1.jpg', 'sunset_winter.png'),
 (3, 'Hồ Chí Minh', 'Student', 'University of Information Technology', 'cuong.jpg', 'cover-is-loading.jpg'),
 (4, 'Vũng Tàu', 'Fresher', 'Solazu', 'users_default.png', 'sunset_winter.png'),
 (5, 'Hà Nội', 'Student', 'University of Information Technology', 'user-10.jpg', 'sunset_winter.png'),
-(6, 'Bình Dương', 'Development', 'ABC Company', 'user-1.jpg', 'sunset_winter.png'),
-(7, NULL, 'Development', NULL, 'users_default.png', 'sunset_winter.png'),
-(8, NULL, NULL, 'Solazu Company', 'users_default.png', 'sunset_winter.png'),
-(9, NULL, NULL, NULL, 'users_default.png', 'sunset_winter.png');
+(6, 'Bình Dương', 'Development', 'ABC Company', 'user-3.jpg', 'sunset_winter.png'),
+(7, NULL, 'Development', NULL, 'user-2.jpg', 'sunset_winter.png'),
+(8, NULL, NULL, 'Solazu Company', 'user-10.jpg', 'sunset_winter.png'),
+(9, NULL, NULL, NULL, 'user-8.jpg', 'sunset_winter.png');
 
 -- --------------------------------------------------------
 
@@ -847,7 +895,7 @@ ALTER TABLE `group_member`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -857,17 +905,17 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `place`
 --
 ALTER TABLE `place`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `place_thumbnail`
 --
 ALTER TABLE `place_thumbnail`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `plan_access`
 --
@@ -877,7 +925,7 @@ ALTER TABLE `plan_access`
 -- AUTO_INCREMENT for table `plan_comment`
 --
 ALTER TABLE `plan_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT for table `plan_like`
 --

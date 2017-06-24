@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Requests\PlaceRequest;
+use App\PlaceThumbnail;
 use App\User;
 use App\Place;
 use Request;
@@ -146,6 +147,15 @@ class AdminController extends Controller
         $place->star = $request->star;
         $place->category_id = $request->category_id;
         $place->save();
+
+        if (!empty($request->file('place_thumbnail')))
+        {
+            foreach ($request->file('place_thumbnail') as $thumbnail)
+            {
+                $image = new PlaceThumbnail($place->id);
+                $image->create($thumbnail);
+            }
+        }
 
         return redirect()->route('add-new-place')->with(['message' => 'The place has been created successfully!']);
     }

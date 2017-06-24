@@ -26,13 +26,6 @@
                          {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                          {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
                          {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
-                         {{ Form::label('num_place', 'Number Place', ['class' => 'num-place']) }}
-                         {{ Form::select('num_place', [
-                             '1' => 'One',
-                             '2' => 'Two',
-                             '3' => 'Three',
-                             '4' => 'Four'
-                         ], null, ['class' => 'num-place', 'id' => 'num-place']) }}
                          <div class="row">
                              <div class="col-md-6 col-sm-6">
                                  {{ Form::text('start_time', '', array('class' => 'form-control', 'id' => 'start-time', 'placeholder' => 'Start Time')) }}

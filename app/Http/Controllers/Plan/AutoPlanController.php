@@ -10,19 +10,17 @@ class AutoPlanController extends Controller
 {
     public $total_cost;
     public $find_place;
-    public $num_place;
     public $start_time;
     public $end_time;
     public $min_to_do;
 
     protected $max_cost = 0; //Chi phí cao nhất của kế hoạch dự kiến
     protected $max_time = 0; //Thời gian tối đa thực hiện kế hoạch
-    protected $great_places = 0; //Địa điểm phù hợp
+    protected $great_places = []; //Địa điểm phù hợp
 
     public function __construct() {
         $this->total_cost = ( isset($_GET['total_cost']) && !empty($_GET['total_cost']) ) ? (int)$_GET['total_cost'] : '0';
         $this->find_place = ( isset($_GET['find_place']) && !empty($_GET['find_place']) ) ? $_GET['find_place'] : 'random';
-        $this->num_place = ( isset($_GET['num_place']) && !empty($_GET['num_place']) ) ? $_GET['num_place'] : '1';
         $this->start_time = ( isset($_GET['start_time']) && !empty($_GET['start_time']) ) ? new Carbon($_GET['start_time']) : '';
         $this->end_time = ( isset($_GET['end_time']) && !empty($_GET['end_time']) ) ? new Carbon($_GET['end_time']) : '';
 
@@ -51,7 +49,7 @@ class AutoPlanController extends Controller
                 $data = $this->findSaveMoney();
                 break;
         }
-        return view( 'plan.auto-place', ['places' => $data, 'max_cost' => $this->max_cost, 'num_place' => $this->num_place] );
+        return view( 'plan.auto-place', ['places' => $data, 'max_cost' => $this->max_cost] );
     }
 
     /* Hàm chuyển thời gian thành số phút
@@ -83,7 +81,7 @@ class AutoPlanController extends Controller
         }
 
         //Tổng giá cao hơn hoặc chi phí các địa điểm này ít hơn thì sẽ không phù hợp
-        if ($cost > $this->total_cost || $cost <= $this->max_cost) {
+        if ($cost > $this->total_cost) {
             return false;
         }
 
@@ -100,19 +98,44 @@ class AutoPlanController extends Controller
             $come_on = clone $temp_time;
             $leave_at = (clone $temp_time)->addMinutes($this->timeToMinutes($places[$i]['time_stay']));
             $close_early = $places[$i]['time_close'];
+
+            $category_1 = '';
+            if ($i >= 1) {
+                $category_1 = $places[$i-1]['category_id'];
+            }
+            $category_2 = '';
+            if ($i >= 2) {
+                $category_2 = $places[$i-2]['category_id'];
+            }
+
             //Tìm địa điểm phù hợp để thực hiện trước
             for ($j = $i + 1; $j < count($places); $j++) {
                 $temp_leave_at = (clone $temp_time)->addMinutes( $this->timeToMinutes($places[$j]['time_stay'] ) );
                 if ( strtotime( $places[$j]['time_open'] ) <= strtotime( $come_on->toTimeString() ) //Mở cửa trước khi đến
                     && strtotime( $places[$j]['time_close'] ) >= strtotime( $temp_leave_at->toTimeString() ) //Đóng cửa sau khi rời
-                    && strtotime( $places[$j]['time_close'] ) < strtotime( $close_early ) ) //Nơi có time_close gần nhất thì đi trước
-                {
+                    && strtotime( $places[$j]['time_close'] ) < strtotime( $close_early ) //Nơi có time_close gần nhất thì đi trước
+                    && $places[$j]['category_id'] != $category_1
+                    && $places[$j]['category_id'] != $category_2
+                ) {
                     $leave_at = clone $temp_leave_at;
                     $close_early = $places[$j]['time_close'];
                     $this->swapPlace($places[$i], $places[$j]);
                 }
             }
-            //Nếu xong vòng lặp nhưng vẫn ko có địa điểm $i phù hợp thì false
+
+            //Kiểm tra category có bị trùng không
+            if($i >= 1) {
+                if ($places[$i]['category_id'] == $category_1){
+                    return false;
+                }
+            }
+            if($i >= 2) {
+                if ($places[$i]['category_id'] == $category_2){
+                    return false;
+                }
+            }
+
+            //Kiểm tra thời gian đóng mở của địa điểm
             if ( strtotime( $places[$i]['time_open'] ) > strtotime( $come_on->toTimeString() ) //Mở cửa trước khi đến
                 || strtotime( $places[$i]['time_close'] ) < strtotime( $leave_at->toTimeString() ) ) //Đóng cửa sau khi rời
             {
@@ -132,7 +155,6 @@ class AutoPlanController extends Controller
 
     /* Hàm đệ quy SaveMoney:
      * Trong mảng các địa điểm $places
-     * Tìm $this->num_place (số địa điểm) có chi phí thấp hơn hoặc bằng $this->total_cost
      * Giá trị trả về là mảng $places.
      *
      * $places     : Mảng địa điểm
@@ -143,66 +165,73 @@ class AutoPlanController extends Controller
      * $parent     : Mảng lưu trữ giá trị của hàm đệ quy cha
      */
 
-    protected function SaveMoney($places, $l, $r, $recursive=1, $parent = []) {
-        //Nếu số địa điểm trùng với số lần đệ quy thì so sánh tổng
-        if ($this->num_place == $recursive) {
-            for ($i = $l; $i <= $r; $i++) {
-                $child = $parent;
-                array_push($child, $places[$i]); //Thêm $i vào mảng con
-                if ($this->checkPlaces($child) == false) { //Kiểm tra những địa điểm này có phù hợp không
-                    continue; //Nếu không phù hợp thì bỏ qua lần lặp
-                }
-            }
-            return $this->great_places;
-        } else { //Đệ quy đến khi số địa điểm trùng với số lần đệ quy
-            $recursive++;
-            for ($i = $l; $i <= $r; $i++) {
-                $child = $parent;
-                array_push($child, $places[$i]); //Thêm $i vào mảng con
-                $this->SaveMoney($places, $i+1, $r, $recursive, $child); //Gọi đệ quy
-            }
-            return $this->great_places;
-        }
-    }
-
-    protected function findSaveMoney() {
-        $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'DESC')->get()->toArray();
-        return $this->SaveMoney($places, 0, count($places) - 1);
-    }
-
     protected function ManyPlace($places, $l, $r, $recursive=1, $parent = []) {
         $flag = false; //Đánh dấu có tìm thấy danh sách địa điểm phù hợp không
 
         for ($i = $l; $i <= $r; $i++) {
             $child = $parent;
-            array_push($child, $places[$i]); //Thêm $i vào mảng con
+            array_push($child, $places[$i]); //Thêm địa điểm $i vào mảng con
             if( $this->checkPlaces($child) ) { //Nếu đã tìm thấy phù hợp thì thoát vòng lặp
                 $flag = true; //Đánh dấu đã tìm thấy
-                $this->num_place++;
                 break;
             }
         }
 
-        if ($flag == true) { //Nếu đã tìm thấy địa điểm phù hợp thì sẽ thử tìm thêm 1 place
+        if ($flag == true) { //Nếu đã tìm thấy địa điểm phù hợp thì sẽ thử tìm thêm 1 place nữa
             $recursive++;
             for ($i = $l; $i <= $r; $i++) {
                 $child = $parent;
-                array_push($child, $places[$i]); //Thêm $i vào mảng con
+                array_push($child, $places[$i]); //Thêm địa điểm $i vào mảng con
                 $this->ManyPlace($places, $i+1, $r, $recursive, $child); //Gọi đệ quy
             }
-            return $this->great_places;
-        } else { //Nếu không còn địa điểm nào phù hợp thì dừng
-            return $this->great_places;
         }
     }
-    protected function findManyPlace() {
-        $this->num_place = 0;
+
+    protected function findSaveMoney() {
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
-        return $this->ManyPlace($places, 0, count($places) - 1);
+        $this->ManyPlace($places, 0, count($places) - 1);
+        return $this->great_places;
+    }
+
+    /* Hàm thay thế địa điểm tìm được bằng địa điểm khác gần hơn
+    $places : là danh sách toàn bộ địa điểm
+    */
+    protected function findShortedPath($places) {
+        for ($i = 1; $i < count($this->great_places); $i++) {
+            $min_distance = $this->distance($this->great_places[$i-1], $this->great_places[$i]);
+            for ($j = 0; $j < count($places); $j++) {
+                if ($this->great_places[$i]['category_id'] == $places[$j]['category_id']) {
+                    $temp_distance = $this->distance($this->great_places[$i-1], $places[$j]); //Tính khoảng cách
+                    $temp_cost = $this->max_cost - $this->great_places[$i]['cost'] + $places[$j]['cost']; //Tính chi phí tạm thời
+                    if (
+                        $temp_distance < $min_distance //Địa điểm thay thế gần hơn
+                        && $temp_cost <= $this->total_cost //Chi phí đủ
+                        && strtotime($places[$j]['time_open']) <= strtotime($this->great_places[$i]['come_on']) //Kiểm tra time mở cửa
+                        && strtotime($places[$j]['time_close']) >= strtotime($this->great_places[$i]['leave_at']) //Kiểm tra time đóng cửa
+                    ) { //Thay thế bằng địa điểm khác gần hơn
+                        $this->great_places[$i] = array_merge($this->great_places[$i],$places[$j]);
+                        $this->max_cost = $temp_cost; //Cập nhật chi phí kế hoạch
+                    }
+                }
+            }
+        }
+    }
+
+    /* Tính khoảng cách giữa 2 điểm */
+    protected function distance($place1, $place2) {
+        return sqrt( ($place1['lat']-$place2['lat'])*($place1['lat']-$place2['lat']) + ($place1['lng']-$place2['lng'])*($place1['lng']-$place2['lng']) );
+    }
+
+    protected function findManyPlace() {
+        $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
+        $this->ManyPlace($places, 0, count($places) - 1); //Tìm số lượng địa điểm tối đa đi được
+        $this->findShortedPath($places); //Tìm địa điểm có đường đi ngắn hơn để thay thế
+        return $this->great_places;
     }
 
     protected function findLuxuryPlace() {
         $places = Place::where('star', 5)->orWhere('star', 4)->get()->toArray(); //Chỉ xét những nơi 4 hoặc 5 sao
-        return $this->SaveMoney($places, 0, count($places) - 1); //Thuật toán xét duyệt giống SaveMoney
+        $this->ManyPlace($places, 0, count($places) - 1); //Tìm số lượng địa điểm tối đa đi được
+        return $this->great_places;
     }
 }

@@ -138,9 +138,29 @@
                                     </div>
                                 </div>
                                 <div class="row">
+
+                                    <label class="col-md-2 label-on-left">Thumbnail</label>
+                                    <div class="col-md-10 fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="/images/admin/image_placeholder.jpg" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                        <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            {{--<input type="hidden" value="" name="...">--}}
+                                            {{ Form::file('place_thumbnail[]',array( 'accept' => 'image/*', 'multiple' =>'')) }}
+                                            {{--<input type="file" name="">--}}
+                                        <div class="ripple-container"></div></span>
+                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-2"></div>
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-fill btn-rose">Add</button>
+                                        <button type="submit" class="btn btn-fill btn-rose">Add Place</button>
                                     </div>
                                 </div>
                             {{ Form::close() }}

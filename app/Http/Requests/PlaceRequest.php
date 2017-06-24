@@ -26,7 +26,7 @@ class PlaceRequest extends FormRequest
         return [
             'name'        => 'required|max:100',
             'address'     => 'required|max:100',
-            'description' => 'required',
+            'description' => '',
             'thumbnail.*' => 'image|max:2048',
             'thumbnail'   => 'image|max:2048',
             'time_open'   => 'required',
