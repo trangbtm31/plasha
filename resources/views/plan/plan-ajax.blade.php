@@ -78,17 +78,23 @@ foreach($data as $plan)
                     <p><b>Start at : </b>{{ date('H:i d-m-Y', strtotime($plan["start_time"])) }}<b> to </b>{{ date('H:i d-m-Y', strtotime($plan["end_time"])) }}</p>
                 </div>
                 <div class="line-divider"></div>
-                <div id="plan-place">
+                <div class="plan-place">
                     <ul>
                         @foreach($plan['plan_place'] as $plan_place)
-                        <li class="row">
-                            <div class="col-md-6 place-img" id="place-img-{{$plan_place['id']}}" img-id="{{$plan_place['id']}}">
-                                <img src="/images/places/{{ !empty($plan_place['place_thumbnail'])? $plan_place['place_thumbnail'][0]['thumbnail'] : 'sunset_winter.png'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
+                        <li class="row place-content">
+                            <div class="col-md-6 " id="place-img-{{$plan_place['id']}}">
+                                <img class="place-img" img-id="{{$plan_place['id']}}" src="/images/places/{{ !empty($plan_place['place_thumbnail'])? $plan_place['place_thumbnail'][0]['thumbnail'] : 'default.jpg'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
                             </div>
                             <div class="col-md-6 place-info" id="place-info-{{$plan_place['id']}}" hidden>
-                                <span class="place-stay-time">{{ date('H:i d-m-Y', strtotime($plan_place['start_time'])) }} to {{ date('H:i d-m-Y', strtotime($plan_place['end_time'])) }}</span><br>
+                                <span class="place-stay-time">{{ date('H:i d-m-Y', strtotime($plan_place['start_time'])) }} <em>to</em> {{ date('H:i d-m-Y', strtotime($plan_place['end_time'])) }}</span><br>
                                 <span class="place-name"><strong>{{ $plan_place['name'] }}</strong></span><br>
+                                <ul class="place-rating">
+                                    @for( $j = 0; $j < (int)$plan_place['star'] ; $j++)
+                                    <li><img src="/images/star-icon.png"></li>
+                                    @endfor
+                                </ul>
                                 <span class="place-address">{{ $plan_place['address'] }}</span><br>
+                                <span class="place-category">Category: {{ $plan_place['category_id'] }}</span><br>
                                 <span class="place-open-time">Open at: {{ date('H:i', strtotime($plan_place['time_open'])) }}</span><br>
                                 <span class="place-close-time">Close at: {{ date('H:i', strtotime($plan_place['time_close'])) }}</span><br>
                                 <span class="place-cost">Expected cost: {{ $plan_place['cost'] }} VND</span>
@@ -122,18 +128,6 @@ foreach($data as $plan)
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            $(".place-img").mouseover(function(){
-                var i = $(this).attr("img-id");
-                $("#place-info-"+i).show(500);
-            });
-            $(".place-img").mouseout(function(){
-                var i = $(this).attr("img-id");
-                $("#place-info-"+i).hide(500);
-            })
-        })
-    </script>
 {{--
 	<script>
     var sliders = []
