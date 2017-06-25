@@ -3,9 +3,6 @@ use App\Friend;
 $recommend_friend = (new Friend)->findRandomUser();
 ?>
 
-<h4 class="grey">
-    <a href="/friend-request" class="text-green text-center col-xs-12">Friend Requests</a>
-</h4>
 <div class="suggestions" id="sticky-sidebar">
 <h4 class="grey">Who to Follow</h4>
 @foreach($recommend_friend as $user)

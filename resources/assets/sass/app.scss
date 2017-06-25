@@ -528,7 +528,7 @@ ul.nav-news-feed i.ion-ios-people-outline{color: #ee2a7b;}
 
 ul.nav-news-feed i.ion-chatboxes{color: #f7941e;padding: 3px 8px;}
 
-ul.nav-news-feed i.ion-images{color: #1c75bc;}
+ul.nav-news-feed i.ion-location{color: #1c75bc; padding: 3px 11px;}
 
 ul.nav-news-feed i.ion-ios-videocam{color: #9e1f63;padding: 3px 8px;}
 
@@ -802,8 +802,8 @@ ul.online-users li span.offline-dot{
   }
 }
 
-#plan-place {
-  li{
+.plan-place {
+  .place-content{
     display: inline-block;
     list-style-type: none;
     margin: 10px;
@@ -818,11 +818,25 @@ ul.online-users li span.offline-dot{
       padding: 0;
     }
     .place-stay-time{
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
+      color: #8dc63f;
+      em{
+        color: #000000;
+      }
     }
     .place-address {
       font-style: italic;
+    }
+    .place-rating {
+        list-style-type: none;
+        overflow: hidden;
+        width:100%;
+        margin:0;
+        li{
+          margin: 3px;
+          display: inline-block;
+        }
     }
   }
   /*width: 100%; height: 250px;

@@ -1,6 +1,13 @@
 $(document).ready(function(){
   activaTab('auto-plan');
-
+    $(".place-img").mouseover(function(){
+        var i = $(this).attr("img-id");
+        $("#place-info-"+i).show(500);
+    });
+    $(".place-img").mouseout(function(){
+        var i = $(this).attr("img-id");
+        $("#place-info-"+i).hide(500);
+    })
 });
 
 /*
