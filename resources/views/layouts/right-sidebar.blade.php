@@ -1,6 +1,6 @@
 <?php
 use App\Friend;
-$recommend_friend = (new Friend)->findRandomUser();
+    $recommend_friend = (new Friend)->findRandomUser();
 ?>
 
 <div class="suggestions" id="sticky-sidebar">
