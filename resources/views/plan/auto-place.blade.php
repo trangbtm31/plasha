@@ -1,6 +1,6 @@
 {{ Form::text( 'number_place', count($places), array('class' => 'hidden') ) }}
 @if (!empty($places))
-    Expected cost: {{ Form::text( 'max_cost', $max_cost, ['class' => 'fake-input', 'readonly' => ''] ) }}
+    Expected cost: {{ Form::text( 'max_cost', $max_cost, ['class' => 'fake-input expected-cost', 'readonly' => '','size' => '5'] ) }}
     <div class="plan-place">
     @for( $i = 0; $i < count($places); $i++ )
         <div class="place-content row">

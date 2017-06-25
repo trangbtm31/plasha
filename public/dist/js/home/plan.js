@@ -4,7 +4,7 @@ $(document).ready(function(){
         var i = $(this).attr("img-id");
         $("#place-info-"+i).show(500);
     });
-    $(".place-img").mouseout(function(){
+    $(".place-content").mouseout(function(){
         var i = $(this).attr("img-id");
         $("#place-info-"+i).hide(500);
     })

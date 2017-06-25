@@ -2,10 +2,10 @@
   <script language="javascript" src="dist/js/home/plan.js" ></script>
   <script src="js/jquery.datetimepicker.full.min.js"></script>
 @endsection
-<h2>Create Plan</h2>
+{{--<h2>Create Plan</h2>--}}
   <ul class="nav nav-tabs">
     <li><a data-toggle="tab" href="#auto-plan">Auto Create Plan</a></li>
-    <li><a data-toggle="tab" href="#handle-plan">Share Location</a></li>
+    <li><a data-toggle="tab" href="#handle-plan">Share Place</a></li>
   </ul>
   <div class="tab-content" id="tabs">
     <div id="auto-plan" class="tab-pane">
@@ -76,7 +76,7 @@
                             {{--{{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}--}}
                             <div class="create-place">
                                 {{--<a onclick="remove_place()" class="close"><span class="close-button glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>--}}
-                                <h2>Location </h2>
+                                <h2>Share your Place</h2>
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
                                             <div class="form-group">

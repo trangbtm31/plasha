@@ -51,12 +51,12 @@ class PlanController extends Controller
         echo "</pre>";
         exit();*/
 
-        $request->total_cost = 0;
+        /*$request->total_cost = 0;
         foreach ($request->place_cost as $cost) {
             $request->total_cost += $cost;
-        }
+        }*/
 
-        $request->start_time = $request->place_time_start[0];
+        /*$request->start_time = $request->place_time_start[0];
         foreach ($request->place_time_start as $time) {
             if ( strtotime($request->start_time) > strtotime($time) ) {
                 $request->start_time = $time;
@@ -68,16 +68,16 @@ class PlanController extends Controller
             if ( strtotime($request->end_time) < strtotime($time) ) {
                 $request->end_time = $time;
             }
-        }
+        }*/
 
-        $plan_info = new PlanHandle();
-        $plan_info->Create($request);
+        /*$plan_info = new PlanHandle();*/
+        /*$plan_info->Create($request);*/
         /*$now = Carbon::now('utc')->toDateTimeString();*/
         for($i = 0; $i < count($request->place_name); $i++) {
             $data = array('name' => $request->place_name[$i],
             'address' => $request->place_address[$i],
             'description' => $request->place_description[$i],
-            /*'category' => $request->place_category[$i],*/
+            'category' => $request->place_category[$i],
             'time_open' => $request->place_time_open[$i],
             'time_close' => $request->place_time_close[$i],
             'cost' => $request->place_cost[$i],
@@ -86,28 +86,28 @@ class PlanController extends Controller
             );
 
             $place_id = Place::insertGetId($data);
-
+            /*
             //Insert into plan_place table
             $PlanPlace = new PlanPlace();
             $PlanPlace->plan_id = $plan_info->id;
             $PlanPlace->place_id = $place_id;
             $PlanPlace->start_time = $request->get('place_time_start')[$i];
             $PlanPlace->end_time = $request->get('place_time_end')[$i];
-            $PlanPlace->save();
+            $PlanPlace->save();*/
 
             //Get thumbnail
             if (!empty($request->file('place_thumbnail')[$i]))
             {
 //                foreach ($request->file('place_thumbnail') as $thumbnail)
 //                {
-                    $image = new PlaceThumbnail($PlanPlace->place_id);
+                    $image = new PlaceThumbnail($place_id);
                     $image->create($request->file('place_thumbnail')[$i]);
 //                }
             }
 
         };
 
-        return redirect()->route('home')->with(['message' => 'Your plan has been created successfully!']);
+        return redirect()->route('home')->with(['message' => 'Your location has been sent to admin! Please waiting for reply from admin']);
     }
     /*public function handleCreatePlace(PlaceRequest $request)
     {

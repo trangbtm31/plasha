@@ -14,7 +14,10 @@ $current_user = User::getCurrentUserInfo();
     </div><!--profile card ends-->
     <ul class="nav-news-feed">
         <li><i class="icon ion-ios-paper"></i><div><a href="{{ route('home')}}">My Newsfeed</a></div></li>
-        <li><i class="icon ion-ios-people"></i><div><a href="{{route('friend-request')}}">Friends Request <span class="fr-req" style="">{{$fr_req? count($fr_req) : ''}}</span></a></div></li>
+        <li><i class="icon ion-ios-people"></i><div><a href="{{route('friend-request')}}">Friends Request
+        @if($fr_req)
+        <span class="fr-req" style="">{{$fr_req? count($fr_req) : ''}}</span>
+        @endif</a></div></li>
         <li><i class="icon ion-ios-people-outline"></i><div><a href="{{ route('friend-list')}}">Friends List</a></div></li>
         <li><i class="icon ion-chatboxes"></i><div><a href="chat">Messages</a></div></li>
         <li><i class="icon ion-location"></i><div><a href="newsfeed-images.html">Place Collection</a></div></li>

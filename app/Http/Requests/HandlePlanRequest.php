@@ -24,18 +24,11 @@ class HandlePlanRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|max:50',
-            'description' => 'required',
-            'thumbnail.*' => 'image|max:2048',
-            'place_name'        => 'required|max:50',
             'place_description' => 'required',
             'place_category'    => 'required',
-            'place_thumbnail.*' => 'image|max:2048',
             'place_name'        => 'required|max:50',
             'place_address'    => 'required',
             'place_thumbnail.*'  => 'image|max:2048',
-            'place_time_start' => 'required',
-            'place_time_end'   => 'required',
             'place_cost'       => 'required',
             'total_cost'       => ''
         ];
