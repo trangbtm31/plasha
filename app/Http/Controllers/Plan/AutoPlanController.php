@@ -68,29 +68,27 @@ class AutoPlanController extends Controller
         $b = $temp;
     }
 
-    /* Hàm kiểm tra các địa điểm có phù hợp hay không
-     * Input : Danh sách các địa điểm (Place) lấy từ database
-     * Output: true/false và danh sách Places sắp xếp theo thứ tự thực hiện.
+    /* Hàm dùng để thiết lập Ngày và Giờ đóng/mở cửa của một địa điểm */
+    public function setTimeOpenDoor( Carbon $DateTimeCome, string $TimeOpen, string $TimeClose) {
+        if ( strtotime( $TimeOpen ) > strtotime( $DateTimeCome->toTimeString() ) ) {
+            $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen)->subDay();
+        } else {
+            $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen);
+        }
+
+        $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $date_time_open->toDateString(). ' ' . $TimeClose);
+        //Nếu nơi đó mở cửa tới sáng (VD: 18:00 -> 2:00) thì thời gian đóng cửa sẽ là ngày hôm sau
+        if ( $date_time_close->lt($date_time_open) ) {
+            $date_time_close->addDay(); //Thêm 1 ngày
+        }
+
+        return array('date_time_open' => $date_time_open, 'date_time_close' => $date_time_close);
+    }
+
+    /* Hàm dùng để sắp xếp các địa điểm đang chọn
+     * Nếu sắp xếp không phù hợp sẽ trả về False
      */
-    public function checkPlaces(&$places) {
-        //Tổng thời gian và chi phí của kế hoạch có phù hợp với các địa điểm trên?
-        $time = $cost = 0;
-        foreach ($places as $place) {
-            $time += $this->timeToMinutes($place['time_stay']);
-            $cost += $place['cost'];
-        }
-
-        //Tổng giá cao hơn hoặc chi phí các địa điểm này ít hơn thì sẽ không phù hợp
-        if ($cost > $this->total_cost) {
-            return false;
-        }
-
-        //Tổng thời gian vượt quá thời gian thực hiện kế hoạch thì không phù hợp
-        //Hoặc tổng thời gian ít hơn thời gian của kế hoạch khác thì không phù hợp
-        if ($time > $this->min_to_do || $time <= $this->max_time) {
-            return false;
-        }
-
+    public function arrangePlaces (&$places) {
         //Sắp xếp các địa điểm theo thời gian mở cửa
         //'clone' dùng để sao chép một đối tượng object. Nếu không dùng clone thì khi a thay đổi, b cũng thay đổi theo
         $temp_time = clone $this->start_time;
@@ -111,8 +109,10 @@ class AutoPlanController extends Controller
             //Tìm địa điểm phù hợp để thực hiện trước
             for ($j = $i + 1; $j < count($places); $j++) {
                 $temp_leave_at = (clone $temp_time)->addMinutes( $this->timeToMinutes($places[$j]['time_stay'] ) );
-                if ( strtotime( $places[$j]['time_open'] ) <= strtotime( $come_on->toTimeString() ) //Mở cửa trước khi đến
-                    && strtotime( $places[$j]['time_close'] ) >= strtotime( $temp_leave_at->toTimeString() ) //Đóng cửa sau khi rời
+                $open_door = $this->setTimeOpenDoor($come_on,$places[$j]['time_open'],$places[$j]['time_close']);
+
+                if ( $come_on->gte($open_door['date_time_open']) //Mở cửa trước khi đến
+                    && $leave_at->lte($open_door['date_time_close']) //Đóng cửa sau khi rời
                     && strtotime( $places[$j]['time_close'] ) < strtotime( $close_early ) //Nơi có time_close gần nhất thì đi trước
                     && $places[$j]['category_id'] != $category_1
                     && $places[$j]['category_id'] != $category_2
@@ -135,22 +135,66 @@ class AutoPlanController extends Controller
                 }
             }
 
-            //Kiểm tra thời gian đóng mở của địa điểm
-            if ( strtotime( $places[$i]['time_open'] ) > strtotime( $come_on->toTimeString() ) //Mở cửa trước khi đến
-                || strtotime( $places[$i]['time_close'] ) < strtotime( $leave_at->toTimeString() ) ) //Đóng cửa sau khi rời
+            //Nếu đang tìm địa điểm nhưng chưa có nơi nào mở cửa thì tìm nơi mở cửa sớm nhất
+            $open_door = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
+            if ( ($come_on->lt($open_door['date_time_open']) || $leave_at->gt($open_door['date_time_close'])) )
+            {
+                $open_soon = strtotime($places[$i]['time_open']);
+                for ($k = $i + 1; $k < count($places); $k++) {
+                    if ( strtotime( $places[$k]['time_open'] ) <  $open_soon ) {
+                        $this->swapPlace($places[$i], $places[$k]);
+                    }
+                }
+                $come_on = Carbon::createFromFormat('Y-m-d H:i:s', $come_on->toDateString(). ' ' . $places[0]['time_open']);
+                $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay'] ) );
+            }
+
+            //Kiểm tra lại thời gian mở cửa lần cuối, nếu không tìm đc nơi phù hợp nữa thì ngừng
+            $open_door = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
+            if ( $come_on->lt($open_door['date_time_open']) || $leave_at->gt($open_door['date_time_close']) )
             {
                 return false;
             }
+
             $places[$i]['come_on'] = clone $come_on;
             $places[$i]['leave_at'] = clone $leave_at;
             $temp_time = clone $leave_at;
         }
-
-        $this->max_cost = $cost;
-        $this->max_time = $time;
-        $this->great_places = $places;
-
         return true;
+    }
+
+    /* Hàm kiểm tra các địa điểm có phù hợp hay không
+     * Input : Danh sách các địa điểm (Place) lấy từ database
+     * Output: true/false và danh sách Places sắp xếp theo thứ tự thực hiện.
+     */
+    public function checkPlaces(&$places) {
+        //Tổng thời gian và chi phí của kế hoạch có phù hợp với các địa điểm trên?
+        $time = $cost = 0;
+        foreach ($places as $place) {
+            $time += $this->timeToMinutes($place['time_stay']);
+            $cost += $place['cost'];
+        }
+
+        //Tổng giá cao hơn thì sẽ không phù hợp
+        if ($cost > $this->total_cost) {
+            return false;
+        }
+
+        //Tổng thời gian vượt quá thời gian thực hiện kế hoạch thì không phù hợp
+        //Hoặc tổng thời gian ít hơn thời gian của kế hoạch khác thì không phù hợp
+        if ($time > $this->min_to_do || $time <= $this->max_time) {
+            return false;
+        }
+
+        //Sắp xếp các địa điểm theo thứ tự hợp lý và cập nhật thông tin
+        if ( $this->arrangePlaces($places) ) {
+            $this->max_cost = $cost;
+            $this->max_time = $time;
+            $this->great_places = $places;
+            return true;
+        } else {
+            return false; //Nếu không xếp được thì các điểm này không phù hợp
+        }
     }
 
     /* Hàm đệ quy SaveMoney:
@@ -201,16 +245,20 @@ class AutoPlanController extends Controller
             $min_distance = $this->distance($this->great_places[$i-1], $this->great_places[$i]);
             for ($j = 0; $j < count($places); $j++) {
                 if ($this->great_places[$i]['category_id'] == $places[$j]['category_id']) {
+
                     $temp_distance = $this->distance($this->great_places[$i-1], $places[$j]); //Tính khoảng cách
                     $temp_cost = $this->max_cost - $this->great_places[$i]['cost'] + $places[$j]['cost']; //Tính chi phí tạm thời
+                    $open_door = $this->setTimeOpenDoor($this->great_places[$i]['come_on'], $places[$j]['time_open'], $places[$j]['time_close']);
+
                     if (
                         $temp_distance < $min_distance //Địa điểm thay thế gần hơn
                         && $temp_cost <= $this->total_cost //Chi phí đủ
-                        && strtotime($places[$j]['time_open']) <= strtotime($this->great_places[$i]['come_on']) //Kiểm tra time mở cửa
-                        && strtotime($places[$j]['time_close']) >= strtotime($this->great_places[$i]['leave_at']) //Kiểm tra time đóng cửa
+                        && $this->great_places[$i]['come_on']->gte($open_door['date_time_open'])//Kiểm tra time mở cửa
+                        && $this->great_places[$i]['leave_at']->lte($open_door['date_time_close'])//Kiểm tra time đóng cửa
                     ) { //Thay thế bằng địa điểm khác gần hơn
                         $this->great_places[$i] = array_merge($this->great_places[$i],$places[$j]);
                         $this->max_cost = $temp_cost; //Cập nhật chi phí kế hoạch
+                        $min_distance = $temp_distance;
                     }
                 }
             }
