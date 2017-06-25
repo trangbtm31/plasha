@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2017 at 05:34 PM
+-- Generation Time: Jun 25, 2017 at 03:18 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.2
 
@@ -272,11 +272,11 @@ INSERT INTO `place` (`id`, `name`, `address`, `description`, `time_open`, `time_
 (18, 'Phố Nhật - Noodle & Sushi', '39 Nguyễn Thái Học , P. Cầu Ông Lãnh,  Quận 1, TP. HCM', NULL, '10:00:00', '23:00:00', '02:00:00', 250000, 5, 'eating', '10.766991', '106.6957761', '2017-06-23 16:27:57', '2017-06-24 11:32:28'),
 (20, 'La Bettola Saigon - Italian Cuisine', '82 Xuân Thủy, P. Thảo Điền,  Quận 2, TP. HCM', NULL, '11:00:00', '22:00:00', '02:00:00', 300000, 5, 'eating', '10.8035602', '106.7340611', '2017-06-23 16:37:47', '2017-06-24 12:12:20'),
 (21, 'Mộc - Riêu & Nướng - Lam Sơn', '9A Lam Sơn, P. 2,  Quận Tân Bình, TP. HCM', NULL, '06:00:00', '22:00:00', '02:00:00', 180000, 4, 'eating', '10.8079471', '106.6664663', '2017-06-23 16:40:27', '2017-06-24 11:28:22'),
-(22, 'Galaxy Cinema - Nguyễn Du', '116 Nguyễn Du,  Quận 1, TP. HCM', NULL, '09:00:00', '23:30:00', '02:30:00', 165000, 5, 'movie', '10.772937', '106.693387', '2017-06-23 16:42:51', '2017-06-24 12:08:44'),
+(22, 'Galaxy Cinema - Nguyễn Du', '116 Nguyễn Du,  Quận 1, TP. HCM', NULL, '09:00:00', '23:30:00', '02:30:00', 150000, 5, 'movie', '10.772937', '106.693387', '2017-06-23 16:42:51', '2017-06-24 12:08:44'),
 (23, 'Hồ Bơi Văn Thánh - Điện Biên Phủ', '48/10 Điện Biên Phủ, P. 22,  Quận Bình Thạnh, TP. HCM', NULL, '09:00:00', '21:00:00', '01:30:00', 60000, 4, 'swimming', '10.7995679', '106.7174578', '2017-06-23 16:45:20', '2017-06-24 11:29:07'),
 (24, 'Hồ Bơi Lan Anh', '291 Cách Mạng Tháng 8, P. 12,  Quận 10, TP. HCM', NULL, '06:00:00', '21:00:00', '01:30:00', 50000, 3, 'swimming', '10.7793278', '106.6786446', '2017-06-23 16:46:31', '2017-06-24 11:33:51'),
 (25, 'Bowling Dream Game - AEON Mall', 'Tầng 3 AEON Mall, 30 Bờ Bao Tân Thắng, P. Sơn Kỳ,  Quận Tân Phú, TP. HCM', NULL, '09:00:00', '21:00:00', '02:00:00', 165000, 4, 'sport', '10.8017161', '106.6179324', '2017-06-23 16:48:24', '2017-06-24 12:12:21'),
-(26, 'Massé SaiGon Pool Club', '150/9 Nguyễn Trãi,  Quận 1, TP. HCM', 'Karaoke, Beer club, Thăm quan & chụp ảnh, Billiards, Sân khấu, Khu chơi Game, Giao cơm văn phòng, Khu Ẩm Thực', '11:00:00', '02:00:00', '04:00:00', 500000, 5, 'sport', '10.7699769', '106.6902502', '2017-06-23 16:52:58', '2017-06-24 12:12:22'),
+(26, 'Massé SaiGon Pool Club', '150/9 Nguyễn Trãi,  Quận 1, TP. HCM', 'Karaoke, Beer club, Thăm quan & chụp ảnh, Billiards, Sân khấu, Khu chơi Game, Giao cơm văn phòng, Khu Ẩm Thực', '11:00:00', '02:00:00', '03:00:00', 500000, 5, 'sport', '10.7699769', '106.6902502', '2017-06-23 16:52:58', '2017-06-24 12:12:22'),
 (27, 'Escape Room Việt Nam - Trò chơi thoát hiểm', 'Lầu 5, TTTM Crescent Mall, 101 Tôn Dật Tiên, P. Tân Phú,  Quận 7, TP. HCM', NULL, '10:00:00', '22:00:00', '01:00:00', 285000, 5, 'sport', '10.7287097', '106.7188056', '2017-06-23 16:55:59', '2017-06-24 12:08:46'),
 (28, 'Nhà hàng The Deck Saigon', '38 Nguyễn Ư Dĩ, P. Thảo Điền,  Quận 2, TP. HCM', NULL, '08:30:00', '23:30:00', '02:00:00', 385000, 5, 'eating', '10.806938', '106.7445592', '2017-06-23 16:57:11', '2017-06-24 11:34:10'),
 (29, 'Morico - Modern Japanese Restaurant Cafe', '30 Lê Lợi, P. Bến Nghé,  Quận 1, TP. HCM', NULL, '09:00:00', '23:00:00', '03:00:00', 150000, 5, 'drink', '10.7743308', '106.7007185', '2017-06-23 17:01:14', '2017-06-24 11:32:46'),

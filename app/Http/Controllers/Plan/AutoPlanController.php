@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Plan;
 
 use App\Place;
 use App\Http\Controllers\Controller;
+use App\PlaceThumbnail;
 use Carbon\Carbon;
 
 class AutoPlanController extends Controller
@@ -234,6 +235,7 @@ class AutoPlanController extends Controller
     protected function findSaveMoney() {
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
         $this->ManyPlace($places, 0, count($places) - 1);
+        $this->getThumbnail();
         return $this->great_places;
     }
 
@@ -274,12 +276,21 @@ class AutoPlanController extends Controller
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
         $this->ManyPlace($places, 0, count($places) - 1); //Tìm số lượng địa điểm tối đa đi được
         $this->findShortedPath($places); //Tìm địa điểm có đường đi ngắn hơn để thay thế
+        $this->getThumbnail();
         return $this->great_places;
     }
 
     protected function findLuxuryPlace() {
         $places = Place::where('star', 5)->orWhere('star', 4)->get()->toArray(); //Chỉ xét những nơi 4 hoặc 5 sao
         $this->ManyPlace($places, 0, count($places) - 1); //Tìm số lượng địa điểm tối đa đi được
+        $this->getThumbnail();
         return $this->great_places;
+    }
+
+    public function getThumbnail() {
+        foreach ($this->great_places as &$place) {
+            $thumbnail = new PlaceThumbnail($place['id']);
+            $place['place_thumbnail'] = $thumbnail->getThumbnail()->toArray();
+        }
     }
 }
