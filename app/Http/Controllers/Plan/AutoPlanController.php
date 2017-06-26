@@ -71,16 +71,39 @@ class AutoPlanController extends Controller
 
     /* Hàm dùng để thiết lập Ngày và Giờ đóng/mở cửa của một địa điểm */
     public function setTimeOpenDoor( Carbon $DateTimeCome, string $TimeOpen, string $TimeClose) {
-        if ( strtotime( $TimeOpen ) > strtotime( $DateTimeCome->toTimeString() ) ) {
-            $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen)->subDay();
-        } else {
+//        if ( strtotime( $TimeOpen ) > strtotime( $DateTimeCome->toTimeString() ) ) {
+//            $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen)->subDay();
+//        } else {
+//            $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen);
+//        }
+//
+//        $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $date_time_open->toDateString(). ' ' . $TimeClose);
+//        //Nếu nơi đó mở cửa tới sáng (VD: 18:00 -> 2:00) thì thời gian đóng cửa sẽ là ngày hôm sau
+//        if ( $date_time_close->lt($date_time_open) ) {
+//            $date_time_close->addDay(); //Thêm 1 ngày
+//        }
+        if ( strtotime( $TimeOpen ) < strtotime( $TimeClose ) ) {
+            //Trường hợp thời gian mở trong ngày (VD: 8h ->23h)
+            if ( strtotime( $DateTimeCome->toTimeString() ) >= strtotime( $TimeClose ) ) {
+                $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen)->addDay();
+                $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeClose)->addDay();
+            } else {
+                $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen);
+                $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeClose);
+            }
+        } else if ( strtotime( $TimeOpen ) > strtotime( $TimeClose ) ) {
+            //Nếu nơi đó mở cửa qua 24h đêm (VD: 18:00 -> 2:00)
+            if ( strtotime( $DateTimeCome->toTimeString() ) >= strtotime( $TimeClose ) ) {
+                $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString().' ' .$TimeOpen);
+                $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString().' '.$TimeClose)->addDay();
+            }
+            else {
+                $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen)->subDay();
+                $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeClose);
+            }
+        } else { //Mở cửa 24/24
             $date_time_open = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeOpen);
-        }
-
-        $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $date_time_open->toDateString(). ' ' . $TimeClose);
-        //Nếu nơi đó mở cửa tới sáng (VD: 18:00 -> 2:00) thì thời gian đóng cửa sẽ là ngày hôm sau
-        if ( $date_time_close->lt($date_time_open) ) {
-            $date_time_close->addDay(); //Thêm 1 ngày
+            $date_time_close = Carbon::createFromFormat('Y-m-d H:i:s', $DateTimeCome->toDateString(). ' ' . $TimeClose)->addDay();
         }
 
         return array('date_time_open' => $date_time_open, 'date_time_close' => $date_time_close);
@@ -137,17 +160,25 @@ class AutoPlanController extends Controller
             }
 
             //Nếu đang tìm địa điểm nhưng chưa có nơi nào mở cửa thì tìm nơi mở cửa sớm nhất
-            $open_door = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
-            if ( ($come_on->lt($open_door['date_time_open']) || $leave_at->gt($open_door['date_time_close'])) )
+            $open_door_i = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
+
+            if ( ($come_on->lt($open_door_i['date_time_open']) || $leave_at->gt($open_door_i['date_time_close'])) )
             {
-                $open_soon = strtotime($places[$i]['time_open']);
+                //Tìm nơi mở cửa sớm nhất
+                $min_come_on = clone $open_door_i['date_time_open'];
                 for ($k = $i + 1; $k < count($places); $k++) {
-                    if ( strtotime( $places[$k]['time_open'] ) <  $open_soon ) {
+                    $open_door_k = $this->setTimeOpenDoor($come_on,$places[$k]['time_open'],$places[$k]['time_close']);
+                    $temp_leave_at = (clone $open_door_k['date_time_open'])->addMinutes( $this->timeToMinutes($places[$k]['time_stay']) );
+                    if ( $min_come_on->lt($open_door_k['date_time_open']) //Nơi mở cửa sớm
+                        && $temp_leave_at->lte($open_door_k['date_time_close']) //Và đóng cửa sau khi rời đi
+                    )
+                    {
+                        $min_come_on = clone $open_door_k['date_time_open'];
                         $this->swapPlace($places[$i], $places[$k]);
                     }
                 }
-                $come_on = Carbon::createFromFormat('Y-m-d H:i:s', $come_on->toDateString(). ' ' . $places[0]['time_open']);
-                $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay'] ) );
+                $come_on = clone $min_come_on;
+                $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay']) );
             }
 
             //Kiểm tra lại thời gian mở cửa lần cuối, nếu không tìm đc nơi phù hợp nữa thì ngừng
@@ -193,9 +224,8 @@ class AutoPlanController extends Controller
             $this->max_time = $time;
             $this->great_places = $places;
             return true;
-        } else {
-            return false; //Nếu không xếp được thì các điểm này không phù hợp
         }
+        return false;
     }
 
     /* Hàm đệ quy SaveMoney:
@@ -233,6 +263,14 @@ class AutoPlanController extends Controller
     }
 
     protected function findSaveMoney() {
+//        $places = Place::where('id', '=', '17')->orWhere('id', '=', '20')->orderBy('cost', 'ASC')->get()->toArray();
+//        $places = Place::where('id', '=', '31')->orWhere('id', '=', '26')->orWhere('id', '=', '23')->get()->toArray();
+//        foreach ($places as &$place){
+//            $result = $this->setTimeOpenDoor($this->start_time,$place['time_open'],$place['time_close']);
+//            echo "<pre>";
+//            print_r($result);
+//            echo "</pre>";
+//        }
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
         $this->ManyPlace($places, 0, count($places) - 1);
         $this->getThumbnail();
@@ -275,7 +313,7 @@ class AutoPlanController extends Controller
     protected function findManyPlace() {
         $places = Place::where('cost', '<=', $this->total_cost)->orderBy('cost', 'ASC')->get()->toArray();
         $this->ManyPlace($places, 0, count($places) - 1); //Tìm số lượng địa điểm tối đa đi được
-        $this->findShortedPath($places); //Tìm địa điểm có đường đi ngắn hơn để thay thế
+        //$this->findShortedPath($places); //Tìm địa điểm có đường đi ngắn hơn để thay thế
         $this->getThumbnail();
         return $this->great_places;
     }

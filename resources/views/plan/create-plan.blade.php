@@ -22,23 +22,27 @@
                          {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Enter name of plan', 'maxlength' => '50')) }}
                          {{ Form::textarea('description', '', array('class' => 'form-control', 'id' => 'upload-plan', 'placeholder' => 'Write your plan', 'cols' => '50', 'rows' => '1' )) }}
                          {{--{{ Form::file('thumbnail[]',array('class' => 'ion-images', 'accept' => 'image/*', 'multiple' =>'')) }}--}}
-                         {{ Form::number('price', '', array('id' => 'total_cost', 'class' => 'form-control', 'placeholder' => 'Enter total cost for this plan', 'maxlength' => '10')) }}
+                         {{ Form::number('price', '', array('id' => 'total_cost', 'class' => 'form-control', 'placeholder' => 'Enter maximum cost for this plan', 'maxlength' => '10')) }}
+                         <div class="error" id="total_cost_error"></div>
                          {{ Form::radio('find_place', 'save-money', true, ['class' => '']) }} Save Money <br/>
                          {{ Form::radio('find_place', 'many-place', false, ['class' => '']) }} Many Place <br/>
                          {{ Form::radio('find_place', 'luxury-place', false, ['class' => '']) }} Luxury Place <br/>
                          <div class="row">
                              <div class="col-md-6 col-sm-6">
                                  {{ Form::text('start_time', '', array('class' => 'form-control', 'id' => 'start-time', 'placeholder' => 'Start Time')) }}
+                                 <div class="error" id="start_time_error"></div>
                                  <script>
                                      jQuery('#start-time').datetimepicker();
                                  </script>
                              </div>
                              <div class="col-md-6 col-sm-6">
                                  {{ Form::text('end_time', '', array('class' => 'form-control', 'id' => 'end-time', 'placeholder' => 'End Time')) }}
+                                 <div class="error" id="end_time_error"></div>
                                  <script>
                                      jQuery('#end-time').datetimepicker();
                                  </script>
                              </div>
+                             <div class="error" id="start_end_error"></div>
                          </div>
                          <button type="button" class="btn btn-primary" onclick="auto_place()">Suggest</button>
                          <div id="recommend-place"></div>
