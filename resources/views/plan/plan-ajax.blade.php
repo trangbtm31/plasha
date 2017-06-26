@@ -44,7 +44,7 @@ foreach($data as $plan)
         </div>
         @endif
         {{--@foreach($plan["list_thumbnail"] as $thumbnail)
-            <img src="images/plan-thumbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
+            <img src="images/plan-umbnail/{{ $thumbnail["thumbnail"] }}" alt="post-image" class="img-responsive post-image" />
         @endforeach--}}
         <div class="post-container">
             <img src="images/users/{{ !empty($plan["avatar"]) ? $plan["avatar"] : 'users_default.png' }}" alt="user" class="profile-photo-md pull-left" />

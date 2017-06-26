@@ -60,4 +60,10 @@ class PlaceController extends Controller
             return false;
         }
     }
+
+    public function showPlaceList() {
+        $place_list = (new Place)->getPlaceList();
+        //var_dump(json_decode($place));die;
+        return view('place.place-list', compact('place_list'));
+    }
 }

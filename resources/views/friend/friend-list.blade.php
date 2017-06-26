@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Plasa news feed !!
+    Friend list
 @endsection
 
 @section('content')

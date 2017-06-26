@@ -20,7 +20,7 @@ $current_user = User::getCurrentUserInfo();
         @endif</a></div></li>
         <li><i class="icon ion-ios-people-outline"></i><div><a href="{{ route('friend-list')}}">Friends List</a></div></li>
         <li><i class="icon ion-chatboxes"></i><div><a href="chat">Messages</a></div></li>
-        <li><i class="icon ion-location"></i><div><a href="newsfeed-images.html">Place Collection</a></div></li>
+        <li><i class="icon ion-location"></i><div><a href="{{ route('place-list') }}">Place Collection</a></div></li>
         {{--<li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>--}}
     </ul><!--news-feed links ends-->
     <div id="chat-block">
