@@ -121,11 +121,11 @@ class AutoPlanController extends Controller
 
             //Tìm địa điểm phù hợp để thực hiện trước
             for ($j = $i + 1; $j < count($places); $j++) {
-                $temp_leave_at = (clone $temp_time)->addMinutes( $this->timeToMinutes($places[$j]['time_stay'] ) );
+                $temp_leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$j]['time_stay'] ) );
                 $open_door = $this->setTimeOpenDoor($come_on,$places[$j]['time_open'],$places[$j]['time_close']);
 
                 if ( $come_on->gte($open_door['date_time_open']) //Mở cửa trước khi đến
-                    && $leave_at->lte($open_door['date_time_close']) //Đóng cửa sau khi rời
+                    && $temp_leave_at->lte($open_door['date_time_close']) //Đóng cửa sau khi rời
                     && strtotime( $places[$j]['time_close'] ) < strtotime( $close_early ) //Nơi có time_close gần nhất thì đi trước
                     && $places[$j]['category_id'] != $category_1
                     && $places[$j]['category_id'] != $category_2
@@ -133,6 +133,36 @@ class AutoPlanController extends Controller
                     $leave_at = clone $temp_leave_at;
                     $close_early = $places[$j]['time_close'];
                     $this->swapPlace($places[$i], $places[$j]);
+                }
+            }
+
+            //Nếu đang tìm địa điểm nhưng chưa có nơi nào mở cửa thì tìm nơi mở cửa sớm nhất
+            $open_door_i = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
+
+            if ( ($come_on->lt($open_door_i['date_time_open']) || $leave_at->gt($open_door_i['date_time_close'])) )
+            {
+                //Tìm nơi mở cửa sớm nhất
+                $min_come_on = clone $open_door_i['date_time_open'];
+                for ($k = $i + 1; $k < count($places); $k++) {
+                    $open_door_k = $this->setTimeOpenDoor($come_on,$places[$k]['time_open'],$places[$k]['time_close']);
+                    $temp_leave_at = (clone $open_door_k['date_time_open'])->addMinutes( $this->timeToMinutes($places[$k]['time_stay']) );
+                    if ( $open_door_k['date_time_open']->between($come_on,$min_come_on) //Nơi mở cửa sớm
+                        && $temp_leave_at->lte($open_door_k['date_time_close']) //Và đóng cửa sau khi rời đi
+                        && $places[$k]['category_id'] != $category_1
+                        && $places[$k]['category_id'] != $category_2
+                    )
+                    {
+                        $min_come_on = clone $open_door_k['date_time_open'];
+                        $this->swapPlace($places[$i], $places[$k]);
+                    }
+                }
+                $come_on = clone $min_come_on;
+                $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay']) );
+
+                $open_door = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
+                if ( ($come_on->lt($open_door['date_time_open']) || $leave_at->gt($open_door['date_time_close'])) )
+                {
+                    return false;
                 }
             }
 
@@ -146,28 +176,6 @@ class AutoPlanController extends Controller
                 if ($places[$i]['category_id'] == $category_2){
                     return false;
                 }
-            }
-
-            //Nếu đang tìm địa điểm nhưng chưa có nơi nào mở cửa thì tìm nơi mở cửa sớm nhất
-            $open_door_i = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
-
-            if ( ($come_on->lt($open_door_i['date_time_open']) || $leave_at->gt($open_door_i['date_time_close'])) )
-            {
-                //Tìm nơi mở cửa sớm nhất
-                $min_come_on = clone $open_door_i['date_time_open'];
-                for ($k = $i + 1; $k < count($places); $k++) {
-                    $open_door_k = $this->setTimeOpenDoor($min_come_on,$places[$k]['time_open'],$places[$k]['time_close']);
-                    $temp_leave_at = (clone $open_door_k['date_time_open'])->addMinutes( $this->timeToMinutes($places[$k]['time_stay']) );
-                    if ( $min_come_on->gt($open_door_k['date_time_open']) //Nơi mở cửa sớm
-                        && $temp_leave_at->lte($open_door_k['date_time_close']) //Và đóng cửa sau khi rời đi
-                    )
-                    {
-                        $min_come_on = clone $open_door_k['date_time_open'];
-                        $this->swapPlace($places[$i], $places[$k]);
-                    }
-                }
-                $come_on = clone $min_come_on;
-                $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay']) );
             }
 
             $places[$i]['come_on'] = clone $come_on;
