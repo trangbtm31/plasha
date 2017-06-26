@@ -44,7 +44,7 @@
                              </div>
                              <div class="error" id="start_end_error"></div>
                          </div>
-                         <button type="button" class="btn btn-primary" onclick="auto_place()">Suggest</button>
+                         <button id="btn-suggest-place" type="button" class="btn btn-primary" is_busy="false" onclick="auto_place()">Suggest</button>
                          <div id="recommend-place"></div>
                      </div>
                  </div>

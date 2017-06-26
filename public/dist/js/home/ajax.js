@@ -158,20 +158,31 @@ function auto_place() {
     var end_time = $('#end-time').val();
     var har_error = false;
 
+    $button = $('#btn-suggest-place');
+    var is_busy = $button.attr('is_busy');
+
+    if (is_busy == 'true') {
+        return false;
+    }
+    $button.html('Please waiting ^^');
+    $button.attr({
+        "is_busy" : true
+    });
+
     if (total_cost == '') {
-        $('#total_cost_error').html('Please type maximum cost for this plan!');
+        $('#total_cost_error').html('Please type maximum cost for this plan!').show();
         har_error = true;
     } else {
         $('#total_cost_error').hide();
     }
     if (start_time == '') {
-        $('#start_time_error').html('Please choose start time!');
+        $('#start_time_error').html('Please choose start time!').show();
         har_error = true;
     } else {
         $('#start_time_error').hide();
     }
     if (end_time == '') {
-        $('#end_time_error').html('Please choose end time!');
+        $('#end_time_error').html('Please choose end time!').show();
         har_error = true;
     } else {
         $('#end_time_error').hide();
@@ -181,7 +192,7 @@ function auto_place() {
     var end = new Date(end_time);
     var now = new Date();
     if ((start > end) || (now > start)){
-        $('#start_end_error').html('');
+        $('#start_end_error').html('').show();
         if (start > end) {
             $('#start_end_error').append('<p>End time must be after start time. Please choose again!</p>');
         }
@@ -207,8 +218,20 @@ function auto_place() {
             {
                 document.getElementById('recommend-place').innerHTML = result;
             }
-        })
+        }).always(function()
+        {
+            $button.html('Suggest');
+            $button.attr({
+                "is_busy" : false
+            });
+        });
+    } else {
+        $button.html('Suggest');
+        $button.attr({
+            "is_busy" : false
+        });
     }
+
 }
 
 var find_place = document.getElementsByName("find_place");
