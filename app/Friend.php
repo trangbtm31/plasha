@@ -153,17 +153,28 @@ class Friend extends Model
         {
             array_push($list_friend_id, $friend['user_id_1']);
         }
-
-        $query = json_decode(
-            \DB::table('users')
-                ->join('user_info', 'id', '=', 'user_info.user_id')
-                ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
-                ->whereIn('id', $list_friend_id)
-                ->orderBy('updated_at', 'asc')
-                ->offset($start)
-                ->limit($limit)
-                ->get()
-            , true);
+        if($start =! null and $limit != null)
+        {
+            $query = json_decode(
+                \DB::table('users')
+                    ->join('user_info', 'id', '=', 'user_info.user_id')
+                    ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
+                    ->whereIn('id', $list_friend_id)
+                    ->orderBy('updated_at', 'asc')
+                    ->offset($start)
+                    ->limit($limit)
+                    ->get()
+                , true);
+        } else {
+            $query = json_decode(
+                \DB::table('users')
+                    ->join('user_info', 'id', '=', 'user_info.user_id')
+                    ->select('id', 'first_name', 'last_name', 'Gender', 'address', 'job', 'company', 'avatar', 'cover_photo')
+                    ->whereIn('id', $list_friend_id)
+                    ->orderBy('updated_at', 'asc')
+                    ->get()
+                , true);
+        }
         return $query;
     }
 

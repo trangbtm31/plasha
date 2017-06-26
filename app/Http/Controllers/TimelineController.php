@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Category;
 
 class TimelineController extends Controller {
 
@@ -19,7 +20,8 @@ class TimelineController extends Controller {
 
     public function showTimeline($id) {
         $user = User::getUserInfo($id);
-        return view('User.time-line', ['user' => $user] );
+        $category = Category::getAllCategory();
+        return view('User.time-line', ['user' => $user, 'category' => $category] );
     }
 
 } 
