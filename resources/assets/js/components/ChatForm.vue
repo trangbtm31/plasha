@@ -28,6 +28,6 @@
                 });
                 this.newMessage = ''
             }
-        },
+        }
     }
 </script>

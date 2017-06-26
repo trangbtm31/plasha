@@ -16,6 +16,42 @@ require('./bootstrap');
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
 
+const app = new Vue({
+    el: '.chat-room',
+
+    data: {
+        messages: []
+    },
+
+    created() {
+        this.fetchMessages();
+        Echo.private('chat')
+            .listen('MessageSent', (e) => {
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user,
+                    user_info: e.user_info
+                });
+            });
+    },
+
+    methods: {
+        fetchMessages() {
+            axios.get('/messages').then(response => {
+                this.messages = response.data;
+            });
+        },
+
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post('/messages', message).then(response => {
+                console.log(response.data);
+            });
+        }
+    }
+});
+
 Vue.component('example', require('./components/Example.vue'));
 
 /**
