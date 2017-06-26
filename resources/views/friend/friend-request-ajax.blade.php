@@ -1,30 +1,30 @@
 <?php
 namespace App;
-// Lấy trang hiện tại
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-// Kiểm tra trang hiện tại có bé hơn 1 hay không
-if ($page < 1) {
-    $page = 1;
-}
-
-// Số record trên một trang
-$limit = 2;
-
-// Tìm start
-$start = ($limit * $page) - $limit;
-// Câu truy vấn
-$data = (new Friend)->getFriendRequest($start, $limit +1);
-$total = count($data);
-
-if ($total <= $limit){
-    echo '<script language="javascript">$("#load-more-friend-request").remove()</script>';
-}
-
-// Xóa bớt data cuối cùng
-if ($total > $limit){
-    array_pop($data);
-}
+//// Lấy trang hiện tại
+//$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+//
+//// Kiểm tra trang hiện tại có bé hơn 1 hay không
+//if ($page < 1) {
+//    $page = 1;
+//}
+//
+//// Số record trên một trang
+//$limit = 2;
+//
+//// Tìm start
+//$start = ($limit * $page) - $limit;
+//// Câu truy vấn
+$data = (new Friend)->getFriendRequest();
+//$total = count($data);
+//
+//if ($total <= $limit){
+//    echo '<script language="javascript">$("#load-more-friend-request").remove()</script>';
+//}
+//
+//// Xóa bớt data cuối cùng
+//if ($total > $limit){
+//    array_pop($data);
+//}
 ?>
 @foreach($data as $friend)
     <div id="user-request-{{ $friend['id'] }}" class = "friend-request-item col-sm-6 col-md-6 col-lg-6">

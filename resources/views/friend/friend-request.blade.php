@@ -16,7 +16,7 @@ Plasa news feed !!
                 <div class="col-md-9">
                     <h1 class="friend-request-title">Friend Request</h1>
                     <div class="friend-request-wrapper flex-reverse-wrapper">
-                        <button id="load-more-friend-request" class="button btn-primary center-block" onclick="LoadMoreRequestFriend(this)" page="1" is_busy="false">Load More Request</button>
+                        {{--<button id="load-more-friend-request" class="button btn-primary center-block" onclick="LoadMoreRequestFriend(this)" page="1" is_busy="false">Load More Request</button>--}}
                         <div class="friend-request-list friend-list row">
                             @include('friend.friend-request-ajax')
                         </div>
