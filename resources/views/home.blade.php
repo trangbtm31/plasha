@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    {{--@include("layouts.app")--}}
+    @include("layouts.app")
     <div class="news-feed" >
       <div id="page-contents">
   	    <div class="container-fluid">
