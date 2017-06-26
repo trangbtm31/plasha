@@ -146,6 +146,8 @@ class AdminController extends Controller
         $place->cost = $request->cost;
         $place->star = $request->star;
         $place->category_id = $request->category_id;
+        $place->lat = $request->lat;
+        $place->lng = $request->lng;
         $place->save();
 
         if (!empty($request->file('place_thumbnail')))

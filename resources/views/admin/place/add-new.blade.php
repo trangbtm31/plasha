@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            {{ Form::open(array('route'=>'insert-place', 'method' => 'post', 'files' => true, 'class' => 'form-horizontal')) }}
+                            {{ Form::open(array('route'=>'insert-place', 'method' => 'post', 'files' => true, 'class' => 'form-horizontal', 'onsubmit' => 'return checkInsertPlace()')) }}
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="card-header card-header-text" data-background-color="rose">
                                     <h4 class="card-title">New Place</h4>
@@ -138,9 +138,8 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
                                     <label class="col-md-2 label-on-left">Thumbnail</label>
-                                    <div class="col-md-10 fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="col-md-4 fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
                                             <img src="/images/admin/image_placeholder.jpg" alt="...">
                                         </div>
@@ -154,6 +153,20 @@
                                             {{--<input type="file" name="">--}}
                                         <div class="ripple-container"></div></span>
                                             <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="col-md-4 label-on-left">Location</label>
+                                        <div class="col-md-8">
+                                            <button type="button" class="btn btn-fill btn-rose" is_busy="false" onclick="getLocation(this)">Get Location</button>
+                                        </div>
+                                        <label class="col-md-4 label-on-left">Longitude</label>
+                                        <div class="col-md-8">
+                                            {{ Form::text('lat', '', array('class' => 'form-control')) }}
+                                        </div>
+                                        <label class="col-md-4 label-on-left">Latitude</label>
+                                        <div class="col-md-8">
+                                            {{ Form::text('lng', '', array('class' => 'form-control')) }}
                                         </div>
                                     </div>
                                 </div>

@@ -48,4 +48,16 @@ class PlaceController extends Controller
         foreach($unicode as $nonUnicode=>$uni) $str = preg_replace("/($uni)/i",$nonUnicode,$str);
         return str_replace(' ', '+', $str);
     }
+
+    public function getLocation() {
+        if ( !empty(($_GET['address'])) ) {
+            $result = $this->getGoogleResult($_GET['address']);
+            if ( count($result) < 1 ) {
+                return false;
+            }
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

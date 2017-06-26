@@ -170,3 +170,49 @@ $(document).ready(function() {
         format: 'HH:mm'
     });
 });
+
+function getLocation(data) {
+    var address = $("input[name=address]").val();
+    var is_busy = $(data).attr('is_busy');
+    if (is_busy == 'true') {
+        return false;
+    }
+    $button = $(data)
+    $button.attr({
+        "is_busy" : true
+    });
+    $button.html('LOADDING ...');
+
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: 'get-location',
+        data: {"address": address},
+    }).done(function (result) {
+        if (result.status == 'ZERO_RESULTS') {
+            $("input[name=lat]").val('');
+            $("input[name=lng]").val('');
+            alert('Not found this place. Please check the address!');
+        } else {
+            $("input[name=lat]").val( result.results[0].geometry.location.lat );
+            $("input[name=lng]").val( result.results[0].geometry.location.lng );
+        }
+    }).fail(function () {
+        $("input[name=lat]").val('');
+        $("input[name=lng]").val('');
+        alert('Error! Please try again.');
+    }).always(function()
+    {
+        $button.html('GET LOCATION');
+        $button.attr({
+            "is_busy" : false
+        });
+    });
+}
+
+function checkInsertPlace() {
+    if ( ($("input[name=lat]").val() == "") || ($("input[name=lng]").val() == "")) {
+        alert("Please get location for this place!");
+        return false;
+    }
+}

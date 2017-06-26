@@ -86,6 +86,7 @@ Route::post('/del-place',['middleware' => 'admin', 'as' => 'del-place', 'uses' =
 
 /* Add google location to database */
 Route::get('/add-google-location', ['middleware' => 'admin', 'as' => 'add-google-location', 'uses' => 'Place\PlaceController@addGoogleLocation']);
+Route::get('/get-location', ['middleware' => 'admin', 'as' => 'get-location', 'uses' => 'Place\PlaceController@getLocation']);
 
 /* Time line page */
 Route::get('/{id}',['as' => 'time-line', 'uses' => 'TimelineController@showTimeline']);
