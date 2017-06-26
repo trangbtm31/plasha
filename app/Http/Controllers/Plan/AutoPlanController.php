@@ -139,7 +139,7 @@ class AutoPlanController extends Controller
             //Nếu đang tìm địa điểm nhưng chưa có nơi nào mở cửa thì tìm nơi mở cửa sớm nhất
             $open_door_i = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
 
-            if ( ($come_on->lt($open_door_i['date_time_open']) || $leave_at->gt($open_door_i['date_time_close'])) )
+            if ( $come_on->lt($open_door_i['date_time_open']) || $leave_at->gt($open_door_i['date_time_close']) )
             {
                 //Tìm nơi mở cửa sớm nhất
                 $min_come_on = clone $open_door_i['date_time_open'];
@@ -160,7 +160,11 @@ class AutoPlanController extends Controller
                 $leave_at = (clone $come_on)->addMinutes( $this->timeToMinutes($places[$i]['time_stay']) );
 
                 $open_door = $this->setTimeOpenDoor($come_on,$places[$i]['time_open'],$places[$i]['time_close']);
-                if ( ($come_on->lt($open_door['date_time_open']) || $leave_at->gt($open_door['date_time_close'])) )
+                if ( $come_on->lt($open_door['date_time_open'])
+                    || $leave_at->gt($open_door['date_time_close'])
+                    || $come_on->lt($this->start_time)
+                    || $leave_at->gt($this->end_time)
+                )
                 {
                     return false;
                 }
@@ -277,6 +281,7 @@ class AutoPlanController extends Controller
                         && $temp_cost <= $this->total_cost //Chi phí đủ
                         && $this->great_places[$i]['come_on']->gte($open_door['date_time_open'])//Kiểm tra time mở cửa
                         && $this->great_places[$i]['leave_at']->lte($open_door['date_time_close'])//Kiểm tra time đóng cửa
+                        && in_array($places[$j], $this->great_places) == true //Địa điểm này chưa đi qua
                     ) { //Thay thế bằng địa điểm khác gần hơn
                         $this->great_places[$i] = array_merge($this->great_places[$i],$places[$j]);
                         $this->max_cost = $temp_cost; //Cập nhật chi phí kế hoạch
