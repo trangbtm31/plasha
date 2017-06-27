@@ -81,11 +81,11 @@ foreach($data as $plan)
                 <div class="plan-place">
                     <ul>
                         @foreach($plan['plan_place'] as $plan_place)
-                        <li class="row place-content" img-id="{{$plan_place['id']}}">
-                            <div class="col-md-6 " id="place-img-{{$plan_place['id']}}">
-                                <img class="place-img" img-id="{{$plan_place['id']}}" src="/images/places/{{ !empty($plan_place['place_thumbnail'])? $plan_place['place_thumbnail'][0]['thumbnail'] : 'default.jpg'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
+                        <li class="row place-content" img-id="{{$plan['id']}}-{{$plan_place['id']}}">
+                            <div class="col-md-6 " id="place-img-{{$plan['id']}}-{{$plan_place['id']}}">
+                                <img class="place-img" img-id="{{$plan['id']}}-{{$plan_place['id']}}" src="/images/places/{{ !empty($plan_place['place_thumbnail'])? $plan_place['place_thumbnail'][0]['thumbnail'] : 'default.jpg'}}"  width="200px" height="200px" style="border-radius: 50%; border: 5px solid #FFF; position:relative;">
                             </div>
-                            <div class="col-md-6 place-info" id="place-info-{{$plan_place['id']}}" hidden>
+                            <div class="col-md-6 place-info" id="place-info-{{$plan['id']}}-{{$plan_place['id']}}" hidden>
                                 <span class="place-stay-date">{{ date('d-m-Y ', strtotime($plan_place['start_time'])) }}</span><br>
                                 <span class="place-stay-time">{{ date('H:i ', strtotime($plan_place['start_time'])) }} <em>to</em> {{ date('H:i ', strtotime($plan_place['end_time'])) }}</span><br>
                                 <span class="place-name"><strong>{{ $plan_place['name'] }}</strong></span><br>
