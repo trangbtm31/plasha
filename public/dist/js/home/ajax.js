@@ -150,7 +150,6 @@ function more_fr_onl(data) {
         });
     });
 }
-
 function auto_place() {
     var total_cost = document.getElementById('total_cost').value;
     var find_place = document.querySelector('input[name="find_place"]:checked').value;
@@ -205,33 +204,86 @@ function auto_place() {
     }
 
     if (har_error == false) {
-        $.ajax({
-            type: 'get',
-            dataType: 'text',
-            url: 'auto-find-place',
-            data: {"total_cost": total_cost,
-                "find_place": find_place,
-                "start_time" : start_time,
-                "end_time" : end_time,
-            },
-            success: function(result)
-            {
-                document.getElementById('recommend-place').innerHTML = result;
-            }
-        }).always(function()
-        {
-            $button.html('Suggest');
-            $button.attr({
-                "is_busy" : false
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                $.ajax({
+                    type: 'get',
+                    dataType: 'text',
+                    url: 'auto-find-place',
+                    data: {"total_cost": total_cost,
+                        "find_place": find_place,
+                        "start_time" : start_time,
+                        "end_time" : end_time,
+                        "lat" : lat.toString(),
+                        "lng" : lng.toString(),
+                    },
+                    success: function(result)
+                    {
+                        document.getElementById('recommend-place').innerHTML = result;
+                    }
+                }).always(function()
+                {
+                    $button.html('Suggest');
+                    $button.attr({
+                        "is_busy" : false
+                    });
+                });
+            }, function() {
+                $.ajax({
+                    type: 'get',
+                    dataType: 'text',
+                    url: 'auto-find-place',
+                    data: {"total_cost": total_cost,
+                        "find_place": find_place,
+                        "start_time" : start_time,
+                        "end_time" : end_time,
+                        "lat" : '',
+                        "lng" : '',
+                    },
+                    success: function(result)
+                    {
+                        document.getElementById('recommend-place').innerHTML = result;
+                    }
+                }).always(function()
+                {
+                    $button.html('Suggest');
+                    $button.attr({
+                        "is_busy" : false
+                    });
+                });
             });
-        });
+        } else {
+            $.ajax({
+                type: 'get',
+                dataType: 'text',
+                url: 'auto-find-place',
+                data: {"total_cost": total_cost,
+                    "find_place": find_place,
+                    "start_time" : start_time,
+                    "end_time" : end_time,
+                    "lat" : '',
+                    "lng" : '',
+                },
+                success: function(result)
+                {
+                    document.getElementById('recommend-place').innerHTML = result;
+                }
+            }).always(function()
+            {
+                $button.html('Suggest');
+                $button.attr({
+                    "is_busy" : false
+                });
+            });
+        }
     } else {
         $button.html('Suggest');
         $button.attr({
             "is_busy" : false
         });
     }
-
 }
 
 var find_place = document.getElementsByName("find_place");

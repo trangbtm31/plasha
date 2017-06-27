@@ -206,7 +206,7 @@
 <!-- Sliders Plugin -->
 <script src="dist/js/admin/lib/nouislider.min.js"></script>
 <!--  Google Maps Plugin    -->
-{{--<script src="https://maps.googleapis.com/maps/api/js"></script>--}}
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbJtTYL_66y8gDnfVH-REzjX9QzCqGgm0"></script>
 <!-- Select Plugin -->
 <script src="dist/js/admin/lib/jquery.select-bootstrap.js"></script>
 <!--  DataTables.net Plugin    -->

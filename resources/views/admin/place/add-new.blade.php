@@ -159,16 +159,22 @@
                                         <label class="col-md-4 label-on-left">Location</label>
                                         <div class="col-md-8">
                                             <button type="button" class="btn btn-fill btn-rose" is_busy="false" onclick="getLocation(this)">Get Location</button>
+                                            <div id="map" class="map hidden" style="height: 250px; padding: 0; margin: 0;"></div>
+                                            {{ Form::text('lat', '', array('class' => 'form-control hidden')) }}
+                                            {{ Form::text('lng', '', array('class' => 'form-control hidden')) }}
                                         </div>
-                                        <label class="col-md-4 label-on-left">Longitude</label>
-                                        <div class="col-md-8">
-                                            {{ Form::text('lat', '', array('class' => 'form-control')) }}
-                                        </div>
-                                        <label class="col-md-4 label-on-left">Latitude</label>
-                                        <div class="col-md-8">
-                                            {{ Form::text('lng', '', array('class' => 'form-control')) }}
-                                        </div>
+                                        {{--<label class="col-md-6 label-on-left">Longitude</label>--}}
+                                        {{--<div class="col-md-6">--}}
+
+                                        {{--</div>--}}
+                                        {{--<label class="col-md-6 label-on-left">Latitude</label>--}}
+                                        {{--<div class="col-md-6">--}}
+
+                                        {{--</div>--}}
                                     </div>
+                                </div>
+                                <div class="row">
+
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2"></div>

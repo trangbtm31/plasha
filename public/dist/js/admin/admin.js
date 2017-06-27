@@ -172,34 +172,45 @@ $(document).ready(function() {
 });
 
 function getLocation(data) {
+    var name_place = $("input[name=name]").val();
     var address = $("input[name=address]").val();
     var is_busy = $(data).attr('is_busy');
     if (is_busy == 'true') {
         return false;
     }
-    $button = $(data)
+    $button = $(data);
     $button.attr({
         "is_busy" : true
     });
     $button.html('LOADDING ...');
+    $map = $("#map");
+    $input_lat = $("input[name=lat]");
+    $input_lng = $("input[name=lng]");
 
     $.ajax({
         type: 'get',
         dataType: 'json',
         url: 'get-location',
-        data: {"address": address},
+        data: {"address": name_place + ' ' + address},
     }).done(function (result) {
         if (result.status == 'ZERO_RESULTS') {
-            $("input[name=lat]").val('');
-            $("input[name=lng]").val('');
+            $input_lat.val('');
+            $input_lng.val('');
+            $map.addClass('hidden');
             alert('Not found this place. Please check the address!');
         } else {
-            $("input[name=lat]").val( result.results[0].geometry.location.lat );
-            $("input[name=lng]").val( result.results[0].geometry.location.lng );
+            var lat = result.results[0].geometry.location.lat;
+            var lng = result.results[0].geometry.location.lng;
+            var name = result.results[0].name;
+            $input_lat.val(lat);
+            $input_lng.val(lng);
+            loadMap(lat, lng, name);
+            $map.removeClass('hidden');
         }
     }).fail(function () {
-        $("input[name=lat]").val('');
-        $("input[name=lng]").val('');
+        $input_lat.val('');
+        $input_lng.val('');
+        $map.addClass('hidden');
         alert('Error! Please try again.');
     }).always(function()
     {
@@ -215,4 +226,41 @@ function checkInsertPlace() {
         alert("Please get location for this place!");
         return false;
     }
+}
+
+var map, infoWindow;
+function loadMap(lat, lng, name) {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: lat, lng: lng},
+        zoom: 16
+    });
+    infoWindow = new google.maps.InfoWindow;
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: lat,
+                lng: lng
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(name);
+            infoWindow.open(map);
+            map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
 }

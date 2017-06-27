@@ -14,6 +14,8 @@ class AutoPlanController extends Controller
     public $start_time;
     public $end_time;
     public $min_to_do;
+    public $lat;
+    public $lng;
 
     protected $max_cost = 0; //Chi phí cao nhất của kế hoạch dự kiến
     protected $max_time = 0; //Thời gian tối đa thực hiện kế hoạch
@@ -24,6 +26,8 @@ class AutoPlanController extends Controller
         $this->find_place = ( isset($_GET['find_place']) && !empty($_GET['find_place']) ) ? $_GET['find_place'] : 'random';
         $this->start_time = ( isset($_GET['start_time']) && !empty($_GET['start_time']) ) ? new Carbon($_GET['start_time']) : '';
         $this->end_time = ( isset($_GET['end_time']) && !empty($_GET['end_time']) ) ? new Carbon($_GET['end_time']) : '';
+        $this->lat = ( isset($_GET['lat']) && !empty($_GET['lat']) ) ? (float)$_GET['lat'] : '';
+        $this->lng = ( isset($_GET['lng']) && !empty($_GET['lng']) ) ? (float)$_GET['lng'] : '';
 
         if ( !empty($this->start_time) && !empty($this->end_time) && $this->start_time->lt($this->end_time) ){
             $interval = $this->end_time->diff($this->start_time);
@@ -267,6 +271,33 @@ class AutoPlanController extends Controller
     $places : là danh sách toàn bộ địa điểm
     */
     protected function findShortedPath($places) {
+        //Kiểm tra nơi đầu tiên gần user nhất nếu lấy được vị trí
+        if ( !empty($this->lat && !empty($this->lng)) ) {
+            $min_distance = sqrt( ($this->great_places[0]['lat'] - $this->lat) * ($this->great_places[0]['lat'] - $this->lat)
+                + ($this->great_places[0]['lng'] - $this->lng) * ($this->great_places[0]['lng'] - $this->lng) );
+            for ($j = 1; $j < count($places); $j++) {
+                if ($this->great_places[0]['category_id'] == $places[$j]['category_id']) {
+
+                    $temp_distance = sqrt( ($places[$j]['lat'] - $this->lat) * ($places[$j]['lat'] - $this->lat)
+                        + ($places[$j]['lng'] - $this->lng) * ($places[$j]['lng'] - $this->lng) );
+                    $temp_cost = $this->max_cost - $this->great_places[0]['cost'] + $places[$j]['cost']; //Tính chi phí tạm thời
+                    $open_door = $this->setTimeOpenDoor($this->great_places[0]['come_on'], $places[$j]['time_open'], $places[$j]['time_close']);
+
+                    if (
+                        $temp_distance < $min_distance //Địa điểm thay thế gần hơn
+                        && $temp_cost <= $this->total_cost //Chi phí đủ
+                        && $this->great_places[0]['come_on']->gte($open_door['date_time_open'])//Kiểm tra time mở cửa
+                        && $this->great_places[0]['leave_at']->lte($open_door['date_time_close'])//Kiểm tra time đóng cửa
+                        && !in_array($places[$j], $this->great_places) == true //Địa điểm này chưa đi qua
+                    ) { //Thay thế bằng địa điểm khác gần hơn
+                        $this->great_places[0] = array_merge($this->great_places[0],$places[$j]);
+                        $this->max_cost = $temp_cost; //Cập nhật chi phí kế hoạch
+                        $min_distance = $temp_distance;
+                    }
+                }
+            }
+        }
+
         for ($i = 1; $i < count($this->great_places); $i++) {
             $min_distance = $this->distance($this->great_places[$i-1], $this->great_places[$i]);
             for ($j = 0; $j < count($places); $j++) {
@@ -281,7 +312,7 @@ class AutoPlanController extends Controller
                         && $temp_cost <= $this->total_cost //Chi phí đủ
                         && $this->great_places[$i]['come_on']->gte($open_door['date_time_open'])//Kiểm tra time mở cửa
                         && $this->great_places[$i]['leave_at']->lte($open_door['date_time_close'])//Kiểm tra time đóng cửa
-                        && in_array($places[$j], $this->great_places) == true //Địa điểm này chưa đi qua
+                        && !in_array($places[$j], $this->great_places) == true //Địa điểm này chưa đi qua
                     ) { //Thay thế bằng địa điểm khác gần hơn
                         $this->great_places[$i] = array_merge($this->great_places[$i],$places[$j]);
                         $this->max_cost = $temp_cost; //Cập nhật chi phí kế hoạch

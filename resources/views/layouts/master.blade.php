@@ -33,6 +33,7 @@
         <script src="js/jquery.scrollbar.min.js"></script>
         <script src="js/tipped.js"></script>
         <script src="js/script.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbJtTYL_66y8gDnfVH-REzjX9QzCqGgm0"></script>
         @yield('scripts')
         <script>
             window.Laravel = {!! json_encode([
@@ -49,7 +50,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script language="javascript" src="dist/js/home/ajax.js" ></script>
-    {{--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>--}}
 
     </body>
 
